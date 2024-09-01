@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora VazaNada</title>
+</head>
+
+<body>
+    <h1>Bem vindo!</h1>
+
+    <h2>Preencha os campos abaixo para estimar sua economia utilizando a solução da VZND:</h2>
+
+    Quantos vazamentos você teve nos ultimos 12 meses em gasodutos?<br>
+    <input type="number" id="ipt_qtdVazamentos"> <br> <br>
+
+    Qual foi a maior quantidade de gás que você já perdeu em uma hora de vazamento? (Em m³/h)<br>
+    <input type="number" id="ipt_maiorVazamento"> <br> <br>
+
+    Qual foi a menor quantidade de gás que você já perdeu em uma hora de vazamento? (Em m³/h)<br>
+    <input type="number" id="ipt_menorVazamento"> <br> <br>
+
+    Qual foi o maior tempo de contenção de um vazamento? (Em minutos)<br>
+    <input type="number" id="ipt_maiorTempo"> <br> <br>
+
+    Qual foi o menor tempo de contenção de um vazamento? (Em minutos)<br>
+    <input type="number" id="ipt_menorTempo"> <br> <br>
+
+    <button onclick="calcular()">Calcular</button>
+
+    <br>
+    <br>
+
+    <div id="div_mensagem"></div>
+</body>
+
+</html>
+
+<script>
+    function calcular() {
+        var qtdVazamentos = Number(ipt_qtdVazamentos.value);
+        var maiorVazamento = Number(ipt_maiorVazamento.value);
+        var menorVazamento = Number(ipt_menorVazamento.value);
+        var maiorTempo = Number(ipt_maiorTempo.value) / 60; // Conversão de min para horas
+        var menorTempo = Number(ipt_menorTempo.value) / 60; // Conversão de min para horas
+
+
+
+        if (qtdVazamentos == 0 || maiorVazamento == 0 || menorVazamento == 0 || maiorTempo == 0 || menorTempo == 0) {
+            alert("Preencha todos os campos!");
+        } else if (qtdVazamentos < 0 || maiorVazamento < 0 || menorVazamento < 0 || maiorTempo < 0 || menorTempo < 0) {
+            alert("Os valores não podem ser negativos!");
+        } else if (maiorVazamento < menorVazamento) {
+            alert("O maior vazamento não pode ser menor que o menor vazamento!");
+        } else if (maiorTempo < menorTempo) {
+            alert("O menor tempo não pode ser maior que o maior tempo!");
+        
+        } else {
+
+            var custoGasMCubico = 0.86;
+
+            // Média de quantidade de gás vazado por hora em um vazamento
+            var mediaQuantidadeVazadoPorHora = (maiorVazamento + menorVazamento) / 2;
+            // Média de tempo para conter um vazamento em horas
+            var mediaTempo = (maiorTempo + menorTempo) / 2;
+
+            // Média de perda por vazamento em m³
+            var mediaDePerdaPorVazamento = mediaQuantidadeVazadoPorHora * mediaTempo;
+            // Média de custo por vazamento
+            var mediaDeCustoPorVazamento = mediaDePerdaPorVazamento * custoGasMCubico;
+
+            // Médias de perda por vazamento em m³ por ano e mes
+            var mediaAnual = mediaDePerdaPorVazamento * qtdVazamentos;
+            var mediaMensal = mediaAnual / 12;
+
+            // Médias de custo por vazamento por ano e mes
+            var mediaCustoAnual = mediaDeCustoPorVazamento * qtdVazamentos;
+            var mediaCustoMensal = mediaCustoAnual / 12;
+
+
+            /**
+             * A solução da VZND reduz o tempo para conter vazamentos em até 90%
+             * 
+             * Os valores a baixo são baseados na redução de 90% do tempo de contenção de vazamentos
+             * 
+             * O custo de um vazamento passaria a ser de 10% do valor atual
+             * 
+             */
+
+
+            // Medias de tempo para contenção com desconto de 90% por vazamento
+            var mediaTempoDesconto = mediaTempo * 0.1;
+
+            var mediaDePerdaPorVazamentoDesconto = mediaQuantidadeVazadoPorHora * mediaTempoDesconto;
+            var mediaCustoPorVazamentoDesconto = mediaDePerdaPorVazamentoDesconto * custoGasMCubico;
+
+            var mediaCustoAnualDesconto = mediaCustoPorVazamentoDesconto * qtdVazamentos;
+            var mediaCustoMensalDesconto = mediaCustoAnualDesconto / 12;
+
+
+            div_mensagem.innerHTML = `
+                    <b>Você perdeu aproximadamente:</b> 
+                    <ul>
+                        <li>💸 ${mediaCustoAnual.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} nos últimos 12 meses.</li>
+                        <li>📅 Uma média mensal de ${mediaCustoMensal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</li>
+                        <li>🔄 Perdendo aproximadamente ${mediaAnual.toFixed(2)} m³ de gás por ano</li>
+                        <li>📉 Perdendo aproximadamente ${mediaMensal.toFixed(2)} m³ de gás por mês</li>
+                    </ul>
+                    
+                    <b>Com a solução da VZ<span style="color: #5CE1E6">ND</span>, você poderia:</b>
+                    <ul>
+                        <li>⏱️ Reduzir o tempo para conter vazamentos em até 90%</li>
+                        <li>⏳ A média de tempo atual que você leva para conter um vazamento é de ${(mediaTempo * 60).toFixed(0)} minutos</li>
+                        <li>⚡ Você passaria a detectar um vazamento em até ${(mediaTempoDesconto * 60).toFixed(0)} minutos</li>
+                        <li>💰 Seu custo que antes era de ${mediaDeCustoPorVazamento.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} por vazamento, passaria a ser de ${mediaCustoPorVazamentoDesconto.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} por vazamento</li>
+                    </ul>
+                    
+                    <b>Economia:</b>
+                    <ul>
+                        <li>💵 Com a solução da VZ<span style="color: #5CE1E6">ND</span>, você poderia <b style="color: green">economizar</b> aproximadamente ${(mediaDeCustoPorVazamento - mediaCustoPorVazamentoDesconto).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} <b>por vazamento</b></li>
+                        <li>💵 Com a solução da VZ<span style="color: #5CE1E6">ND</span>, você poderia <b style="color: green">economizar</b> aproximadamente ${(mediaCustoMensal - mediaCustoMensalDesconto).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} <b>por mês</b></li>
+                        <li>💵 Com a solução da VZ<span style="color: #5CE1E6">ND</span>, você poderia <b style="color: green">economizar</b> aproximadamente ${(mediaCustoAnual - mediaCustoAnualDesconto).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} <b>por ano</b></li>
+                    </ul>
+            `;
+
+        }
+
+    }
+</script>
