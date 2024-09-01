@@ -46,7 +46,22 @@
         var menorTempo = Number(ipt_menorTempo.value) / 60; // Conversão de min para horas
 
 
+        /*
+            Verificação das condições de entrada:
+            - Se qualquer valor for 0, exibe um alerta para preencher todos os campos.
+            - Se qualquer valor for negativo, exibe um alerta dizendo que os valores não podem ser negativos.
+            - Se o maior vazamento for menor que o menor vazamento, exibe um alerta.
+            - Se o maior tempo for menor que o menor tempo, exibe um alerta.
+        */
 
+        /*
+            Explicação do funcionamento do else if:
+            - O else if é usado para verificar múltiplas condições em sequência.
+            - Se a condição do if for falsa, o código verifica a condição do primeiro else if.
+            - Se a condição do primeiro else if for falsa, o código verifica a condição do próximo else if, e assim por diante.
+            - Se todas as condições forem falsas, o bloco de código dentro do else é executado.
+            - Isso permite que você execute diferentes blocos de código dependendo de qual condição é verdadeira.
+        */
         if (qtdVazamentos == 0 || maiorVazamento == 0 || menorVazamento == 0 || maiorTempo == 0 || menorTempo == 0) {
             alert("Preencha todos os campos!");
         } else if (qtdVazamentos < 0 || maiorVazamento < 0 || menorVazamento < 0 || maiorTempo < 0 || menorTempo < 0) {
@@ -55,7 +70,7 @@
             alert("O maior vazamento não pode ser menor que o menor vazamento!");
         } else if (maiorTempo < menorTempo) {
             alert("O menor tempo não pode ser maior que o maior tempo!");
-        
+
         } else {
 
             var custoGasMCubico = 0.86;
