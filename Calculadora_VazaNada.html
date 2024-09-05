@@ -43,7 +43,7 @@
         } else if (Comprimento_Total < 0 || Area_altoRisco < 0 || Espacamento_altoRisco < 0 || Espacamento_baixoRisco < 0){
             alert("Os valores não podem ser negativos!"); // Alerta se algum valor for negativo.
         } else if (Area_de_Risco > Comprimento_Total){
-            alert("A área de baixo e alto risco não podem ser maior que o comprimento total de gasoduto!"); // Alerta se a soma das áreas for maior que o comprimento total.
+            alert("A área de alto risco não podem ser maior que o comprimento total de gasoduto!"); // Alerta se a soma das áreas for maior que o comprimento total.
         } else if (Espacamento_altoRisco < 10 || Espacamento_altoRisco > 50) {
             alert("O espaçamento entre sensores na área de alto risco deve estar entre 10 e 50 metros!"); // Alerta se o espaçamento na área de alto risco estiver fora do intervalo permitido.
         } else if (Espacamento_baixoRisco < 100 || Espacamento_baixoRisco > 500) {
