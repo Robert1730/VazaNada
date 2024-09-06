@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR>
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,11 +39,12 @@
         var Espacamento_baixoRisco = Number(input_espacoBaixo.value); // Espaçamento entre os sensores de 100 a 500 (metros).
         var Area_de_Risco = (Area_altoRisco + Area_baixoRisco);
         
-        if(Comprimento_Total == 0 || Area_altoRisco == 0 || Espacamento_altoRisco == 0 || Espacamento_baixoRisco == 0){            alert("Preencha todos os campos!"); // Alerta se algum campo estiver vazio.
+        if(Comprimento_Total == 0 || Area_altoRisco == 0 || Espacamento_altoRisco == 0 || Espacamento_baixoRisco == 0){
+            alert("Preencha todos os campos!"); // Alerta se algum campo estiver vazio.
         } else if (Comprimento_Total < 0 || Area_altoRisco < 0 || Espacamento_altoRisco < 0 || Espacamento_baixoRisco < 0){
             alert("Os valores não podem ser negativos!"); // Alerta se algum valor for negativo.
-        } else if (Area_de_Risco > Comprimento_Total){
-            alert("A área de alto risco não podem ser maior que o comprimento total de gasoduto!"); // Alerta se a soma das áreas for maior que o comprimento total.
+        } else if (Area_altoRisco > Comprimento_Total){
+            alert("A área de alto risco não pode ser maior que o comprimento total de gasoduto!"); // Alerta se a soma das áreas for maior que o comprimento total.
         } else if (Espacamento_altoRisco < 10 || Espacamento_altoRisco > 50) {
             alert("O espaçamento entre sensores na área de alto risco deve estar entre 10 e 50 metros!"); // Alerta se o espaçamento na área de alto risco estiver fora do intervalo permitido.
         } else if (Espacamento_baixoRisco < 100 || Espacamento_baixoRisco > 500) {
@@ -62,9 +63,14 @@
             var Qtd_SensoresBaixo = Math.ceil(Area_baixoRisco / Espacamento_baixoRisco); //Sensores em áreas de baixo risco
             var Qtd_SensoresTotal = (Qtd_SensoresBaixo + Qtd_SensoresAlto); //Total de Sensores
             
-            var Me3_hcl = 773.16; //Preço do sensor é $137 USD, conversão direta para o Real R$773,16.
+            // PIR300B Winsen - 328.73 -- Menores áreas
+            // IR600 SemeaTech -  1114.34 -- Maiores áres
+            var PIR300B_Winsen = 328.73; //Preço do sensor é $137 USD, conversão direta para o Real R$773,16.
+            var IR600_SemeaTech = 1114.34;
 
-            var orcamento = Qtd_SensoresTotal * Me3_hcl;
+            var orcamento_sensor_baixo = Qtd_SensoresBaixo * IR600_SemeaTech;
+            var orcamento_sensor_alto = Qtd_SensoresAlto * PIR300B_Winsen;
+            var orcamento = (orcamento_sensor_alto + orcamento_sensor_baixo);
 
 
             //kilometros ou metros?
@@ -96,10 +102,37 @@
             de casas decimais.
             */
             div_mostrar.innerHTML = `
-            <b>Projeto do Gasoduto</b><br>
-            Com base no <span style='color: #003366'>comprimento total do gasoduto de <b>${medidaTotal} ${unidadeTotal}</b></span>, considerando <span style='color: #B22222'>áreas de alto risco de <b>${medidaAlta} ${unidadeAlta}</b></span> e <span style='color: #696969'>áreas de baixo risco de <b>${medidaBaixa} ${unidadeBaixa}</b></span>, a quantidade estimada de sensores para cobrir adequadamente o gasoduto seria <b>${Qtd_SensoresTotal}</b> sensores, sendo <b>${Qtd_SensoresAlto} sensores</b> alocados para as áreas de alto risco e <b>${Qtd_SensoresBaixo} sensores</b> para as áreas de baixo risco.<br><br>
-            <b>Custo Estimado</b><br>
-            A <b>VZ<span style="color: #5CE1E6">ND</span></b> propõe a instalação desses sensores <span style='color: #006400'>pelo preço final de <b>${orcamento.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}</b></span>, assegurando a detecção eficiente em todos os pontos críticos e áreas menos suscetíveis a vazamentos.
+            <p><b>Resultado da Simulação de Orçamento</b></b>
+
+            <p>Com base nas especificações fornecidas para o gasoduto com comprimento total de <b>${medidaTotal} ${unidadeTotal}</b></span>, nossa simulação estima a seguinte alocação de sensores e serviços de monitoramento:</p>
+
+            <p><b><span style='color: #B22222'>Áreas de Alto Risco ${medidaAlta} ${unidadeAlta}:</b></span></p>
+
+            <ul>    
+                <li><b>Sensores Utilizados:</b> ${Qtd_SensoresAlto} sensores PIR300B Winsen.</li>
+                <li><b>Preço por Sensor:</b> <span style='color: #006400'><b>R$328,73.</b></span></li>
+                <li><b>Custo Total para Áreas de Alto Risco:</b> <span style='color: #006400'><b>${orcamento_sensor_alto.toLocaleString("pt-BR", { style: 'currency', currency: 'BRL'})}.</b></span></li>
+            </ul>
+
+            <p><b><span style='color: #696969'>Áreas de Baixo Risco ${medidaBaixa} ${unidadeBaixa}:</b></span></p>
+
+            <ul>
+                <li><b>Sensores Utilizados:</b> ${Qtd_SensoresBaixo} sensores IR600 SemeaTech.</b></li>
+                <li><b>Preço por Sensor:</b> <span style='color: #006400'><b>R$1.114,34.</b></span></li>
+                <li><b>Custo Total para Áreas de Baixo Risco:</b> <span style='color: #006400'><b>${orcamento_sensor_baixo.toLocaleString("pt-BR", {style: 'currency', currency: 'BRL'})}.</b></span></li>
+            </ul>
+
+            <p><b>Custo Total Estimado</b></p>
+            
+            <p>A <b>VZ<span style="color: #5CE1E6">ND</span></b> propõe a instalação dos sensores e o serviço de monitoramento pelo valor total de <b><span style='color: #006400'>${orcamento.toLocaleString("pt-BR", {style: 'currency', currency: 'BRL'})}</span></b>.<br>
+                O serviço de monitoramento inclui:</p>
+            
+            <ul>
+                <li><b>Monitoramento em Tempo Real:</b> Acompanhamento contínuo dos sensores para detectar qualquer anomalia.</li>
+                <li><b>Relatórios Periódicos:</b> Atualizações regulares sobre o status do gasoduto e alertas em caso de possíveis problemas.</li>
+                <li><b>Suporte Técnico:</b> Assistência especializada para garantir a operação eficiente e rápida resolução de quaisquer questões.</li>
+            </ul>
+            Este orçamento assegura a proteção completa do seu gasoduto, proporcionando uma cobertura eficiente tanto nas áreas críticas quanto nas menos suscetíveis a vazamentos.</p>
             `;
         }
     }
