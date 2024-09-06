@@ -26,6 +26,9 @@
 
     Qual foi o menor tempo de contenção de um vazamento? (Em minutos)<br>
     <input type="number" id="ipt_menorTempo"> <br> <br>
+    
+    Quanto custa o m³ do gás? (Em reais)<br>
+    <input type="number" id="ipt_custo_gas"> <br> <br>
 
     <button onclick="calcular()">Calcular</button>
 
@@ -44,7 +47,7 @@
         var menorVazamento = Number(ipt_menorVazamento.value);
         var maiorTempo = Number(ipt_maiorTempo.value) / 60; // Conversão de min para horas
         var menorTempo = Number(ipt_menorTempo.value) / 60; // Conversão de min para horas
-
+        var custoGasMCubico = Number(ipt_custo_gas.value);
 
         /*
             Verificação das condições de entrada:
@@ -72,9 +75,6 @@
             alert("O menor tempo não pode ser maior que o maior tempo!");
 
         } else {
-
-            var custoGasMCubico = 0.86;
-
             // Média de quantidade de gás vazado por hora em um vazamento
             var mediaQuantidadeVazadoPorHora = (maiorVazamento + menorVazamento) / 2;
             // Média de tempo para conter um vazamento em horas
