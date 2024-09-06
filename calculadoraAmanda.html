@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora VZND</title>
+</head>
+<body>
+
+    <h1 style="color:darkcyan">Calculadora Financeira</h1>
+
+    Qual segmento da empresa? (Industrial, Residencial ou Comercial)
+    <input id="ipt_segmento"/>
+
+    <br> <br>
+
+    Qual o volume de gás mensal? (m3)
+    <input id="ipt_volume">
+
+    <br> <br>
+
+    Quantos vazamentos foram registrados nos últimos 12 meses?
+    <input type="number" id="ipt_vazamentos"/>
+
+    <br> <br>
+
+    Quanto tempo em média durou os vazamentos? (minutos)
+    <input type="number" id="ipt_tempo"/>
+
+    <br> <br>
+
+    <button onclick="calcular()">Calcular</button>
+
+    <br> <br> 
+
+    <div id="div_mensagem"></div>
+
+</body>
+</html>
+
+<script>
+
+    function calcular(){
+        var vazamentos = Number(ipt_vazamentos.value)
+        var tempo = Number(ipt_tempo.value)
+        var segmento = ipt_segmento.value
+        var volume = Number(ipt_volume.value)
+        var gas = 0
+
+
+        //Validações usando os valores da tabela da ComGas
+        if (segmento == "Residencial" && volume <= 500) {
+            gas = 3.01
+        }
+
+        if (segmento == "Residencial" && volume > 500) {
+            gas = 2.89 
+        }
+
+        if (segmento == "Residencial" && volume > 2000) {
+            gas = 2.76
+        }
+
+        if (segmento == "Comercial" && volume <= 2000 ) {
+            gas = 2.75
+        }
+        
+        if (segmento == "Comercial" && volume > 2000.1) {
+            gas = 2.44    
+        }
+
+        if (segmento == "Comercial" && volume > 3500) {
+            gas = 1.83   
+        }
+
+        if (segmento == "Comercial" && volume > 50000) {
+            gas = 1.74   
+        }
+
+        if (segmento == "Industrial" && volume <= 50000){
+            gas = 1.80
+        }
+
+        if (segmento == "Industrial" && volume > 50000) {
+            gas = 1.30
+        }
+
+        if (segmento == "Industrial" && volume > 300000){
+            gas = 1.25
+        }
+
+        if (segmento == "Industrial" && volume > 500000) {
+            gas = 1.24
+        }
+
+        if (segmento == "Industrial" && volume > 1000000){
+            gas = 1.22
+        }
+
+        if (segmento == "Industrial" && volume > 2000000){
+            gas = 1.20
+        }
+
+
+        var gasVazado = (tempo * 2.39) * vazamentos
+         // uma rachadura de 5mm sob uma diferença de pressão de 39 bar (valor medio), teria um vazamento de aproximandamente 2.39m³ por minuto.
+         // por enquanto a calculadora considera que todo vazamento veio de uma rachadura de 5mm
+
+        var valorPrejuizo = gasVazado * gas 
+        var economia = valorPrejuizo * 0.9 // economia de 90%
+
+        div_mensagem.innerHTML = `Com ${gasVazado}m³ de gás vazado, o valor do seu prejuízo é de <b style = "color: red"> R$${valorPrejuizo.toFixed(2)} </b> por mês!! <br>
+                                Contratando a VZND você pode economizar até <b style = "color: green"> R$${economia.toFixed(2)} </b>!!!!!`
+
+    }
+
+</script>
