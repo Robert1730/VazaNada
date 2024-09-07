@@ -8,8 +8,9 @@
 <body>
     <h2>Simulação de orçamento do sensor da <b>VZ<span style="color: #5CE1E6">ND</span></b></h2>
 
-    <p>Esta página permite que você simule o orçamento estimado para a instalação de sensores ao longo de um gasoduto, 
-        considerando áreas de alto e baixo risco.<br> Preencha os campos abaixo com os detalhes do projeto para obter uma estimativa de custo.</p>
+    <p>Esta página permite que você simule o orçamento estimado para a instalação de sensores ao longo de um gasoduto, considerando áreas de alto e baixo risco.<br>
+    Preencha os campos abaixo com os detalhes do projeto para obter uma estimativa de custo.</p>
+
 
     Comprimento total do gasoduto (em metros):<br>
     <input id="input_comprimento" type="number"><br><br>
@@ -28,78 +29,101 @@
     <br><br>
 
     <div id="div_mostrar"></div>
+
 </body>
 </html>
+
 <script>
+    
     function Calcular() {
-        var Comprimento_Total = Number(input_comprimento.value); //Comprimento total de gasoduto.
-        var Area_altoRisco = Number(input_altoRisco.value); // Área de alto risco (metros).
-        var Espacamento_altoRisco = Number(input_espacoAlto.value); // Espaçamento entre os sensores de 10 a 50 (metros).
-        var Area_baixoRisco = (Comprimento_Total - Area_altoRisco);// Área de baixo risco (metros).
+
+        // Variáveis das inputs. ***************************************************************************************
+             var Comprimento_Total = Number(input_comprimento.value); //Comprimento total de gasoduto.
+                var Area_altoRisco = Number(input_altoRisco.value); // Área de alto risco (metros).
+         var Espacamento_altoRisco = Number(input_espacoAlto.value); // Espaçamento entre os sensores de 10 a 50 (metros).
+               var Area_baixoRisco = (Comprimento_Total - Area_altoRisco);// Área de baixo risco (metros).
         var Espacamento_baixoRisco = Number(input_espacoBaixo.value); // Espaçamento entre os sensores de 100 a 500 (metros).
-        var Area_de_Risco = (Area_altoRisco + Area_baixoRisco);
+                 var Area_de_Risco = (Area_altoRisco + Area_baixoRisco); // Soma das duas áreas de risco.
         
-        if(Comprimento_Total == 0 || Area_altoRisco == 0 || Espacamento_altoRisco == 0 || Espacamento_baixoRisco == 0){
-            alert("Preencha todos os campos!"); // Alerta se algum campo estiver vazio.
-        } else if (Comprimento_Total < 0 || Area_altoRisco < 0 || Espacamento_altoRisco < 0 || Espacamento_baixoRisco < 0){
-            alert("Os valores não podem ser negativos!"); // Alerta se algum valor for negativo.
-        } else if (Area_altoRisco > Comprimento_Total){
-            alert("A área de alto risco não pode ser maior que o comprimento total de gasoduto!"); // Alerta se a soma das áreas for maior que o comprimento total.
-        } else if (Espacamento_altoRisco < 10 || Espacamento_altoRisco > 50) {
-            alert("O espaçamento entre sensores na área de alto risco deve estar entre 10 e 50 metros!"); // Alerta se o espaçamento na área de alto risco estiver fora do intervalo permitido.
-        } else if (Espacamento_baixoRisco < 100 || Espacamento_baixoRisco > 500) {
-            alert("O espaçamento entre sensores na área de baixo risco deve estar entre 100 e 500 metros!"); // Alerta se o espaçamento na área de baixo risco estiver fora do intervalo permitido.
+
+        // Alerts que aparecerão ao usúario caso ele tenha se equivocado ao inserir os dados.***************************
+        // Se algum campo não estiver preenchido, aparecerá um alert.
+            if(Comprimento_Total == 0 || Area_altoRisco == 0 || Espacamento_altoRisco == 0 || Espacamento_baixoRisco == 0){
+                alert("Preencha todos os campos!"); // Alerta se algum campo estiver vazio.
+        
+        // Se um o usúario informar um valor negativo (-1, -25, -398..) aparecerá um alert.
+            } else if (Comprimento_Total < 0 || Area_altoRisco < 0 || Espacamento_altoRisco < 0 || Espacamento_baixoRisco < 0){
+                alert("Os valores não podem ser negativos!"); // Alerta se algum valor for negativo.
+        
+        // Se a área de alto risco for maior que a aréa total aparecerá um alert.
+            } else if (Area_altoRisco > Comprimento_Total){
+                alert("A área de alto risco não pode ser maior que o comprimento total de gasoduto!"); // Alerta se a soma das áreas for maior que o comprimento total.
+        
+        // Se o espaçamento entre os sensores for maior ou menor que o valor informado aparecerá um alert.
+            } else if (Espacamento_altoRisco < 10 || Espacamento_altoRisco > 50) {
+                alert("O espaçamento entre sensores na área de alto risco deve estar entre 10 e 50 metros!"); // Alerta se o espaçamento na área de alto risco estiver fora do intervalo permitido.
+        
+            } else if (Espacamento_baixoRisco < 100 || Espacamento_baixoRisco > 500) {
+                alert("O espaçamento entre sensores na área de baixo risco deve estar entre 100 e 500 metros!"); // Alerta se o espaçamento na área de baixo risco estiver fora do intervalo permitido.
             
-            
+        // Agora se o usúario inserir os valor corretamente irá continuar a operação.***********************************
         } else {
-        
-            /* O comando "Math.ceil" arredonda um número para cima, para o próximo inteiro mais próximo.
+            /*
+            O comando "Math.ceil" arredonda um número para cima, para o próximo inteiro mais próximo.
             Por exemplo:
             Math.ceil(4.1); -> 5
             Math.ceil(4.9); -> 5
             Aqui, tanto 4.1 quanto 4.9 são arredondados para 5.
             */
-            var Qtd_SensoresAlto = Math.ceil(Area_altoRisco / Espacamento_altoRisco); //Sensores em áreas de alto risco
-            var Qtd_SensoresBaixo = Math.ceil(Area_baixoRisco / Espacamento_baixoRisco); //Sensores em áreas de baixo risco
-            var Qtd_SensoresTotal = (Qtd_SensoresBaixo + Qtd_SensoresAlto); //Total de Sensores
+        //Sensores.*****************************************************************************************************   
+            // Variáveis da quantidade de sensores.
+                var Qtd_SensoresAlto = Math.ceil(Area_altoRisco / Espacamento_altoRisco); //Quantidade de sensores em áreas de alto risco
+                var Qtd_SensoresBaixo = Math.ceil(Area_baixoRisco / Espacamento_baixoRisco); //Quantidade de sensores em áreas de baixo risco
+                var Qtd_SensoresTotal = (Qtd_SensoresBaixo + Qtd_SensoresAlto); //Total de Sensores.
+
+            // Preço dos Sensores.
+                var IR600_SemeaTech = 1114.34; // IR600 SemeaTech: R$1.114,34 -- Raio longo, bom para áreas de baixo risco.
+                var PIR300B_Winsen = 328.73; // Preço do sensor PIR300B Winsen: R$328,73 -- Raio curto, bom para aréas de alto risco.
+
+            // Orçamento dos sensores.
+                var orcamento_sensor_baixo = Qtd_SensoresBaixo * IR600_SemeaTech; // A quatidade de sensores em áreas de baixo risco.
+                var orcamento_sensor_alto = Qtd_SensoresAlto * PIR300B_Winsen; // A quatidade de sensores em áreas de alto risco.
+                var orcamento = (orcamento_sensor_alto + orcamento_sensor_baixo); // O orçamento final dos dois sensores.
+
+
+        // Aqui vamos definir se na mensagem irá apaercer a unidade de quilômetros ou a unidade de metros. *************
+            // Se o Comprimento total inserido pelo usúario for maior que 1000 metros, a unidade será km (quilômetros).
+                if(Comprimento_Total >= 1000){ // O comprimento total de gasodutos maior ou igual a 1000 metros.
+                    var medidaTotal = Comprimento_Total / 1000; // Resultado da divisão.
+                    var unidadeTotal = "km"; // Tipo de unidade (Quilômetros).
+
+            // Agora se o Comprimento total inserido pelo usúario for menor que 1000 metros, a unidade continuára sendo m (metros).
+                } else {
+                    medidaTotal = Comprimento_Total; // O valor inserido e igual a medida do metros.
+                    var unidadeTotal = "metros";} // Tipo de unidade (metros).
+
+            // O mesmo se aplica com as áreas de alto e baixo risco.
+                if(Area_altoRisco >= 1000){ 
+                    var medidaAlta = Area_altoRisco / 1000;
+                    var unidadeAlta = "km";
             
-            // PIR300B Winsen - 328.73 -- Menores áreas
-            // IR600 SemeaTech -  1114.34 -- Maiores áres
-            var PIR300B_Winsen = 328.73; //Preço do sensor é $137 USD, conversão direta para o Real R$773,16.
-            var IR600_SemeaTech = 1114.34;
+                } else {
+                    medidaAlta = Area_altoRisco;
+                    var unidadeAlta = "metros";}
 
-            var orcamento_sensor_baixo = Qtd_SensoresBaixo * IR600_SemeaTech;
-            var orcamento_sensor_alto = Qtd_SensoresAlto * PIR300B_Winsen;
-            var orcamento = (orcamento_sensor_alto + orcamento_sensor_baixo);
-
-
-            //kilometros ou metros?
-            if(Comprimento_Total >= 1000){
-                var medidaTotal = Comprimento_Total / 1000;
-                var unidadeTotal = "km";
-            } else {
-                medidaTotal = Comprimento_Total;
-                var unidadeTotal = "metros";}
-
-            if(Area_altoRisco >= 1000){
-                var medidaAlta = Area_altoRisco / 1000;
-                var unidadeAlta = "km";
-            } else {
-                medidaAlta = Area_altoRisco;
-                var unidadeAlta = "metros";}
-
-            if(Area_baixoRisco >= 1000){
-                var medidaBaixa = Area_baixoRisco / 1000;
-                var unidadeBaixa = "km";
-            } else {
-                medidaBaixa = Area_baixoRisco;
-                var unidadeBaixa = "metros";}
+                if(Area_baixoRisco >= 1000){
+                    var medidaBaixa = Area_baixoRisco / 1000;
+                    var unidadeBaixa = "km";
+            
+                } else {
+                    medidaBaixa = Area_baixoRisco;
+                    var unidadeBaixa = "metros";}
 
 
-
-            /* O comando ".toFixed(2)" é usado para exibir um número com um número específico de casas
-            decimais, arredondando conforme necessário e garantindo que a saída tenha a quantidade desejada
-            de casas decimais.
+        // A mensagem que aparecerá para o usúario após ele inserir os dados.*******************************************
+            /*
+            O código ".toLocaleString("pt-BR", { style: 'currency', currency: 'BRL'})" 
+            irá deixar o orçamento formatado na moeda Brasileira (Real).
             */
             div_mostrar.innerHTML = `
             <p><b>Resultado da Simulação de Orçamento</b></b>
@@ -135,5 +159,6 @@
             Este orçamento assegura a proteção completa do seu gasoduto, proporcionando uma cobertura eficiente tanto nas áreas críticas quanto nas menos suscetíveis a vazamentos.</p>
             `;
         }
-    }
+        }
+
 </script>
