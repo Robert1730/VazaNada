@@ -7,13 +7,20 @@
     <title>Calculadora Financeira</title>
 </head>
 
-<body>
+<body style="background-color: #1a2536;color: #ffffff">
     
-    <h1>Bem vindo(a) a nossa calculadora Finaceira! </h1>
+    <!-- <img src="https://cdn.discordapp.com/attachments/1261857676695048208/1281047106836234291/image.png?ex=66dee8d6&is=66dd9756&hm=5248fcd01ba29dcc71f15970bb002db969c7e4ce5d3ae707c7c6f8d31626fc49&" alt="Logo da VZND" width="100px"> -->
+    <h1> Bem vindo(a) a nossa calculadora Finaceira! </h1>
     <br>
     <h2> Adquira os serviços VAZANADA! </h2>
     <h3> Faça um orçamento já: </h3>
-
+    <br>
+    Qual o nome da sua empresa?
+    <br>
+    <br>
+    <input type="text" id="ipt_empresa">
+    <br>
+    <br>
     Qual o comprimento do gasoduto que você deseja assegurar? (em Km) 
     <br>
     <br>
@@ -22,8 +29,6 @@
     <br><br>
     <div id="div_mensagem"></div>
 
-    <!-- Criar Licenças? -->
-
 </body>
 
 </html>
@@ -31,7 +36,8 @@
 <script>
 
     function calcular() {
-
+        
+        var empresa = ipt_empresa.value;
         var comprimento = Number(ipt_comprimento.value);
         var qtd_sensores = Number(ipt_comprimento.value) / 0.1;
         var custoSensores = qtd_sensores * 850; 
@@ -42,10 +48,10 @@
         O custo destes sensores é de ${custoSensores.toLocaleString('pt-br', {style:'currency', currency:'BRL'})}! <br>
         O custo de instalação destes sensores é de ${custoInstalação.toLocaleString('pt-br', {style:'currency', currency:'BRL'})}! <br>
         O custo da liçença de uso da nossa Dashboard de monitoramento é de R$6.000,00 (anual)! <br>
-        A realização da manutenção dos sensores deve ser feita no mínimo a cada 6 dias! <br>
-        A vida útil dos nossos sensores é de em média 3,5 anos! <br><br> 
-        Seu custo total para adquirir nossos serviços pela primeira vez seria ${custoTotal.toLocaleString('pt-br', {style:'currency', currency:'BRL'})}!<br>
-        Isso que é custo-benefício e também garante que você não precise pagar R$5Mi em multas ;)`
+        <span style='color: rgb(255, 216, 21)'>A vida útil dos nossos sensores varia de 1 a 5 anos! <br>
+        A realização da manutenção dos sensores deve ser feita no mínimo a cada 6 dias! </span> <br><br> 
+        <span style='color:#55c9cd'>Para adquirir nossos serviços pela primeira vez, o custo total da empresa ${empresa } seria: ${custoTotal.toLocaleString('pt-br', {style:'currency', currency:'BRL'})}!  <br>
+        Isso que é custo-benefício e também garante que você não precise pagar R$5Mi em multas ;) </span>`
 
     };
 
