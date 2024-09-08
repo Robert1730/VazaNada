@@ -29,6 +29,7 @@
     
     Quanto custa o m³ do gás? (Em reais)<br>
     <input type="number" id="ipt_custo_gas"> <br> <br>
+    
 
     <button onclick="calcular()">Calcular</button>
 
@@ -114,13 +115,15 @@
             var mediaCustoMensalDesconto = mediaCustoAnualDesconto / 12;
 
 
+
+
             div_mensagem.innerHTML = `
                     <b>Você perdeu aproximadamente:</b> 
                     <ul>
                         <li>💸 ${mediaCustoAnual.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} nos últimos 12 meses.</li>
                         <li>📅 Uma média mensal de ${mediaCustoMensal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</li>
-                        <li>🔄 Perdendo aproximadamente ${mediaAnual.toFixed(2)} m³ de gás por ano</li>
-                        <li>📉 Perdendo aproximadamente ${mediaMensal.toFixed(2)} m³ de gás por mês</li>
+                        <li>🔄 Perdendo aproximadamente ${mediaAnual.toLocaleString()} m³ de gás por ano</li>
+                        <li>📉 Perdendo aproximadamente ${mediaMensal.toLocaleString()} m³ de gás por mês</li>
                     </ul>
                     
                     <b>Com a solução da VZ<span style="color: #5CE1E6">ND</span>, você poderia:</b>
