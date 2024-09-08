@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Financeira</title>
+</head>
+
+<body>
+    
+    <h1>Bem vindo(a) a nossa calculadora Finaceira! </h1>
+    <br>
+    <h2> Adquira os serviços VAZANADA! </h2>
+    <h3> Faça um orçamento já: </h3>
+
+    Qual o comprimento do gasoduto que você deseja assegurar? (em Km) 
+    <br>
+    <br>
+    <input type="number" id="ipt_comprimento">  
+    <button onclick="calcular()">Calcule</button>
+    <br><br>
+    <div id="div_mensagem"></div>
+
+    <!-- Criar Licenças? -->
+
+</body>
+
+</html>
+
+<script>
+
+    function calcular() {
+
+        var comprimento = Number(ipt_comprimento.value);
+        var qtd_sensores = Number(ipt_comprimento.value) / 0.1;
+        var custoSensores = qtd_sensores * 850; 
+        var custoInstalação = qtd_sensores * 350;
+        var custoTotal = custoSensores + custoInstalação + 6000;
+
+        div_mensagem.innerHTML = `Em um gasoduto de ${comprimento}km será necessário efetuar a instalação de ${qtd_sensores} sensores! <br>
+        O custo destes sensores é de ${custoSensores.toLocaleString('pt-br', {style:'currency', currency:'BRL'})}! <br>
+        O custo de instalação destes sensores é de ${custoInstalação.toLocaleString('pt-br', {style:'currency', currency:'BRL'})}! <br>
+        O custo da liçença de uso da nossa Dashboard de monitoramento é de R$6.000,00 (anual)! <br>
+        A realização da manutenção dos sensores deve ser feita no mínimo a cada 6 dias! <br>
+        A vida útil dos nossos sensores é de em média 3,5 anos! <br><br> 
+        Seu custo total para adquirir nossos serviços pela primeira vez seria ${custoTotal.toLocaleString('pt-br', {style:'currency', currency:'BRL'})}!<br>
+        Isso que é custo-benefício e também garante que você não precise pagar R$5Mi em multas ;)`
+
+    };
+
+
+</script>
