@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador Financeiro VZND</title>
+</head>
+
+    <style>
+
+        body {
+          background-color: rgb(247, 205, 255);
+        };
+    
+    </style>
+
+<body>
+
+    <h1> Bem vindo(a) à Ferramenta de Financiamento de Serviços da VZND! </h1>
+
+    <h2> Para Financiar os Serviços da VZND, preencha os campos abaixo com os dados solicitados: </h2>
+
+    Valor Total do Orçamento:
+    <input id="ipt_valor"/> <br> <br>
+
+    Valor Estimado da Entrada no Financiamento:
+    <input id="ipt_entrada"/> <br> <br>
+
+    Periodicidade dos Pagamentos (Mensal, Bimestral, Trimestral ou Semestral):
+    <input id="ipt_periodo"/> <br> <br>
+
+    Prazo do Financiamento (em meses):
+    <input id="ipt_prazo"/> <br> <br>
+
+    <button onclick="calcular()"> Calcular Financiamento</button> <br> <br>
+
+    <div id="div_mensagem"></div>
+
+</body>
+</html>
+<script>
+
+    alert ("Não utilize a Ferramenta de Financiamento, sem antes utilizar a Ferramenta de Orçamento.");
+
+    function calcular() {
+
+        var orcamento = Number(ipt_valor.value); // calculadora de orçamento (Laysa)
+        var entrada = Number(ipt_entrada.value); // Qual o valor da entrada que o cliente pagará
+        var prazo = Number(ipt_prazo.value); // Em quantos meses o cliente pretende pagar
+        var periodo = ipt_periodo.value; // O pagamento das parcelas será feito de quanto em quanto tempo
+        var taxa_juros = 0.05;
+        
+        if (periodo == 'Mensal'){
+            var periodo = 1;
+        };
+
+        if (periodo == 'Bimestral'){
+            var periodo = 2;
+        };
+
+        if (periodo == 'Trimestral'){
+            var periodo = 3;
+        };
+
+        if (periodo == 'Semestral'){
+            var periodo = 6;
+        };
+
+        var pós_entrada = orcamento - entrada; // valor pós entrada
+        var qtd_pagamentos = prazo / periodo; // quantas parcelas
+        var parcela = pós_entrada / qtd_pagamentos; // valor de cada parcela
+        var total = parcela * qtd_pagamentos; // valor total do financiamento pós entrada
+
+        var juros = parcela * taxa_juros * 1;// se o pagamento atrasar, terá de pagar juros
+        var parcela_juros = parcela + juros; // valor a ser pago caso haja juros
+
+        div_mensagem.innerHTML = `<b style = 'color:blue' > O valor financiado é de ${orcamento.toLocaleString('pt-br', {style:'currency', currency:'BRL'})}</b>; <br>
+        <b style = 'color:blue' > O valor de cada parcela será de ${parcela.toLocaleString('pt-br', {style:'currency', currency:'BRL'})}</b>;<br>
+        <b style = 'color:blue' > Sendo assim, o valor total do financiamento será de ${total.toLocaleString('pt-br', {style:'currency', currency:'BRL'})}, pós entrada de valor de ${entrada.toLocaleString('pt-br', {style:'currency', currency:'BRL'})}</b>; <br> <br>
+        <b style = 'color:red' > O valor dos juros é de ${juros.toLocaleString('pt-br', {style:'currency', currency:'BRL'})} por dia. </b>; <br>
+        <b style = 'color:red' >  O valor total, caso atraso de parcela, com juros será de ${parcela_juros.toLocaleString('pt-br', {style:'currency', currency:'BRL'})}. </b>`;
+    };
+
+</script>
