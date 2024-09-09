@@ -103,8 +103,8 @@
         var prejuizoGasPorVazamento = volumeGasVazadoPorTempo * precoGasm3;
         var solucaoGasReducao = prejuizoGasPorVazamento * 0.9;
 
-        resultado.innerHTML = `<br>Com ${mensagemRupturas} em seus gasodutos ${distribuidora}, poderiam ocorrer prejuizos de até <b style="color:red">R$ ${prejuizoGasPorVazamento}</b><br>
-        Porém ao usufruir dos serviços da VAZANADA, você poderia evitar 90% dos prejuizos, economizando até <b style="color:green">R$ ${solucaoGasReducao}<br>
+        resultado.innerHTML = `<br>Com ${mensagemRupturas} em seus gasodutos ${distribuidora}, poderiam ocorrer prejuizos de até <b style="color:red">R$ ${prejuizoGasPorVazamento.toLocaleString('pt-br', {style:'currency', currency:'BRL'})}</b><br>
+        Porém ao usufruir dos serviços da VAZANADA, você poderia evitar 90% dos prejuizos, economizando até <b style="color:green">R$ ${solucaoGasReducao.toLocaleString('pt-br', {style:'currency', currency:'BRL'})}<br>
         </b>`;
     };
 </script>
