@@ -62,7 +62,8 @@
 
         var economia = 0.9 * prejuizo
 
-        div_mensagem.innerHTML = `Caso ocorra um vazamento de gás durante ${tempo_vazao} segundos em uma rachadura de ${area_buraco * 1000} metros quadrados presente em seu gasoduto, você tera um prejuizo de <b style="color:red">R$ ${prejuizo}</b>. Porém, com os serviços da VZND(vazanada), você pode economizar até  <b style = "color:green"> R$ ${economia}</b>( Cerca de 90% da perda total) `
+        div_mensagem.innerHTML = `Caso ocorra um vazamento de gás durante ${tempo_vazao} segundos em uma rachadura de ${area_buraco * 1000} milimetros quadrados presente em seu gasoduto, você tera um prejuizo de <b style="color:red"> ${prejuizo.toLocaleString('pt-br', {style:'currency', currency:'BRL'})}</b>. <br> 
+        Porém, com os serviços da VZND(vazanada), você pode economizar até  <b style = "color:green"> ${economia.toLocaleString('pt-br', {style:'currency', currency:'BRL'})}</b>( Cerca de 90% da perda total) `
 
 
     }
