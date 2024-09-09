@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora financeira</title>
+</head>
+
+<body>
+    <p style="color: blue">CALCULADORA FINANCEIRA</p>
+
+    <p>Calcule aqui o quanto que sua empresa poderá economizar com os serviços da VazaNada</p>
+
+    Insira o tempo de vazão (seg):
+    <input type="number" id="ipt_vazao_gas">
+    <br>
+    <br>
+    insira a área da rachadura (mm2):
+    <input type="number" id="ipt_area_buraco">
+    <br>
+    <br>
+    Insira o valor do gás por (m3)
+    <input type="number" id="ipt_valor_gas">
+    <br>
+    <br>
+
+
+
+    <button onclick="calcular()">Calcular Prejuizo</button>
+
+
+    <div id="div_mensagem"></div>
+</body>
+
+</html>
+
+
+<script>
+
+    function calcular() {
+
+        var area_buraco = Number(ipt_area_buraco.value) / 1000;// conversão para metro
+
+        var valor_gas = Number(ipt_valor_gas.value);
+
+        var tempo_vazao = Number(ipt_vazao_gas.value);
+
+        var coeficiente_de_descarga_do_gas = 0.8; // O coeficiente de descarga é um fator adimensional que descreve a eficiência com a qual um fluido (neste caso, gás natural) passa através de uma abertura ou buraco. Para gás natural, o coeficiente de descarga pode variar dependendo de vários fatores, como a geometria do buraco, a forma da abertura e as condições do fluxo.
+
+        var pressao_atmosferica = 101.32; // 1atm(pressão atimosferica) equivale a 101.32 pascal(principal unidade de medida de pressão)
+
+        var pressao_dentro_gasoduto = 2941995.61; // 2941995.61 é o valor que a pressao de um gasoduto em pascal deve ter, de acordo com a lei 1425/21
+
+        var diferenca_de_pressao = pressao_dentro_gasoduto - pressao_atmosferica;
+
+        var densidade_gás_natural = 0.63; //kg/m3
+
+        var vazao = coeficiente_de_descarga_do_gas * area_buraco * Math.sqrt (2 * diferenca_de_pressao / densidade_gás_natural) * tempo_vazao;
+
+        var prejuizo = vazao * valor_gas;
+
+        var economia = 0.9 * prejuizo
+
+        div_mensagem.innerHTML = `Caso ocorra um vazamento de gás durante ${tempo_vazao} segundos em uma rachadura de ${area_buraco * 1000} milimetros quadrados presente em seu gasoduto, você tera um prejuizo de <b style="color:red"> ${prejuizo.toLocaleString('pt-br', {style:'currency', currency:'BRL'})}</b>. <br> 
+        Porém, com os serviços da VZND(vazanada), você pode economizar até  <b style = "color:green"> ${economia.toLocaleString('pt-br', {style:'currency', currency:'BRL'})}</b>( Cerca de 90% da perda total) `
+
+
+    }
+
+</script>
