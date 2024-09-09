@@ -53,9 +53,9 @@ CREATE TABLE Cadastro (
 );
 ```
 
-```sql
 ### Tabela `Sensor`
 Armazena informações dos sensores cadastradas.
+```sql
 CREATE TABLE Sensor (
     IdSensor INT PRIMARY KEY AUTO_INCREMENT,
     longitude DECIMAL(11, 8) NOT NULL,
