@@ -120,25 +120,25 @@
             div_mensagem.innerHTML = `
                     <b>Você perdeu aproximadamente:</b> 
                     <ul>
-                        <li>💸 ${mediaCustoAnual.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} nos últimos 12 meses.</li>
-                        <li>📅 Uma média mensal de ${mediaCustoMensal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</li>
-                        <li>🔄 Perdendo aproximadamente ${mediaAnual.toLocaleString()} m³ de gás por ano</li>
-                        <li>📉 Perdendo aproximadamente ${mediaMensal.toLocaleString()} m³ de gás por mês</li>
+                        <li>💸 <b style="color: red">${mediaCustoAnual.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</b> nos últimos 12 meses.</li>
+                        <li>📅 Uma média mensal de <b style="color: red">${mediaCustoMensal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</b></li>
+                        <li>📉 Perdendo aproximadamente <b style="color: red">${mediaMensal.toLocaleString()} m³ </b> de gás por mês</li>
+                        <li>🔄 Perdendo aproximadamente <b style="color: red">${mediaAnual.toLocaleString()} m³</b> de gás por ano</li>
                     </ul>
                     
                     <b>Com a solução da VZ<span style="color: #5CE1E6">ND</span>, você poderia:</b>
                     <ul>
-                        <li>⏱️ Reduzir o tempo para conter vazamentos em até 90%</li>
                         <li>⏳ A média de tempo atual que você leva para conter um vazamento é de ${(mediaTempo * 60).toFixed(0)} minutos</li>
                         <li>⚡ Você passaria a detectar um vazamento em até ${(mediaTempoDesconto * 60).toFixed(0)} minutos</li>
+                        <li>⏱️ Reduzindo o tempo para detectar vazamentos em até 90%</li>
                         <li>💰 Seu custo que antes era de ${mediaDeCustoPorVazamento.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} por vazamento, passaria a ser de ${mediaCustoPorVazamentoDesconto.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} por vazamento</li>
                     </ul>
                     
                     <b>Economia:</b>
                     <ul>
-                        <li>💵 Com a solução da VZ<span style="color: #5CE1E6">ND</span>, você poderia <b style="color: green">economizar</b> aproximadamente ${(mediaDeCustoPorVazamento - mediaCustoPorVazamentoDesconto).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} <b>por vazamento</b></li>
-                        <li>💵 Com a solução da VZ<span style="color: #5CE1E6">ND</span>, você poderia <b style="color: green">economizar</b> aproximadamente ${(mediaCustoMensal - mediaCustoMensalDesconto).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} <b>por mês</b></li>
-                        <li>💵 Com a solução da VZ<span style="color: #5CE1E6">ND</span>, você poderia <b style="color: green">economizar</b> aproximadamente ${(mediaCustoAnual - mediaCustoAnualDesconto).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} <b>por ano</b></li>
+                        <li>💵 Com a solução da <b>VZ<span style="color: #5CE1E6">ND</span><b>, você poderia <b style="color: green">economizar</b> aproximadamente <b style="color: green">${(mediaDeCustoPorVazamento - mediaCustoPorVazamentoDesconto).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</b> <b>por vazamento</b></li>
+                        <li>💵 Com a solução da <b>VZ<span style="color: #5CE1E6">ND</span><b>, você poderia <b style="color: green">economizar</b> aproximadamente <b style="color: green">${(mediaCustoMensal - mediaCustoMensalDesconto).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</b> <b>por mês</b></li>
+                        <li>💵 Com a solução da <b>VZ<span style="color: #5CE1E6">ND</span><b>, você poderia <b style="color: green">economizar</b> aproximadamente <b style="color: green">${(mediaCustoAnual - mediaCustoAnualDesconto).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</ b> <b>por ano</b></li>
                     </ul>
             `;
 
