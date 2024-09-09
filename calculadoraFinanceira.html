@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <h1>Calculadora de economia</h1>
+    Olá, para realizarmos uma estimativa de quanto você poderá economizar com nossos serviços, precisaremos que preencha algumas informações. <br><br>
+    
+    Identifique o nome de sua distribuidora de gás (TAG, TBG, TSB, GOM, NTS): 
+    <input type="text" id="iptDistribuidora"><br>
+
+    Digite uma estimativa do tempo de vazamento de gás em minutos:
+    <input type="text" id="iptTempoVazamento"><br>
+
+    Digite a quantidade de rupturas em seus gasodutos:
+    <input type="text" id="iptRupturasVazamento"><br>
+    
+    <br>
+    <button onclick="calcularEconomia()">Calcule a economia estimada</button>
+
+    <div id="resultado"></div>
+</body>
+</html>
+
+<script>
+    function calcularEconomia(){
+
+        //aqui puxamos os valores fornecidos pelo usuário
+        var distribuidora = iptDistribuidora.value;
+        var tempoVazamento = Number(iptTempoVazamento.value);
+        var qtdRupturasVazamento = Number(iptRupturasVazamento.value);
+
+        //Preço do gás natural em gasodutos
+        var precoGasm3 = 0.861498; 
+
+        //Densidade do gás natural em sua forma gasosa
+        var densidadeDoGasQuilosPorCm3 = 0.63;
+        
+        //valores do Gasoduto Nord Stream, que teve o melhor registro de vazamento e mais bem detalhado 
+        var volumeM3GasDiarioGasodutoNordStream = 170000000;
+        var volumeM3GasPorHoraGasodutoNordStream = volumeM3GasDiarioGasodutoNordStream / 24;
+        var volumeKgGasVazadoNordStreamPorHoraEmRuptura = 22920;
+
+        //calculo de conversão de unidade Quilos(Kg) para Metros cúbicos (M3), pois é melhor para nós trabalharmos com metros cúbicos quando se trata de gás
+        var volumeM3GasVazadoNordStreamPorHoraEmRuptura = 22920/0.63;
+
+        //calculo da porcentagem universal de gás vazado por rompimento em gasodutos, que usaremos para ver o vazamento por gasodutos de cada distribuidora.
+        var porcentagemDeGasPorRupturaEmVazamento = volumeM3GasVazadoNordStreamPorHoraEmRuptura / volumeM3GasPorHoraGasodutoNordStream;
+
+        //calculo do gás escapado por minuto da TAG
+        var volumeGasPorDiaTAG = 74670000;
+        var volumePorRupturaDiariaTAG = volumeGasPorDiaTAG * porcentagemDeGasPorRupturaEmVazamento;
+        var GasPorMinutoDeRupturaTAG = volumePorRupturaDiariaTAG / 1440;
+        
+        //calculo do gás escapado por minuto da TBG
+        var volumeGasPorDiaTBG = 30000000;
+        var volumePorRupturaDiariaTBG = volumeGasPorDiaTBG * porcentagemDeGasPorRupturaEmVazamento;
+        var GasPorMinutoDeRupturaTBG = volumeGasPorDiaTBG / 1440;
+
+        //calculo do gás escapado por minuto da TSB
+        var volumeGasPorDiaTSB = 15000000;
+        var volumePorRupturaDiariaTSB = volumeGasPorDiaTSB * porcentagemDeGasPorRupturaEmVazamento;
+        var GasPorMinutoDeRupturaTSB = volumeGasPorDiaTSB / 1440;
+
+        //calculo do gás escapado por minuto da GOM
+        var volumeGasPorDiaGOM = 5740000;
+        var volumePorRupturaDiariaGOM = volumeGasPorDiaGOM * porcentagemDeGasPorRupturaEmVazamento;
+        var GasPorMinutoDeRupturaGOM = volumeGasPorDiaGOM / 1440;
+
+        //calculo do gás escapado por minuto da NTS
+        var volumeGasPorDiaNTS = 158200000;
+        var volumePorRupturaDiariaNTS = volumeGasPorDiaNTS * porcentagemDeGasPorRupturaEmVazamento;
+        var GasPorMinutoDeRupturaNTS = volumeGasPorDiaNTS / 1440;
+
+        var volumeGasPorVazamento = 0;
+
+        //Aqui realizo os calculos para saber a quantidade de gás vazado através dos dados fornecidos variando de acordo com sua distribuidora. 
+        if (distribuidora == "TAG") {
+            volumeGasVazadoPorTempo = (GasPorMinutoDeRupturaTAG * tempoVazamento) * qtdRupturasVazamento;
+        };
+        if (distribuidora == "TBG") {
+            volumeGasVazadoPorTempo = (GasPorMinutoDeRupturaTBG * tempoVazamento) * qtdRupturasVazamento;
+        };
+        if (distribuidora == "TSB") {
+            volumeGasVazadoPorTempo = (GasPorMinutoDeRupturaTSB * tempoVazamento) * qtdRupturasVazamento;
+        };
+        if (distribuidora == "GOM") {
+            volumeGasVazadoPorTempo = (GasPorMinutoDeRupturaGOM * tempoVazamento) * qtdRupturasVazamento;
+        };
+        if (distribuidora == "NTS") {
+            volumeGasVazadoPorTempo = (GasPorMinutoDeRupturaNTS * tempoVazamento) * qtdRupturasVazamento;
+        };
+        
+        var mensagemRupturas = "";
+        if (qtdRupturasVazamento == 1) {
+            mensagemRupturas = "uma ruptura"
+        } else {
+            mensagemRupturas = qtdRupturasVazamento + " rupturas"
+        };
+        var prejuizoGasPorVazamento = volumeGasVazadoPorTempo * precoGasm3;
+        var solucaoGasReducao = prejuizoGasPorVazamento * 0.9;
+
+        resultado.innerHTML = `<br>Com ${mensagemRupturas} em seus gasodutos ${distribuidora}, poderiam ocorrer prejuizos de até <b style="color:red">R$ ${prejuizoGasPorVazamento.toLocaleString('pt-br', {style:'currency', currency:'BRL'})}</b><br>
+        Porém ao usufruir dos serviços da VAZANADA, você poderia evitar 90% dos prejuizos, economizando até <b style="color:green">R$ ${solucaoGasReducao.toLocaleString('pt-br', {style:'currency', currency:'BRL'})}<br>
+        </b>`;
+    };
+</script>
