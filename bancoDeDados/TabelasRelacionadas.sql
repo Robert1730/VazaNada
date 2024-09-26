@@ -2,7 +2,7 @@ CREATE DATABASE vazanada;
 USE vazanada;
 
 CREATE TABLE Cadastro (
-    idEmpresa INT PRIMARY KEY AUTO_INCREMENT,
+    idCadastro INT PRIMARY KEY AUTO_INCREMENT,
     razao_social VARCHAR(150) NOT NULL,
     cnpj CHAR(14) NOT NULL,
     email VARCHAR(80) NOT NULL,
@@ -28,9 +28,9 @@ CREATE TABLE Login (
 idLogin int primary key auto_increment,
 email varchar(255) NOT NULL,
 senha varchar(255) NOT NULL,
-fkLogin INT UNIQUE,
+fkCadastro INT UNIQUE,
 CONSTRAINT fkLoginCadastro FOREIGN KEY (fkLogin)
-REFERENCES Cadastro(idEmpresa)
+REFERENCES Cadastro(idCadastro)
 );
 
 INSERT INTO Login (email, senha, fklogin) values
@@ -44,7 +44,7 @@ INSERT INTO Login (email, senha, fklogin) values
 
 select * from login;
 
-SELECT idEmpresa, c.email, c.senha, l.senha, l.email,l.idLogin, l.fkLogin from login as l join cadastro as c on fkLogin = idEmpresa;
+SELECT idCadastro, c.email, c.senha, l.senha, l.email, idLogin, l.fkLogin from login as l join cadastro as c on fkLogin = idCadastro;
 
 
 

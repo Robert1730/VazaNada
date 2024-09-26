@@ -2,7 +2,7 @@ CREATE DATABASE vazanada;
 USE vazanada;
 
 CREATE TABLE Cadastro (
-    idEmpresa INT PRIMARY KEY AUTO_INCREMENT,
+    idCadastro INT PRIMARY KEY AUTO_INCREMENT,
     razao_social VARCHAR(150) NOT NULL,
     cnpj CHAR(14) NOT NULL,
     email VARCHAR(80) NOT NULL,
@@ -17,6 +17,15 @@ CREATE TABLE Cadastro (
     responsavel VARCHAR(80) NOT NULL
 );
 
+CREATE TABLE Login (
+idLogin int primary key auto_increment,
+email varchar(255) NOT NULL,
+senha varchar(255) NOT NULL,
+fkCadastro INT UNIQUE,
+CONSTRAINT fkEmpresaCadastro FOREIGN KEY (fkCadastro)
+REFERENCES Cadastro(idCadastro)
+);
+
 CREATE TABLE Sensor (
     IdSensor INT PRIMARY KEY AUTO_INCREMENT,
     longitude DECIMAL(11, 8) NOT NULL,
@@ -24,8 +33,6 @@ CREATE TABLE Sensor (
     dt_instalacao DATE NOT NULL,
     ultima_manutencao DATE NOT NULL
 );
-
-
 
 CREATE TABLE Registro (
     idRegistro INT PRIMARY KEY AUTO_INCREMENT,
@@ -85,15 +92,20 @@ INSERT INTO Registro (idSensor, data_hora, porcentagem) VALUES
 (1, '2020-01-01 00:04:50', 25.6),
 (1, '2020-01-01 00:05:00', 26.3);
 
+INSERT INTO Login (email, senha, fkCadastro) values
+('petrogás@petrogás.com', 'Hfch2fJ#$', 1),
+('gas&cia@gas&cia.com', 'Yfjau2fJ&', 2),
+('brasil@gas.com', 'UvhmfKJ%', 3);
 
-SELECT CONCAT('Bem vindo ', responsavel, '! O cadastro da empresa ', razao_social, ' foi realizado com sucesso. Aproveite!!') AS 'Boas vindas' FROM Cadastro WHERE idEmpresa = 2;
+SELECT CONCAT('Bem vindo ', responsavel, '! O cadastro da empresa ', razao_social, ' foi realizado com sucesso. Aproveite!!') AS 'Boas vindas' FROM Cadastro WHERE idCadastro = 2;
 SELECT * FROM Cadastro WHERE uf = 'SP';
-
 
 SELECT * FROM Sensor WHERE ultima_manutencao < '2020-04-20' ORDER BY ultima_manutencao;
 SELECT * FROM Sensor WHERE longitude = -23.5536790 && latitude = -46.6185690;
 
-
 SELECT * FROM Registro WHERE porcentagem > 20 ORDER BY data_hora DESC;
 SELECT porcentagem FROM Registro WHERE idSensor = 1;
 
+select * from login;
+
+SELECT idCadastro, c.email, c.senha, l.senha, l.email, idLogin, l.fkCadastro from login as l join cadastro as c on fkCadastro = idCadastro;
