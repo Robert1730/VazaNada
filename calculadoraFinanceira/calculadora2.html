@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="shortcut icon" href="./assets/icons/calculadoraFinanceira.ico" type="image/x-icon">
     <title>Calculadora VazaNada</title>
 </head>
 
@@ -23,9 +25,6 @@
     Qual a média de tempo de detecção de um vazamento? (Em minutos)<br>
     <input type="number" id="ipt_mediaTempo"> <br> <br>
 
-
-    
-
     <button onclick="calcular()">Calcular</button>
 
     <br>
@@ -41,12 +40,8 @@
         var consumoMensal = Number(ipt_consumoMensal.value)
         var qtdVazamentos = Number(ipt_qtdVazamentos.value);
         var mediaQuantidadeVazadoPorHora = Number(ipt_mediaVazamento.value);
-        //* var maiorVazamento = Number(ipt_maiorVazamento.value); *//
-        //* var menorVazamento = Number(ipt_menorVazamento.value); *//
-      // *  var maiorTempo = Number(ipt_maiorTempo.value) / 60; // Conversão de min para horas
-      //*  var menorTempo = Number(ipt_menorTempo.value) / 60; // Conversão de min para horas
-        var custoGasMCubico = 4,9 ;
         var mediaTempo = Number(ipt_mediaTempo.value)
+        var custoGasMCubico = 4.9 ;
 
         /*
             Verificação das condições de entrada:
@@ -64,13 +59,18 @@
             - Se todas as condições forem falsas, o bloco de código dentro do else é executado.
             - Isso permite que você execute diferentes blocos de código dependendo de qual condição é verdadeira.
         */
-        if (qtdVazamentos == 0 || mediaQuantidadeVazadoPorHora == 0 || maiorTempo == 0 || menorTempo == 0) {
-            alert("Preencha todos os campos!");
-        } else if (qtdVazamentos < 0 || mediaQuantidadeVazadoPorHora < 0 || maiorTempo < 0 || menorTempo < 0) {
-            alert("Os valores não podem ser negativos!");
-        }  else if (maiorTempo < menorTempo) {
-            alert("O menor tempo não pode ser maior que o maior tempo!");
-
+        if (qtdVazamentos == 0 || mediaQuantidadeVazadoPorHora == 0 || mediaTempo == 0 || consumoMensal == 0) {
+            Swal.fire({
+                icon: "error",
+                title: "Campos não preenchidos",
+                text: "Preencha todos os campos!"
+            });
+        } else if (qtdVazamentos < 0 || mediaQuantidadeVazadoPorHora < 0 || mediaTempo < 0 || consumoMensal < 0) {
+            Swal.fire({
+                icon: "error",
+                title: "Campos negativados",
+                text: "Algum campo está negativado, verifique as informações inseridas!"
+            });
         } else {
             // Média de quantidade de gás vazado por hora em um vazamento
             // Média de tempo para conter um vazamento em horas
@@ -88,6 +88,8 @@
             // Médias de custo por vazamento por ano e mes
             var mediaCustoAnual = mediaDeCustoPorVazamento * qtdVazamentos;
             var mediaCustoMensal = mediaCustoAnual / 12;
+            var mediaCustoTrimensal = mediaCustoAnual / 4;
+            var mediaCustoSemestre = mediaCustoAnual / 2;
 
 
             /**
@@ -108,7 +110,8 @@
 
             var mediaCustoAnualDesconto = mediaCustoPorVazamentoDesconto * qtdVazamentos;
             var mediaCustoMensalDesconto = mediaCustoAnualDesconto / 12;
-
+            var mediaCustoTrimensalDesconto = mediaCustoAnualDesconto / 4;
+            var mediaCustoSemestreDesconto = mediaCustoAnualDesconto / 2;
 
 
 
@@ -131,13 +134,114 @@
                     
                     <b>Economia:</b>
                     <ul>
-                        <li>💵 Com a solução da <b>VZ<span style="color: #5CE1E6">ND</span><b>, você poderia <b style="color: green">economizar</b> aproximadamente <b style="color: green">${(mediaDeCustoPorVazamento - mediaCustoPorVazamentoDesconto).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</b> <b>por vazamento</b></li>
+                        <li><b>💵 A partir de um ticket médio de <b style="color: green">${(custoGasMCubico).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</b> por m³, com a solução da </b> <b>VZ<span style="color: #5CE1E6">ND</span><b>, você poderia <b style="color: green">economizar</b> aproximadamente <b style="color: green">${(mediaDeCustoPorVazamento - mediaCustoPorVazamentoDesconto).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</b> <b>por vazamento</b></li>
                         <li>💵 Com a solução da <b>VZ<span style="color: #5CE1E6">ND</span><b>, você poderia <b style="color: green">economizar</b> aproximadamente <b style="color: green">${(mediaCustoMensal - mediaCustoMensalDesconto).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</b> <b>por mês</b></li>
+                        <li>💵 Com a solução da <b>VZ<span style="color: #5CE1E6">ND</span><b>, você poderia <b style="color: green">economizar</b> aproximadamente <b style="color: green">${(mediaCustoTrimensal - mediaCustoTrimensalDesconto).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</b> <b>por trimestre</b></li>
+                        <li>💵 Com a solução da <b>VZ<span style="color: #5CE1E6">ND</span><b>, você poderia <b style="color: green">economizar</b> aproximadamente <b style="color: green">${(mediaCustoSemestre - mediaCustoSemestreDesconto).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</b> <b>por semestre</b></li>
                         <li>💵 Com a solução da <b>VZ<span style="color: #5CE1E6">ND</span><b>, você poderia <b style="color: green">economizar</b> aproximadamente <b style="color: green">${(mediaCustoAnual - mediaCustoAnualDesconto).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</ b> <b>por ano</b></li>
                     </ul>
+
+                    <br>
+
+                    <button onclick="propaganda()">Clique aqui caso queira lucrar</button>
             `;
 
         }
 
     }
+
+    function propaganda() {
+        Swal.fire({
+                icon: "info",
+                title: "Contato",
+                showCancelButton: true,
+                showCloseButton: true,
+                cancelButtonColor: "#5CE1E6",
+                cancelButtonText: "Conheça mais sobre o projeto",
+                confirmButtonText: "Enviar informações!",
+                showClass: {
+                popup: `
+                    animate__animated
+                    animate__fadeInUp
+                    animate__faster
+                        `
+                },
+                hideClass: {
+                popup: `
+                    animate__animated
+                    animate__fadeOutDown
+                    animate__faster
+                       `
+                },
+                footer: '<a href="https://github.com/Robert1730/VazaNada" target="_blank">Clique aqui para já entrar em contato direto conosco</a>',
+                html: `
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome"placeholder="Insira o nome da sua empresa" required/>
+                    <br>
+
+                    <label for="fone">Telefone:</label>
+                    <input type="tel" id="fone"placeholder="(xx) xxxxx-xxxx"/>
+                    <br>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" placeholder="Seu melhor email"/>
+                
+                    <br>
+                    <textarea placeholder="Deixe sua mensagem"></textarea>
+                    <br>
+
+                    <fieldset class="checkbox">
+                        <legend>Por onde devemos entrar em contato?</legend>
+                      
+                        <div>
+                          <input type="checkbox" checked/>
+                          <label>Email</label>
+                        </div>
+                      
+                        <div>
+                          <input type="checkbox"/>
+                          <label>Telefone</label>
+                        </div>
+                      </fieldset>
+                    `,
+
+                    preConfirm: () => {
+                    var nome = document.getElementById('nome').value;
+                    var email = document.getElementById('email').value;
+                    var fone = document.getElementById('fone').value;
+
+        if (!nome || (!email && !fone)) {
+            Swal.showValidationMessage('Por favor, preencha todos os campos obrigatórios (nome e um desses dois campos: E-mail, Telefone) para podermos entrar em contato.');
+            return false;
+        }
+        return { nome, email, fone };
+    }
+                    
+                }).then((result) => {
+    if (result.isDismissed) {
+        window.open("https://github.com/Robert1730/VazaNada", "_blank");
+        return; 
+    }
+
+    if (result.isConfirmed) {
+        Swal.fire({
+            icon: "success",
+            title: "Enviado",
+            text: "Suas informações foram enviadas com sucesso, entraremos em contato em 24 horas úteis.",
+            confirmButtonText: "Estarei no aguardo!",
+            showCloseButton: true,
+            showCancelButton: true,
+            cancelButtonColor: "#5CE1E6",
+            cancelButtonText: "Conheça mais sobre o projeto",
+        }).then((cancelResult) => {
+            if (cancelResult.isDismissed) {
+                window.open("https://github.com/Robert1730/VazaNada", "_blank");
+            }
+        });
+    }
+});
+  }
 </script>
+
+<!-- No botão conheça mais sobre o projeto, levar para o site institucional futuramente -->
+<!-- Estilizar a parte de fazer o formulário -->
