@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="shortcut icon" href="./assets/icons/calculadoraFinanceira.ico" type="image/x-icon">
     <title>Calculadora VazaNada</title>
 </head>
@@ -63,13 +64,41 @@
             Swal.fire({
                 icon: "error",
                 title: "Campos não preenchidos",
-                text: "Preencha todos os campos!"
+                text: "Preencha todos os campos!",
+                showClass: {
+                popup: `
+                    animate__animated
+                    animate__fadeInUp
+                    animate__faster
+                        `
+                },
+                hideClass: {
+                popup: `
+                    animate__animated
+                    animate__fadeOutDown
+                    animate__faster
+                       `
+                },
             });
         } else if (qtdVazamentos < 0 || mediaQuantidadeVazadoPorHora < 0 || mediaTempo < 0 || consumoMensal < 0) {
             Swal.fire({
                 icon: "error",
                 title: "Campos negativados",
-                text: "Algum campo está negativado, verifique as informações inseridas!"
+                text: "Algum campo está negativado, verifique as informações inseridas!",
+                showClass: {
+                popup: `
+                    animate__animated
+                    animate__fadeInUp
+                    animate__faster
+                        `
+                },
+                hideClass: {
+                popup: `
+                    animate__animated
+                    animate__fadeOutDown
+                    animate__faster
+                       `
+                },
             });
         } else {
             // Média de quantidade de gás vazado por hora em um vazamento
@@ -154,10 +183,10 @@
         Swal.fire({
                 icon: "info",
                 title: "Contato",
-                showCancelButton: true,
                 showCloseButton: true,
-                cancelButtonColor: "#5CE1E6",
-                cancelButtonText: "Conheça mais sobre o projeto",
+                showDenyButton: true,
+                denyButtonColor: "#5CE1E6",
+                denyButtonText: "Conheça mais sobre o projeto",
                 confirmButtonText: "Enviar informações!",
                 showClass: {
                 popup: `
@@ -218,7 +247,7 @@
     }
                     
                 }).then((result) => {
-    if (result.isDismissed) {
+    if (result.isDenied) {
         window.open("https://github.com/Robert1730/VazaNada", "_blank");
         return; 
     }
@@ -230,13 +259,14 @@
             text: "Suas informações foram enviadas com sucesso, entraremos em contato em 24 horas úteis.",
             confirmButtonText: "Estarei no aguardo!",
             showCloseButton: true,
-            showCancelButton: true,
-            cancelButtonColor: "#5CE1E6",
-            cancelButtonText: "Conheça mais sobre o projeto",
-        }).then((cancelResult) => {
-            if (cancelResult.isDismissed) {
-                window.open("https://github.com/Robert1730/VazaNada", "_blank");
-            }
+            showDenyButton: true,
+            denyButtonColor: "#5CE1E6",
+            denyButtonText: "Conheça mais sobre o projeto",
+        }).then((result) => {
+            if (result.isDenied) {
+            window.open("https://github.com/Robert1730/VazaNada", "_blank");
+            return; 
+    }
         });
     }
 });
