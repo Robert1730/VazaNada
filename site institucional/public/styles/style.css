@@ -45,14 +45,15 @@ body {
     height: 100%;
 }
 
-.header a {
+.header a{
     text-decoration: none;
-    color: cyan;
+    color: rgb(255, 255, 255);
     
 }
 
-.agora {
-    font-weight: 800;
+a:active{
+    color: cyan;
+    
 }
 
 .navbar {
@@ -69,19 +70,6 @@ body {
 }
 
 
-.navbar li.active a {
-    background-color:transparent; /* Cor de fundo do item ativo */
-    color: #fff; /* Cor do texto do item ativo */
-    border-radius: 5px; /* Borda arredondada para o destaque */
-}
-
-
-.titulo {
-    color: #008a9c;
-    width: fit-content;
-    font-weight: 800;
-
-}
 .titulo img {
     width: 100px; /* Ajuste o tamanho da imagem conforme necessário */
     height: auto; /* Mantém a proporção */
@@ -103,12 +91,32 @@ body {
     align-items: center;
     height: 100%;
 }
+button {
+    background-color: cyan; /* Cor de fundo do botão */
+    color: black; /* Cor do texto do botão */
+    border: none;
+    border-radius: 5px; /* Bordas arredondadas */
+    padding: 10px 20px; /* Espaçamento interno */
+    font-size: 16px; /* Tamanho da fonte */
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    cursor: pointer; /* Cursor de mão ao passar o mouse */
+    transition: transform 0.2s, box-shadow 0.2s; /* Transição suave */
+}
+
+button:hover {
+    transform: translateY(-4px); /* Eleva o botão ao passar o mouse */
+    box-shadow: 0 4px 10px rgba(0, 255, 234, 0.801); /* Sombra para efeito de elevação */
+}
 
 .banner .container p {
     width: 50%;
     margin: 0;
     padding: 0;
-    font-size: 36px;
+    font-size: 30px;
+}
+
+b {
+    font-size: 20px;
 }
 
 .banner .container .span {
@@ -218,6 +226,20 @@ body {
         color: #ffffff;
         font-weight: 800;
     }
+
+    h3{
+        font-family: "Barlow", sans-serif;
+        color: #ffffff;
+        font-weight: 500;
+        text-align: center;
+    }
+
+    .x{
+        color:cyan;
+        font-size: 500;
+    }
+
+    
     
     .formulario{
         padding: 5%;
@@ -238,9 +260,10 @@ body {
     }
     .botao{
         margin-top: 3%;
-        margin-left: 40%;
+        margin-left: 37%;
+        
         background-color: cyan;
-        width: 100px;
+        width: 150px;
         height: 40px;
         border: none;
         border-radius: 7px;
@@ -250,6 +273,7 @@ body {
         color: white;
         cursor: pointer;
     }
+    
     
     .botao:hover{
         background-color: #000000;
