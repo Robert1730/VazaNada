@@ -37,6 +37,7 @@ body {
     display: flex;
     width: 80%;
     margin: auto;
+    align-items: center;
 }
 
 .header .container {
@@ -71,9 +72,9 @@ a:active{
 
 
 .titulo img {
-    width: 100px; /* Ajuste o tamanho da imagem conforme necessário */
-    height: auto; /* Mantém a proporção */
-    margin-right: 10px; /* Espaço entre a imagem e o texto */
+    width: 100px;
+    height: auto; 
+    margin-right: 10px; 
 }
 
 
@@ -91,21 +92,33 @@ a:active{
     align-items: center;
     height: 100%;
 }
-button {
-    background-color: cyan; /* Cor de fundo do botão */
-    color: black; /* Cor do texto do botão */
-    border: none;
-    border-radius: 5px; /* Bordas arredondadas */
-    padding: 10px 20px; /* Espaçamento interno */
-    font-size: 16px; /* Tamanho da fonte */
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    cursor: pointer; /* Cursor de mão ao passar o mouse */
-    transition: transform 0.2s, box-shadow 0.2s; /* Transição suave */
+.container3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: right;
+    align-items: center;
+    gap: 5px;
 }
 
+
+button {
+    background-color: cyan; 
+    color: rgb(0, 0, 0); 
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px; 
+    font-size: 16px; 
+    font-family: "Barlow", sans-serif;
+    font-weight: bold;
+    cursor: pointer; 
+    transition: transform 0.2s, box-shadow 0.2s; 
+    text-align: center;
+}
+
+
 button:hover {
-    transform: translateY(-4px); /* Eleva o botão ao passar o mouse */
-    box-shadow: 0 4px 10px rgba(0, 255, 234, 0.801); /* Sombra para efeito de elevação */
+    transform: translateY(-4px); 
+    box-shadow: 0 4px 10px rgba(0, 255, 234, 0.801); 
 }
 
 .banner .container p {
@@ -278,3 +291,37 @@ b {
     .botao:hover{
         background-color: #000000;
     }
+
+    .trazemos{
+        
+        flex-direction:column; 
+        align-items: center; 
+        text-align: center; 
+        margin-top: 20px; 
+        color:#fff;
+        font-weight: 500;
+        font-size: 30px;
+        
+    }
+    .container2 .sobre{
+    
+            justify-content: center;
+            background-color: transparent; /* Torna o fundo transparente */
+            
+            margin: 20px auto;
+            padding: 20px;
+            width: 700px;
+            border-radius: 10px;
+            border: 1px solid rgb(0, 247, 255); /* Contorno leve */
+            box-shadow: 0 4px 10px rgba(0, 182, 173, 0.726); /* Sombra leve */
+        }
+
+        .bodySobre{
+            background-image: url('https://s3-alpha-sig.figma.com/img/55af/b376/6f7b4764ed65dbeb506844ab2dde0849?Expires=1728864000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=cuB3Ln~XT6UpQhSvoWPHSN5mrGyJt12CwbdAobS9oZa-nhSJFvGiQbfw502UzB5ee-jmnDFWVkQ7MdHzF1tv83Qzp7ei5xQJ~hIQ8rhdGdBcDechCtZPAOIjCLi5hZzdzj2AmZmkGLDIvTifFKa8T5eteeb6Q60bgEv71GztCDPyRDZJ3come0civJXbLggaT0y~rnbsGjVWtPLEJO5xSeTEBACDw5-jkpmat6IRe5O1iOL~W~qkQuHGRSbEi2OKQcBuxUiCTLpxl-REL6oR3Xj8DhbH7-u3upnyTy9ZnbHjFlDEE4cBy0S~8HHqE-jWNYIam8UeyOwb-86GOnU4zw__');
+        background-size: cover; 
+        background-position: center; 
+        background-repeat: no-repeat; 
+        }
+    
+        
+    
