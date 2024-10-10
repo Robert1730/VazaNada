@@ -38,24 +38,50 @@ Com a instalação de sensores e a implementação do sistema, o objetivo é red
 
 O banco de dados é composto pelas seguintes tabelas:
 
-### Tabela `Cadastro`
+### Tabela `Empresa`
 Armazena informações das empresas cadastradas.
 
 ```sql
-CREATE TABLE Cadastro (
-    idEmpresa INT PRIMARY KEY AUTO_INCREMENT,
-    razao_social VARCHAR(150) NOT NULL,
-    cnpj CHAR(14) NOT NULL,
-    email VARCHAR(80) NOT NULL,
-    senha VARCHAR(255) NOT NULL,
-    cep CHAR(8) NOT NULL,
-    logradouro VARCHAR(200) NOT NULL,
-    numero INT NOT NULL,
-    cidade VARCHAR(50) NOT NULL,
-    uf CHAR(2) NOT NULL,
-    complemento VARCHAR(40),
-    telefone VARCHAR(11) NOT NULL,
-    responsavel VARCHAR(80) NOT NULL
+CREATE TABLE Empresa (
+idEmpresa INT PRIMARY KEY AUTO_INCREMENT,
+razao_social VARCHAR(150) NOT NULL,
+nome VARCHAR(255) NOT NULL,
+responsavel VARCHAR(80) NOT NULL,
+telefone CHAR(11) NOT NULL
+);
+```
+
+### Tabela `Unidade`
+Armazena informações da unidade da empresa.
+
+```sql
+CREATE TABLE Unidade (
+idUnidade INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(255) NOT NULL,
+logradouro VARCHAR(100) NOT NULL,
+numero VARCHAR(10) NOT NULL,
+bairro VARCHAR(100) NOT NULL,
+estado VARCHAR(100) NOT NULL,
+cep CHAR(8) NOT NULL,
+fkEmpresa INT NOT NULL,
+CONSTRAINT fkEmpresaUnidade 
+	FOREIGN KEY (fkEmpresa) 
+		REFERENCES empresa (idEmpresa)
+);
+```
+
+### Tabela `Setor`
+Armazena informações dos setores onde os sensores estão instalados.
+
+```sql
+CREATE TABLE Setor (
+idSetor INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(60) NOT NULL,
+descrição VARCHAR(100) NOT NULL,
+fkUnidade INT NOT NULL,
+CONSTRAINT fkSetorUnidade 
+	FOREIGN KEY (fkUnidade) 
+		REFERENCES empresa (idEmpresa)
 );
 ```
 
@@ -63,24 +89,58 @@ CREATE TABLE Cadastro (
 Armazena informações dos sensores cadastradas.
 ```sql
 CREATE TABLE Sensor (
-    IdSensor INT PRIMARY KEY AUTO_INCREMENT,
-    longitude DECIMAL(11, 8) NOT NULL,
-    latitude DECIMAL(11, 8) NOT NULL,
-    dt_instalacao DATE NOT NULL,
-    ultima_manutencao DATE NOT NULL
+idSensor INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(45) NOT NULL,
+dtInstalação DATETIME NOT NULL,
+dtÚltimaManutenção DATETIME NOT NULL,
+fkSetor INT NOT NULL, 
+CONSTRAINT fkSensorSetor 
+	FOREIGN KEY (fkSetor) 
+		REFERENCES Setor (idSetor)
 );
 ```
-### Tabela `Registro`
+### Tabela `Medição`
 Armazena os registros de vazamentos.
 ```sql
-CREATE TABLE Registro (
-    idRegistro INT PRIMARY KEY AUTO_INCREMENT,
-    idSensor INT NOT NULL,
-    data_hora DATETIME NOT NULL,
-    porcentagem DECIMAL(5, 2) NOT NULL
+CREATE TABLE Medição (
+idMedição INT PRIMARY KEY AUTO_INCREMENT,
+qtdGásVazado INT NOT NULL,
+dtComeçoVazamento DATETIME NOT NULL,
+fkSensor INT NOT NULL, 
+CONSTRAINT fkMediçãoSensor 
+	FOREIGN KEY (fkSensor) 
+		REFERENCES Sensor (idSensor)
 );
 ```
 
+### Tabela `Usuario`
+Armazena os usuarios que poderam acessar a dashboard.
+```sql
+CREATE TABLE Usuario (
+idUsuario INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(45) NOT NULL,
+email VARCHAR(255) NOT NULL,
+senha VARCHAR(255) NOT NULL,
+fkEmpresa INT NOT NULL, 
+CONSTRAINT fkUsuarioEmpresa 
+	FOREIGN KEY (fkEmpresa) 
+		REFERENCES Empresa (idEmpresa)
+);
+```
+
+### Tabela `Login`
+Armazena as informações de quem logou no sistema.
+```sql
+CREATE TABLE Login (
+idLogin INT PRIMARY KEY AUTO_INCREMENT,
+dtHrAcesso DATETIME,
+dtHrSaída DATETIME,
+fkUsuario INT,
+CONSTRAINT fkLoginUsuario
+	FOREIGN KEY (fkUsuario)
+		REFERENCES Usuario (idUsuario)
+);
+```
 
 ## Simulador Financeiro
 
