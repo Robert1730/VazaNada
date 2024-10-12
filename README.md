@@ -105,7 +105,7 @@ Armazena os registros de vazamentos.
 CREATE TABLE Medição (
 idMedição INT PRIMARY KEY AUTO_INCREMENT,
 qtdGásVazado FLOAT NOT NULL,
-dtComeçoVazamento DATETIME NOT NULL,
+dtComeçoVazamento DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
 fkSensor INT NOT NULL, 
 CONSTRAINT fkMediçãoSensor 
 	FOREIGN KEY (fkSensor) 

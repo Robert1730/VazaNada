@@ -1,3 +1,5 @@
+// Sensor oficial sem Labels para não dar erro com o MySQL que não adiciona string, apenas números
+ 
 const int PINO_SENSOR_MQ2 = A0; // Variavel da porta analógica
 
 // Parâmetros utilizados para o calculo da Porcentagem de gas 
@@ -21,16 +23,9 @@ void loop() { // executa infinitas vezes
     porcentagem = 100;
   }
 
-  Serial.print("Porcentagem:"); // legenda do gráfico
-  Serial.print(porcentagem); // valor 
-  Serial.print(" ");
+
+  Serial.println(porcentagem); // valor 
   
-  Serial.print("VolumeMínimo:");
-  Serial.print(1);
-  Serial.print(" ");
-  
-  Serial.print("VolumeCritico:");
-  Serial.println(20);
   delay(1000); // valor em milisegundos
 
-}  
+}
