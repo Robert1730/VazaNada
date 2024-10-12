@@ -1,0 +1,19 @@
+
+body {
+    display: flex;
+    justify-content: space-around; /* Distribui espaço entre os gráficos */
+    align-items: flex-start; /* Alinha os itens ao topo */
+    flex-direction: row; /* Muda a direção dos itens para linha */
+}
+
+.chart-container {
+    display: flex;
+    flex-direction: column; /* Mantém a KPI acima do gráfico */
+    align-items: center; /* Centraliza a KPI e o gráfico */
+}
+
+.kpi {
+    font-size: 24px;
+    margin-bottom: 40px; /* Espaçamento entre a KPI e o gráfico */
+}
+
