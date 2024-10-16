@@ -23,7 +23,6 @@ void loop() { // executa infinitas vezes
     porcentagem = 100;
   }
 
-
   Serial.println(porcentagem); // valor 
   
   delay(1000); // valor em milisegundos

@@ -198,7 +198,7 @@ INSERT INTO Setor (nome, descrição, fkUnidade) VALUES
 	   ('Setor Beta', 'Setor responsável pela distribuição entre BA e PI', 13),
        ('Setor Gama', 'Setor responsável pela distribuição entre BA e MG', 13),
        ('Setor Delta', 'Setor responsável pela distribuição entre BA e ES', 13),
-       ('Setor Ômega', 'Setor responsável pela distribuição entre BA e SE', 13);
+       ('Setor Ômega', 'Setor responsável pela distribuição entre BA e SE', 13),
 
 	   ('Setor Alfa', 'Setor responsável pela distribuição entre BA e GO', 14),
 	   ('Setor Beta', 'Setor responsável pela distribuição entre BA e TO', 14),
@@ -207,7 +207,7 @@ INSERT INTO Setor (nome, descrição, fkUnidade) VALUES
 
 	   ('Setor Alfa', 'Setor responsável pela distribuição entre MG e RJ', 15),
 	   ('Setor Beta', 'Setor responsável pela distribuição entre MG e SP', 15),
-       ('Setor Gama', 'Setor responsável pela distribuição entre MG e ES', 15),
+       ('Setor Gama', 'Setor responsável pela distribuição entre MG e ES', 15);
 
        
 INSERT INTO Sensor (nome, dtInstalação, dtÚltimaManutenção, fkSetor) VALUES 
@@ -239,7 +239,7 @@ INSERT INTO Sensor (nome, dtInstalação, dtÚltimaManutenção, fkSetor) VALUES
        ('Sensor de Gás B', '2023-12-01 10:00:00', '2024-02-10 11:00:00', 5),
        ('Sensor de Gás C', '2024-02-05 14:00:00', '2024-03-01 15:30:00', 5),
        ('Sensor de Gás D', '2023-11-20 09:00:00', '2024-04-05 10:45:00', 5),
-       ('Sensor de Gás E', '2024-03-10 07:30:00', '2024-05-12 08:00:00', 5);
+       ('Sensor de Gás E', '2024-03-10 07:30:00', '2024-05-12 08:00:00', 5),
 
 	   ('Sensor de Gás A', '2024-01-10 08:00:00', '2024-01-15 09:30:00', 6),
        ('Sensor de Gás B', '2023-01-10 10:00:00', '2024-02-10 11:00:00', 6),
@@ -293,7 +293,7 @@ INSERT INTO Sensor (nome, dtInstalação, dtÚltimaManutenção, fkSetor) VALUES
        ('Sensor de Gás B', '2023-01-10 10:00:00', '2024-02-10 11:00:00', 14),
        ('Sensor de Gás C', '2024-01-10 14:00:00', '2024-03-01 15:30:00', 14),
        ('Sensor de Gás D', '2023-01-10 09:00:00', '2024-04-05 10:45:00', 14),
-       ('Sensor de Gás E', '2024-01-10 07:30:00', '2024-05-12 08:00:00', 14),
+       ('Sensor de Gás E', '2024-01-10 07:30:00', '2024-05-12 08:00:00', 14);
        
 INSERT INTO Medição (qtdGásVazado, dtComeçoVazamento, fkSensor) VALUES
 	   (20, '2024-09-15 13:00:00', 1),

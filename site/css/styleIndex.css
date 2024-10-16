@@ -1,12 +1,9 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap');
-
-
+/* Style do nosso Index */
 
 body {
     margin: 0;
     padding: 0;
-    background-image: url(assets/img_qualidade_fundo_site_VZND/home3v3.jpg);
+    background-image: url(./assets/img/background/home3v3.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     font-family: 'Lexend Deca';
@@ -230,18 +227,3 @@ a {
     width: 200px;
     height: 200px;
 }
-
-
-
-/* 
-Value	Common weight name
-400	    Normal
-500	    Medium
-600	    Semi Bold (Demi Bold)
-700	    Bold 
-800     Extra-bold
-900     Black
-*/
-
-
-

@@ -14,6 +14,5 @@ body {
 
 .kpi {
     font-size: 24px;
-    margin-bottom: 40px; /* Espaçamento entre a KPI e o gráfico */
+    margin-bottom: 10%; /* Espaçamento entre a KPI e o gráfico */
 }
-

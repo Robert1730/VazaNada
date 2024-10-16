@@ -1,10 +1,7 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="jstestecss.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Implementando</title>
@@ -15,46 +12,53 @@
 <body>
 
     <div class="chart-container">
-        <div class="kpi">KPI 1: 32 unidades de gás vazado</div>
+        <div class="kpi"> Setor com sensores alertando </div>
         <canvas id="myChart" style="position: relative; height:40vh; width:40vw;"></canvas>
     </div>
 
     <div class="chart-container">
-        <div class="kpi">KPI 2: Tem</div>
-        <canvas id="myChart2" style="position: relative; height:40vh; width:40vw;"></canvas>
+        <div class="kpi"> Sensor que está quase no estado crítico </div>
+        <canvas id="myChart" style="position: relative; height:40vh; width:20vw;"></canvas>
+    </div>
+
+    <div class="chart-container">
+        <div class="kpi"> Sensores em estado Crítico </div>
+        <canvas id="myChart2" style="position: relative; height:45vh; width:40vw;"></canvas>
     </div>
 
     <script>
-        const labels = [
-            '12:00',
-            '13:00',
-            '14:00',
-            '15:00',
-            '16:00',
-            '17:00',
-            '18:00',
-            '19:00',
-            '20:00',
-            '21:00',
-            '22:00',
-            '23:00',
-
+        const labels = [ 
+            'Janeiro',
+            'Fevereiro',
+            'Março',
+            'Abril',
+            'Maio',
+            'Junho',
+            'Julho',
+            'Agosto', 
+            'Setembro',
+            'Outubro',
+            'Novembro',
+            'Dezembro',
         ];
 
         const data = {
             labels: labels,
             datasets: [{
-                label: 'QUANTIDADE DE GÁS VAZADO',
+                label: 'QUANTIDADE DE GÁS VAZADO NO MÊS',
                 backgroundColor: 'rgb(255, 0, 0)',
                 borderColor: 'rgb(255, 0, 0)',
-                data: [100, 29, 28, 25, 22, 23,73,83,92,61,36,0,],
+                data: [38, 0, 38 , 28, 0, 15, 20, 0, 32, 0, 67, 0],
             }]
         };
+
         const config = {
             type: 'line',
             data: data,
             options: {}
         };
+
+
 
         const labels2 = [
             'Janeiro',
@@ -74,13 +78,14 @@
         const data2 = {
             labels: labels2,
             datasets: [{
-                label: 'temp média',
+                label: 'Sensores em alerta',
                 backgroundColor: 'rgb(0, 0, 255)',
                 borderColor: 'rgb(0, 0, 255)',
-                data: [100, 90, 27, 23, 20, 18,76, 43, 98, 24, 27, 0],
-            }]
-        };
+                data: [5, 0, 7, 4, 0, 2, 3, 0, 5, 0, 10, 0],
+            }],
 
+        }
+        
         const config2 = {
             type: 'bar',
             data: data2,
