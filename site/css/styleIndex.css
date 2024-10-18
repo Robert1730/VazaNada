@@ -9,24 +9,14 @@
 body {
     margin: 0;
     padding: 0;
-<<<<<<< HEAD
-    background-image: url('../assets/background/home_escurecida.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    font-family: 'Lexend Deca';
-    height: 100vh;
-    
-=======
     font-family: 'Lexend Deca', sans-serif;
     background-color: #f8f8ff; 
     min-height: 100vh;
->>>>>>> 7161037e6f65810e6b196a6a3ad04d3bc5b6f9fa
 }
 
 header {
     background-color: #333;
     box-shadow: 0px 3px 10px;
-   
 }
 
 /* NAVBAR */
