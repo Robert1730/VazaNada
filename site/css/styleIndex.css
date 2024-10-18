@@ -3,7 +3,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-image: url(./assets/img/background/home3v3.jpg);
+    background-image: url('../assets/background/home_escurecida.png');
     background-repeat: no-repeat;
     background-size: cover;
     font-family: 'Lexend Deca';
