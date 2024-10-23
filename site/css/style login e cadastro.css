@@ -3,7 +3,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-image: url("../assets/background/home.jpg");
+    background-image: url("../assets/background/home3v2.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     font-family: 'Barlow', sans-serif;
@@ -40,7 +40,7 @@ body {
 }
 
 .titulo img {
-    margin-top: 15px;
+    margin-top: 10px;
     height: 110px;
 }
 
@@ -151,11 +151,11 @@ input {
 .botao:hover {
     background-color: #000;
     transform: translateY(-5px);
-    border: 2px solid #00fff2;
+    border: 2px solid #50FFDF;
 }
 
 .footer {
-    background-color: #008a9c;
+    background-color: #50FFDF;
     height: var(--tamanho-footer);
     color: #fff;
     display: flex;
@@ -179,5 +179,6 @@ input {
 }
 
 .x {
-    color: cyan;
+    color: #50FFDF;
+    text-decoration: none; 
 }

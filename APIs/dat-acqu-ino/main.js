@@ -13,7 +13,7 @@ const HABILITAR_OPERACAO_INSERIR = true;
 // função para comunicação serial
 const serial = async (
     valoresSensorAnalogico,
-    // valoresSensorDigital,
+  
 ) => {
 
     // conexão com o banco de dados MySQL
@@ -52,7 +52,7 @@ const serial = async (
         console.log(data);
         const valores = data.split(';');
      
-        const sensorAnalogico = parseFloat(valores[0]);
+        const sensorAnalogico = parseFloat(valores[0]); // converte texto para numero
 
         // armazena os valores dos sensores nos arrays correspondentes
         valoresSensorAnalogico.push(sensorAnalogico);
@@ -63,7 +63,7 @@ const serial = async (
             if(sensorAnalogico > 0){
                             // este insert irá inserir os dados na tabela "medida"
                             await poolBancoDados.execute(
-                                'INSERT INTO sensor (qtdGasVazado) VALUES (?)',
+                                'INSERT INTO Medição (qtdGásVazado, fkSensor) VALUES (?,1)',
                                 [sensorAnalogico]
                             );
                             console.log("valores inseridos no banco: ", sensorAnalogico);

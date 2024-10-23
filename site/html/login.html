@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VZND | Login</title>
     <link rel="stylesheet" href="../css/style login e cadastro.css"> 
-    <link rel="icon" href="../assets/img/vznd.png">
+    <link rel="shortcut icon" href="../assets/icon/IconeVZ.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap" rel="stylesheet">
     
@@ -17,7 +17,11 @@
         <div class="container">
             <h1 class="titulo"><img src="../assets/img/vznd.png" /></h1>
             <ul class="navbar navbar-elementos">
-              <button onclick="home()" class="botao"><img src="../assets/img/home--v4.png" height="30px"/></button>
+              <button onclick="home()" class="botao"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="aqua" class="bi bi-house-fill" viewBox="0 0 16 16" >
+                <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z"/>
+                  <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z"/>
+
+                </svg></button>
             </ul>
         </div>
     </div>
@@ -47,10 +51,10 @@
     </div>
 
     <div class="footer">
-      <div class="container">
-        <h4>&copy; 2024 VZND. Todos os direitos reservados.</h4>
-       v1.0.0
-        </div>
+      
+        <h4>&copy; 2024 VZND. Todos os direitos reservados.
+       v1.0.0</h4>
+        
     </div>
 </body>
 
@@ -68,7 +72,7 @@
       {
         divvalidarSenha.innerHTML = '✅'
 
-        window.location.href = "chart.js.html"; //redirecionamento para a tela de dash
+        window.location.href = ""; //redirecionamento para a tela de dash
       }
       else
       {
