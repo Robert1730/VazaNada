@@ -57,26 +57,45 @@ header {
 }
 
 
-.login-button {
+.buttons {
     display: flex;
     align-items: center;
     margin-right: 20px;
 }
+ 
 
-.login-button button{
+.cadastro-button {
+    background-color: transparent;
+   border: solid 1px;
+    border-radius: 10px;
+    border-color: #ffff;
+    padding: 5px 15px;
+    margin-right: 20px;
+  
+}
+
+.cadastro-button a {
+    text-decoration: none;      /* Retira a linha sublinhada */
+    font-size: 20px;
+    font-weight: 300;
+    color: white;
+}
+
+.login-button {
     background-color: #50FFDF;
     border: none;
     border-radius: 12px;
-    padding: 20px 35px;
+    padding: 10px 25px;
     font-weight: 900;
 }
-
-.login-button button a {
+.login-button a {
     text-decoration: none;      /* Retira a linha sublinhada */
     font-size: 20px;
     font-weight: 900;
     color: white;
 }
+
+
 
 /* HOME */
 
@@ -94,6 +113,7 @@ header {
     margin-left: 45px;
     
 }
+
 
 .home button {
     font-weight: 900;
@@ -229,4 +249,24 @@ header {
     flex: 1;
     justify-content: space-around;
     line-height: 25px;
+}
+
+/* FOOTER: */
+
+.footer {
+    
+    background-color:#50FFDF;
+    height: var(--tamanho-footer);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-size: 15px;
+}
+
+
+.footer h4 {
+
+    margin: 0px;
 }
