@@ -18,11 +18,7 @@
       </header>
         <div class="container_infos_dashboard">
             <aside class= "aside">
-<<<<<<< HEAD
                 <a href="../index.html"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#000" class="bi bi-house-fill" viewBox="0 0 16 16">
-=======
-                <a href="../../index.html"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#000" class="bi bi-house-fill" viewBox="0 0 16 16">
->>>>>>> 0a5e7983ed15df92618fcf49e08842eb40b5baea
                   <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z"/>
                   <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z"/>
                 </svg></a>
@@ -39,14 +35,14 @@
             <div class="dashboard">
               <div class="sensores-info">
                 <div class="sensor-info">
-                  <h1>Sensores em estado crítico</h1>
+                  <h1>Sensores em estado <span style="color: red;">crítico</span></h1>
                   <div>
                     <p>Sensor 1</p>
                     
                   </div>
                 </div>
                 <div class="sensor-info">
-                  <h1>Sensores em alerta</h1>
+                  <h1>Sensores em <span style="color: orange;">alerta</span></h1>
                   <div>
                     <p>Sensor 1</p>
                     <p>Sensor 2</p>
@@ -56,7 +52,7 @@
                   </div>
                 </div>
                 <div class="sensor-info">
-                  <h1>Setores em alerta</h1>
+                  <h1>Setores em <span style="color: orange;">alerta</span></h1>
                   <div>
                     <p>Setor A - (Sensor 2)</p>
                     <p>Setor B - (Sensor 1)</p>
@@ -113,13 +109,24 @@
                 backgroundColor: 'rgb(108, 229, 232)',
                 borderColor: 'rgb(108, 229, 232)',
                 data: [6, 12, 15 , 20, 23, 75, 12, 10, 2, 0, ],
-            }]
+            },
+            {
+              label:'Crítico',
+                backgroundColor: 'rgb(255, 0, 0)',
+                borderColor: 'rgb(255, 0, 0)',
+                data: [75, 75, 75, 75, 75, 75, 75, 75,75, 75,75, 75, ],
+            }
+
+          ]
+
+
         };
 
         const config = {
             type: 'line',
             data: data,
             options: {}
+            
         };
 
         const labels2 = [
