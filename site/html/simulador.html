@@ -90,11 +90,7 @@
         var tempo_detecçao = Number(ipt_tempo_detecçao.value)
         var perdeu_gas = Number(ipt_perdeu_gas.value)
 
-<<<<<<< HEAD
         var novo_tempo = (tempo_detecçao * 0.1)
-=======
-        var novo_tempo = Math.ceil(tempo_detecçao * 0.1)
->>>>>>> bfaae0283a7813da0eac8d23eb9024855cfcea1f
         var nova_duraçao = Math.ceil(duraçao_vazamento - (tempo_detecçao - novo_tempo))
         var nova_duracao_porcentagem = Math.ceil(nova_duraçao / duraçao_vazamento) * 100
 
