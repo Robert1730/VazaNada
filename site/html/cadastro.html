@@ -203,11 +203,41 @@ if (senha.length >= 8) {
 } 
 else 
 {
+<<<<<<< HEAD
   divvalidarSenha.innerHTML = `⛔ Senha deve conter ao menos 8 caracteres válidos, dentre eles :<br>
            Letra(s) Maiúscula(s) (1 ou mais) <br>
            Letra(s) Minúscula(s) (1 ou mais) <br>
            Número(s)<br>`;
     }
+=======
+  divvalidarSenha.innerHTML = `⛔ a Senha deve ter pelo menos 8 caracteres.`;
+}
+
+//confirmação da senha
+
+if(confirmacao.length >= 8)
+{
+if(confirmacao == senha)
+{
+  divvalidarSenha2.innerHTML = `✅`;
+}
+else
+{
+  divvalidarSenha2.innerHTML = ` ⛔ Senhas diferentes`;
+}
+} else
+{
+  divvalidarSenha2.innerHTML = `⛔ insira algo válido`;
+}
+
+
+
+
+  }
+  function home()
+  {
+    window.location.href = "../index.html";
+>>>>>>> bfaae0283a7813da0eac8d23eb9024855cfcea1f
   }
 
 </script>
