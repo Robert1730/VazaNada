@@ -10,7 +10,7 @@
   <header>
     <nav class="navbar">
         <div class="logo">
-            <img src="./assets/img/vznd.png"> 
+            <img src="../assets/img/"> 
         </div>
 
         <div class="list-navbar">
@@ -57,7 +57,7 @@
                 
                 <div class="div_inputs">
                     <p class="informacoesFaleConosco">Telefone para contato:</p>
-                    <input type="text" id="ipt_contato">
+                    <input type="text" id="ipt_telefone">
                 </div>
                 
             </div>
@@ -67,16 +67,16 @@
                 <textarea placeholder="Digite sua mensagem"></textarea>
             </div>
     
-            <div id="div_escolhaContato">
+            <!-- <div id="div_escolhaContato">
     
                 <p>Preferência de contato:</p>
-                <input type="checkbox" id="ipt_email" checked>
+                <input type="checkbox" id="chkipt_email" checked>
                 <label for="chkipt_email">E-mail</label>
     
-                <input type="checkbox" id="ipt_telefone">
+                <input type="checkbox" id="chkipt_telefone">
                 <label for="chkipt_telefone">Telefone</label>
                 
-            </div>
+            </div> -->
     
             <button onclick="enviar()">Enviar</button>
     
@@ -87,3 +87,22 @@
 </html>
 
 <script>
+
+    function enviar() {
+        var nome = ipt_nome.values
+        var empresa = ipt_empresa.values
+        var email = ipt_email.values
+        var telefone = ipt_telefone.values
+        // var emailCheck = chkipt_Email.values
+        // var telefoneCheck = chkipt_telefone.values
+        
+        if(nome == '' || nome == " ") {
+            alert("Insira um nome válido")
+        }
+
+        if(empresa == '' || empresa == " ") {
+            alert("Insira uma empresa válida")
+        }
+    }
+
+</script>
