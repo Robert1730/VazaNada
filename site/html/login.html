@@ -1,108 +1,113 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VZND | Login</title>
     <link rel="stylesheet" href="../css/style login e cadastro.css"> 
     <link rel="shortcut icon" href="../assets/icon/IconeVZ.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap" rel="stylesheet">
-    
-</head>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap" rel="stylesheet">  
+  </head>
 
-<body>
-  <div class="header">
-        <div class="container">
-            <h1 class="titulo"><img src="../assets/img/vznd.png" /></h1>
-            <ul class="navbar navbar-elementos">
-              <button onclick="home()" class="botao"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="aqua" class="bi bi-house-fill" viewBox="0 0 16 16" >
-                <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z"/>
-                  <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z"/>
+  <body>
 
-                </svg></button>
-            </ul>
-        </div>
+    <div class="header">
+      <div class="container">
+        <h1 class="titulo"><img src="../assets/img/vznd.png" /></h1>
+        <ul class="navbar navbar-elementos">
+          <button onclick="home()" class="botao">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="aqua" class="bi bi-house-fill" viewBox="0 0 16 16">
+              <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z"/>
+              <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z"/>
+            </svg>
+          </button>
+        </ul>
+      </div>
     </div>
 
     <div class="main-content">
-        <div class="login">
-            <div class="container">
-                <div class="card card-login">
-                    <h2>Bem-vindo de volta!</h2>
-                    <div class="formulario">
-                        <div class="campo">
-                            <span>E-mail (Usuário):</span>
-                            <input id="input_email" type="text" placeholder="Login">
-                            <div id="divvalidarEmail" style="color: rgb(179, 2, 2)"></div>
-                        </div>
-                        <div class="campo">
-                            <span>Senha:</span>
-                            <input id="input_senha" type="password" placeholder="******">
-                            <div id="divvalidarSenha" style="color: rgb(179, 2, 2)"></div>
-                        </div>
-                        <button onclick="login()" class="botao">Entrar</button><br><br>
-                        <h3>Ainda não faz parte da VZND? <a class="x" href="cadastro.html">Cadastre-se</a></h3>
-                    </div>
+      <div class="login">
+        <div class="container">
+          <div class="card card-login">
+            <h2>Bem-vindo de volta!</h2>
+            <div class="formulario">
+              <div class="campo">
+                <span>E-mail (Usuário):</span>
+                <input id="input_email" class="iptCampos" placeholder="Login">
+                <div id="divvalidarEmail" style="color: rgb(179, 2, 2)"></div>
+              </div>
+              <div class="campo">
+                <span>Senha:</span>   
+                <div id="senha">
+                  <input id="input_senha" type="password" placeholder="******">
+                  <button id="button_VisualizarSenha" class="olho" onclick="mudarSenha()"><img src="../assets/img/naoVendoSenha.png" alt=""></button>
                 </div>
+                <div id="divvalidarSenha" style="color: rgb(179, 2, 2)"></div>
+              </div>
+              <button onclick="login()" class="botao">Entrar</button><br><br>
+              <h3>Ainda não faz parte da VZND? <a class="x" href="cadastro.html">Cadastre-se</a></h3>
             </div>
+          </div>
         </div>
+      </div>
     </div>
 
     <div class="footer">
-      
-        <h4>&copy; 2024 VZND. Todos os direitos reservados.
-       v1.0.0</h4>
-        
+      <h4>&copy; 2024 VZND. Todos os direitos reservados. v1.0.0</h4>
     </div>
-</body>
+  </body>
+</html>
 
-    <script>
-       function login()
-  {
+<script>
+
+  function login() {
+    
     var email = input_email.value;
     var senha = input_senha.value;
 
-    if (email == "vznd.empresa@sptech.school" ) 
-    {
+    if (email == "vznd.empresa@sptech.school" ) {
+      
       divvalidarEmail.innerHTML = `✅`
       
-      if(senha == "VazaNada#2024")
-      {
+      if(senha == "VazaNada#2024") {
         divvalidarSenha.innerHTML = '✅'
 
-<<<<<<< HEAD
         window.location.href = "../html/dashboard.html"; //redirecionamento para a tela de dash
-=======
-        window.location.href = ""; //redirecionamento para a tela de dash
->>>>>>> 0a5e7983ed15df92618fcf49e08842eb40b5baea
-      }
-      else
-      {
-        divvalidarSenha.innerHTML = '⛔ Senha ou usuário incorreto(s)'
-      }
-    } 
-    else{
-        divvalidarEmail.innerHTML = ` ⛔ email não encontrado `
-        divvalidarSenha.innerHTML = '⛔ Senha ou usuário incorreto(s)'
-      }
-
-      if(senha =='')
-      {
-        divvalidarEmail.innerHTML = ` -- `
-         divvalidarSenha.innerHTML = '⛔ insira algo'
-      }
-
       
+      } else {
+          divvalidarSenha.innerHTML = `⛔ Senha ou usuário incorreto(s)`
+      }
 
+    } else{
+        divvalidarEmail.innerHTML = `⛔ Email não encontrado `
+        divvalidarSenha.innerHTML = `⛔ Senha ou usuário incorreto(s)`
+      
+      }
+
+      if(senha =='') {
+        divvalidarEmail.innerHTML = ``
+        divvalidarSenha.innerHTML = `⛔ Insira algo`
+      }
 
   }
-  function home()
-  {
+  
+  function home() {
     window.location.href = "../index.html"; //redirecionar para a home
   }
+
+  function mudarSenha() {
+    var inputSenha = input_senha
+    var buttonSenha = button_VisualizarSenha.value
+
+    if(inputSenha.type == "password") {
+      inputSenha.type = "text"
+      // buttonSenha - Ver como mudar a imagem do olho
+    } else {
+      inputSenha.type = "password"
+    }
+
+  }
+
 </script>
-
-
-</html>

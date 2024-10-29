@@ -23,6 +23,7 @@ header {
     display: flex;
     justify-content: space-between;
     padding: 0.2rem 1.3rem;
+    height: 15vh;
 }
 
 .logo img {
@@ -102,7 +103,7 @@ header {
 #home {
     background-image: url(../assets/background/home3v3.jpg);
     background-size: cover;
-    height: 78.8vh;
+    height: 85vh;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -120,10 +121,14 @@ header {
     font-size: 20px;
     padding: 20px 40px;
     background-color: #50FFDF   ;
-    color: #fff;
     border: solid 0px;
     border-radius: 15px;
     margin-top: 40px;
+}
+
+.home button a {
+    color: #fff;
+    text-decoration: none;
 }
 
 .home p {
@@ -144,7 +149,7 @@ header {
     display: flex;
     flex-direction: column;
     position: relative;
-    top: 15vh;
+    top: 9vh;
     font-size: 20px;
     
 }
@@ -187,7 +192,7 @@ header {
     justify-content: space-around;
 }
 
-    /* SOBRE NOS */
+/* SOBRE NOS */
 
 #sobre-nos {
     text-align: center;
@@ -197,7 +202,7 @@ header {
     top: 15vh;
     font-size: 20px;
     min-height: 100vh;
-    background-color: #333;
+    background-image: url(../assets/background/sobre-nos_degrade.jpg);
 }
 
 .sobre-nos img {
@@ -212,15 +217,16 @@ header {
     border-radius: 30px; 
     display: flex; 
     justify-content: space-between; 
+    align-items: center;
     text-align: center; 
 }
 
 .container-texto .box2 {
 
     background-color: #0F1128; 
-    padding: 50px; 
-    margin-top: 80px;
-    margin-right: 40px;
+    padding: 100px 20px;
+    height: 90%;
+    width: 80%;
     border-radius: 30px; 
     justify-content: space-between; 
     flex-direction: column;

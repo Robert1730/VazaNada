@@ -1,243 +1,279 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>VZND | Cadastro</title>
-
-  <link rel="stylesheet" href="../css/style login e cadastro.css" />
-  <link rel="icon" href="./assets/img vznd/vznd.png" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" />
-  <link rel="shortcut icon" href="../assets/icon/IconeVZ.png" type="image/x-icon">
-</head>
-
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VZND | Cadastro</title>
+    <link rel="stylesheet" href="../css/style login e cadastro.css" />
+    <link rel="icon" href="./assets/img vznd/vznd.png" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+  </head>
   
+  <body>
     <div class="header">
       <div class="container">
         <h1 class="titulo">
           <img src="../assets/img/vznd.png" />
         </h1>
         <ul class="navbar navbar-elementos">
-          <li><a href="login.html">login</a></li>
-         <a> <button onclick="home()" class="botao"><img src="../assets/img/home--v4.png" height="30px"/></button></a>
+          <li><a href="login.html">LOGIN</a></li>
+          <a>
+            <button onclick="home()" class="botao">
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="aqua" class="bi bi-house-fill" viewBox="0 0 16 16" >
+                <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z"/>
+                <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z"/>
+              </svg>
+            </button>
+          </a>
         </ul>
       </div>
     </div>
    
-
     <div class="main-content">
-    
-        <div class="container">
+      <div class="container">
           <div class=" main-content card card-cadastro">
             <div class="formulario">
-            <h2>Cadastre-se</h2>
-            
+              <h2>Cadastre-se</h2>
               <div class="campo">
                 <span>Nome :</span>
-                <input id="input_nome" type="text" placeholder="Insira aqui seu nome" />
-                <div id="divvalidarNome" style="color: rgb(255, 0, 0)"></div>
+                <input id="input_nome" class="iptCampos" placeholder="Insira aqui seu nome" />
+                <div id="divvalidarNome" style="color: rgb(255,182,193)"></div>
               </div>
               <div class="campo">
                 <span>Email (usuário):</span>
-                <input id="input_email" type="text" placeholder="Seu email" />
-                <div id="divvalidarEmail" style="color: rgb(255, 0, 0)"></div>
+                <input id="input_email" class="iptCampos" placeholder="Seu email" />
+                <div id="divvalidarEmail" style="color: rgb(255,182,193)"></div>
               </div>
               <div class="campo">
                 <span>CNPJ:</span>
-                <input id="input_cnpj" type="text" placeholder="00.000.000/0000-00" />
-                <div id="divvalidarCNPJ" style="color: rgb(255, 0, 0)"></div>
+                <input id="input_cnpj" class="iptCampos" placeholder="00.000.000/0000-00" />
+                <div id="divvalidarCNPJ" style="color: rgb(255,182,193)"></div>
               </div>
               <div class="campo">
                 <span>Razão Social:</span>
-                <input id="input_razao" type="text" placeholder="Razão Social" />
-                <div id="divvalidarRazao" style="color: rgb(255, 0, 0)"></div>
+                <input id="input_razao" class="iptCampos" placeholder="Razão Social" />
+                <div id="divvalidarRazao" style="color: rgb(255,182,193)"></div>
               </div>
               <div class="campo">
                 <span>Senha:</span>
-                <input id="input_senha" type="password"  onkeyup="senha()" placeholder="******" />
-                <div id="divvalidarSenha" style="color: rgb(255, 0, 0)"></div>
+                <div id="senha"> 
+                  <input id="input_senha" type="password" placeholder="******">
+                    <button id="button_VisualizarSenha" class="olho" onclick="mudarSenha()">
+                      <img src="../assets/img/naoVendoSenha.png" id="olhoSenha">
+                    </button>
+                  </input>
+                </div>
+                <div id="divvalidarSenha" style="color: rgb(255,182,193)"></div>
+                <!-- <input id="input_senha" type="password" class="iptCampos" placeholder="******">
+                <div id="divvalidarSenha" style="color: rgb(255,182,193)"></div> -->
               </div>
               <div class="campo">
                 <span>Confirmação da Senha:</span>
-                <input id="input_confirmacao_senha" type="password" placeholder="******" />
-                <div id="divvalidarSenha2" style="color: rgb(255, 0, 0)"></div>
+                <input id="input_confirmacao_senha" class="iptCampos" type="password" placeholder="******" />
+                <div id="divvalidarSenha2" style="color: rgb(255,182,193)"></div>
               </div>
-              <button onclick="cadastrar()" class="botao">Cadastrar</button>
+              <button onclick="cadastrar()" id="botao">Cadastrar</button>
             </div>
           </div>
-        </div>
-      
+      </div>
     </div>
 
     <div class="footer">
       <div class="container">
-        <h4>&copy; 2024 VZND. Todos os direitos reservados.  v1.0.0</h4>
+        <h4>&copy; 2024 VZND. Todos os direitos reservados v1.0.0.</h4>
       </div>
     </div>
-  <!-- </div>  -->
+  
 </body>
-
 </html>
 <script>
 
-function home()
-  {
-    window.location.href = "../index.html";
-  }
+  // Váriaveis para validação
+
+
+  var nomeValidado = "false"
+  var emailValidado = "false"
+  var cnpjValidado = "false"
+  var senhaValidado = "false"
+  var confirmacaoValidado = "false"
+  var razaoValidado = "false"
 
   function cadastrar(){
-//variaveis para as inputs
 
-var nome = input_nome.value;
+  //variaveis para as inputs
+
+  var nome = input_nome.value;
   var email = input_email.value;
   var cnpj = input_cnpj.value;
   var senha = input_senha.value;
   var confirmacao = input_confirmacao_senha.value;
   var razao = input_razao.value;
 
+   // Validações para redirecionar
+  
+if(nomeValidado == "false" || emailValidado == "false" || cnpjValidado == "false" || senhaValidado == "false" || confirmacaoValidado == "false" || razaoValidado == "false"){
+
+
   //validar nome
 
-  if(nome.length > 0)
-  {
+  if(nome.length > 0){
     divvalidarNome.innerHTML = `✅`;
+    nomeValidado = "true"
+
+  } else {
+    divvalidarNome.innerHTML = `⛔ Insira um nome válido `;
+    nomeValidado = "false"
+
   }
-  else
-  {
-    divvalidarNome.innerHTML = `⛔ Insira um nome valido `;
-  }
+
 
 //validação do email
 
-    if (email.includes("@")) 
-    {
+    if (email.includes("@")) {
+
       divvalidarEmail.innerHTML = `✅`
+      emailValidado = "true"
+
+    } else {
+      divvalidarEmail.innerHTML = `⛔ Insira um email válido `
+      emailValidado = "false"
     }
-    else{
-      divvalidarEmail.innerHTML = `⛔ Insira um email valido `
-    }
-     
+    
+    
 //validação do cnpj
 
-    if(cnpj.length == 18)
-    {
-     divvalidarCNPJ.innerHTML = `✅`
-    
-    } 
-    else 
-    {
-       divvalidarCNPJ.innerHTML = `⛔ Insira um CNPJ válido <br>
-       Siga o parâmetro "00.000.000/0000-00"`
+    if(cnpj.length == 18){
 
+     divvalidarCNPJ.innerHTML = `✅`
+    cnpjValidado = "true"
+    }  else {
+       divvalidarCNPJ.innerHTML = `⛔ Insira um CNPJ válido <br>
+       Exemplo:"00.000.000/0000-00"`
+       cnpjValidado = "false"
     }
 
     if(senha.includes(" ")){
-      divvalidarSenha.innerHTML = `Espaços não são permitidos`
-       
+      divvalidarSenha.innerHTML = `Espaços não são permitidos` 
     }
 
 
     // validação razão 
-    if(razao.length > 0)
-    {
+
+    if(razao.length > 0){
+
       divvalidarRazao.innerHTML = `✅`
-    }
-    else
-    {
+      razaoValidado = "true"
+
+    } else {
       divvalidarRazao.innerHTML = `⛔ Insira uma razão social válida`
+      razaoValidado = "false"
+
     }
 
-//confirmação da senha
 
-if(confirmacao.length >= 8)
-{
-if(confirmacao == senha)
-{
-  divvalidarSenha2.innerHTML = `✅`;
-}
-else
-{
-  divvalidarSenha2.innerHTML = `⛔ Senhas diferentes`;
-}
-} else
-{
-  divvalidarSenha2.innerHTML = `⛔ Insira algo válido`;
-}
-  }
- 
-  function senha() {
- 
 //variaveis pro if e for da senha
 
   var temNumero = false;
+  var temNumeroCorreto = `⛔`
   var temLetram = false;
+  var temLetramCorreto= `⛔`;
   var temLetraM = false;
+  var temLetraMCorreto= `⛔`;
 
-if (senha.length >= 8) {
-    for (var atual = 0; atual < senha.length; atual++) 
-     {
+if (senha.length >= 8){
+    
+    for (var atual = 0; atual < senha.length; atual++) {
+       
         var atual2 = senha[atual];
         
-        if (atual2 >= 'A' && atual2 <= 'Z') 
-        {
+        if(atual2 >= 'A' && atual2 <= 'Z') {
             temLetraM = true;
-        } 
-        else if (atual2 >= 'a' && atual2 <= 'z')
-         {
+            temLetraMCorreto = `✅`
+
+        } else if (atual2 >= 'a' && atual2 <= 'z') {
             temLetram = true;
-         } 
-        else if (atual2 >= '0' && atual2 <= '9') 
-        {
+            temLetramCorreto = `✅`
+
+        } else if (atual2 >= '0' && atual2 <= '9') { 
             temNumero = true;
+            temNumeroCorreto = `✅`
+
         }
     }
 
-    if (temLetraM && temLetram && temNumero) 
-    {
+    if (temLetraM && temLetram && temNumero) {
         divvalidarSenha.innerHTML = `✅`;
-    } 
-        
-} 
-else 
-{
-<<<<<<< HEAD
-  divvalidarSenha.innerHTML = `⛔ Senha deve conter ao menos 8 caracteres válidos, dentre eles :<br>
-           Letra(s) Maiúscula(s) (1 ou mais) <br>
-           Letra(s) Minúscula(s) (1 ou mais) <br>
-           Número(s)<br>`;
+        senhaValidado = "true"
+
+    } else {
+        divvalidarSenha.innerHTML = `
+          ⛔ Senha deve conter ao menos 8 caracteres válidos:<br>
+          ${temLetraMCorreto} Letra(s) Maiúscula(s), ${temLetramCorreto} minúsculas(s), ${temNumeroCorreto}número(s)`;
+          senhaValidado = "false"
     }
-=======
-  divvalidarSenha.innerHTML = `⛔ a Senha deve ter pelo menos 8 caracteres.`;
+} else {
+  divvalidarSenha.innerHTML = `⛔ Senha deve ter pelo menos 8 caracteres.`;
 }
+
 
 //confirmação da senha
 
-if(confirmacao.length >= 8)
-{
-if(confirmacao == senha)
-{
-  divvalidarSenha2.innerHTML = `✅`;
-}
-else
-{
-  divvalidarSenha2.innerHTML = ` ⛔ Senhas diferentes`;
-}
-} else
-{
-  divvalidarSenha2.innerHTML = `⛔ insira algo válido`;
-}
+if(confirmacao.length >= 8) {
+    if(confirmacao == senha) {
+    
+        divvalidarSenha2.innerHTML = `✅`;
+        confirmacaoValidado = "true"
 
+    } else {
+    
+        divvalidarSenha2.innerHTML = ` ⛔ Senhas diferentes`; 
+        confirmacaoValidado = "false"
+    }
+} else {
+    
+    divvalidarSenha2.innerHTML = `⛔ Insira algo válido`;
+    confirmacaoValidado = "false"
+    } 
 
+    if(nomeValidado == "true" && emailValidado == "true" && cnpjValidado == "true" && senhaValidado == "true" && confirmacaoValidado == "true" && razaoValidado == "true"){
+        botao.innerHTML = `Logar`
 
+        input_nome.readOnly = true
+        input_email.readOnly = true
+        input_cnpj.readOnly = true
+        input_confirmacao_senha.readOnly = true
+        input_razao.readOnly = true
+        input_senha.readOnly = true
+    }
 
+  } else {
+    window.location.href = "./login.html"
   }
-  function home()
-  {
+
+}
+
+  function home() {
     window.location.href = "../index.html";
->>>>>>> bfaae0283a7813da0eac8d23eb9024855cfcea1f
+  }
+
+  function mudarSenha() {
+    var inputSenha = input_senha
+    var buttonSenha = olhoSenha
+
+    // var input_senha = getElementById("input_senha")
+
+    if(inputSenha.type == "password") {
+      inputSenha.type = "text"
+      buttonSenha.src = "../assets/img/vendoSenha.png"
+      // buttonSenha.style.height = "20px"
+
+    } else {
+      inputSenha.type = "password"
+      buttonSenha.src = "../assets/img/naoVendoSenha.png"
+      // buttonSenha.style.height = "30px"
+    }
+
   }
 
 </script>

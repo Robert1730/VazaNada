@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
 
   background-position: left;
@@ -5,12 +11,15 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Lexend Deca', sans-serif;
-  background-color: #f8f8ff; 
+  background-image: url(../assets/background/simulador2v3.jpg); 
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 header {
   background-color: #333;
   box-shadow: 0px 3px 10px;
+  height: 15vh;
 }
 
 /* NAVBAR */
@@ -98,19 +107,19 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 70%;
+  height: 75%;
 }
 
 #faleConosco {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 60%;
   background-color: #01242cc2;
   text-align: center;
   border-radius: 50px;
-  border: #047A95 4px solid;
-  padding-left: 50px;
-  padding-right: 50px;
+  border: #50FFDF 4px solid;
+  padding: 50px;
+  gap: 20px;
 }
 
 #faleConosco h2 {
@@ -129,11 +138,13 @@ main {
   background-color: #50FFDF;
   color: #f8f8ff;
   border-radius: 10px;
-  border: #3DCEB4 2px solid;
+  border: #50FFDF 2px solid;
   font-size: 30px;
   width: 10vw;
   padding: 5px;
   font-weight: bold;
+  cursor: pointer;
+  /* transition: transform 0.8s, background-color 0.8s, border 0.8s; */
 }
 
 .div_informacoes {
@@ -155,7 +166,7 @@ main {
   height: 30px;
   background-color: transparent;
   border-radius: 10px;
-  border: #3DCEB4 2px solid;
+  border: #50FFDF 2px solid;
   font-size: 20px;
   color: #f8f8ff;
   padding: 5px;
@@ -166,19 +177,56 @@ main {
 #div_mensagem {
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 90%;
+  text-align: start;
 }
 
 #div_mensagem textarea{
   background-color: transparent;
   border-radius: 10px;
-  border: #3DCEB4 2px solid;
+  border: #50FFDF 2px solid;
   font-size: 20px;
   color: #f8f8ff;
   padding: 5px;
   outline: transparent;
+  resize: none;
 }
 
 .informacoesFaleConosco {
   color: #50FFDF
+}
+
+.div_validacoes {
+  color: rgb(255,182,193);
+}
+
+#div_escolhaContato {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+#div_escolhaContato label{
+  color: #50FFDF;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.footer {
+    
+  background-color:#50FFDF;
+  height: 10vh;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font-size: 15px;
+}
+
+
+.footer h4 {
+
+  margin: 0px;
 }

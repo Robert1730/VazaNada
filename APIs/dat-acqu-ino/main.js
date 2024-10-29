@@ -7,7 +7,7 @@ const mysql = require('mysql2');
 const SERIAL_BAUD_RATE = 9600;
 const SERVIDOR_PORTA = 3300;
 
-// habilita ou desabilita a inserção de dados no banco de dados
+// habilita ou desabilita a inserção de dados no banco de dados *
 const HABILITAR_OPERACAO_INSERIR = true;
 
 // função para comunicação serial
@@ -16,7 +16,7 @@ const serial = async (
   
 ) => {
 
-    // conexão com o banco de dados MySQL
+    // conexão com o banco de dados MySQL *
     let poolBancoDados = mysql.createPool(
         {
             host: 'localhost',
@@ -52,16 +52,16 @@ const serial = async (
         console.log(data);
         const valores = data.split(';');
      
-        const sensorAnalogico = parseFloat(valores[0]); // converte texto para numero
+        const sensorAnalogico = parseFloat(valores[0]); // converte texto para numero 
 
         // armazena os valores dos sensores nos arrays correspondentes
         valoresSensorAnalogico.push(sensorAnalogico);
       
 
-        // insere os dados no banco de dados (se habilitado)
+        // insere os dados no banco de dados (se habilitado) *
         if (HABILITAR_OPERACAO_INSERIR) {
             if(sensorAnalogico > 0){
-                            // este insert irá inserir os dados na tabela "medida"
+                            // este insert irá inserir os dados na tabela "mediçao"
                             await poolBancoDados.execute(
                                 'INSERT INTO Medição (qtdGásVazado, fkSensor) VALUES (?,1)',
                                 [sensorAnalogico]
