@@ -117,18 +117,18 @@ main {
   background-color: #01242cc2;
   text-align: center;
   border-radius: 50px;
-  border: #50FFDF 4px solid;
+  border: solid 4px rgba(255, 255, 255, 0.63);
   padding: 50px;
   gap: 20px;
 }
 
 #faleConosco h2 {
-  color: #50FFDF;
+  color: #fff;
   font-size: 45px;
 } 
 
 #faleConosco p {
-  color: #50FFDF;
+  color: #fff;
   font-size: 30px;
   font-weight: bold;
 } 
@@ -208,7 +208,7 @@ main {
 }
 
 #div_escolhaContato label{
-  color: #50FFDF;
+  color: white;
   font-size: 25px;
   font-weight: bold;
 }

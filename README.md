@@ -61,12 +61,13 @@ nome VARCHAR(255) NOT NULL,
 logradouro VARCHAR(100) NOT NULL,
 numero VARCHAR(10) NOT NULL,
 bairro VARCHAR(100) NOT NULL,
+cidade VARCHAR(100) NOT NULL,
 estado VARCHAR(100) NOT NULL,
 cep CHAR(8) NOT NULL,
 fkEmpresa INT NOT NULL,
 CONSTRAINT fkEmpresaUnidade 
 	FOREIGN KEY (fkEmpresa) 
-		REFERENCES empresa (idEmpresa)
+		REFERENCES Empresa (idEmpresa)
 );
 ```
 
@@ -81,7 +82,7 @@ descrição VARCHAR(100) NOT NULL,
 fkUnidade INT NOT NULL,
 CONSTRAINT fkSetorUnidade 
 	FOREIGN KEY (fkUnidade) 
-		REFERENCES empresa (idEmpresa)
+		REFERENCES Unidade (idUnidade)
 );
 ```
 
@@ -121,10 +122,10 @@ idUsuario INT PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR(45) NOT NULL,
 email VARCHAR(255) NOT NULL,
 senha VARCHAR(255) NOT NULL,
-fkEmpresa INT NOT NULL, 
-CONSTRAINT fkUsuarioEmpresa 
-	FOREIGN KEY (fkEmpresa) 
-		REFERENCES Empresa (idEmpresa)
+fkUnidade INT NOT NULL, 
+CONSTRAINT fkUsuarioUnidade
+	FOREIGN KEY (fkUnidade) 
+		REFERENCES Unidade (idUnidade)
 );
 ```
 
@@ -219,6 +220,9 @@ function calcular() {
 }
             
 ```
+
+## Main.js exemplo
+
 
 
 ## Prototipação com Arduino e Sensor MQ-2

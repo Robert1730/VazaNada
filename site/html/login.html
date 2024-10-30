@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VZND | Login</title>
+    <script src="../JavaScriptGlobal.js"></script>
+    <script src="../js/login.js"></script>
     <link rel="stylesheet" href="../css/style login e cadastro.css"> 
     <link rel="shortcut icon" href="../assets/icon/IconeVZ.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,13 +38,14 @@
               <div class="campo">
                 <span>E-mail (Usuário):</span>
                 <input id="input_email" class="iptCampos" placeholder="Login">
-                <div id="divvalidarEmail" style="color: rgb(179, 2, 2)"></div>
               </div>
               <div class="campo">
                 <span>Senha:</span>   
                 <div id="senha">
                   <input id="input_senha" type="password" placeholder="******">
-                  <button id="button_VisualizarSenha" class="olho" onclick="mudarSenha()"><img src="../assets/img/naoVendoSenha.png" alt=""></button>
+                  <button id="button_VisualizarSenha" class="olho" onclick="mudarSenha()">
+                    <img src="../assets/img/naoVendoSenha.png" id="olhoSenha">
+                  </button>
                 </div>
                 <div id="divvalidarSenha" style="color: rgb(179, 2, 2)"></div>
               </div>
@@ -57,57 +60,6 @@
     <div class="footer">
       <h4>&copy; 2024 VZND. Todos os direitos reservados. v1.0.0</h4>
     </div>
+
   </body>
 </html>
-
-<script>
-
-  function login() {
-    
-    var email = input_email.value;
-    var senha = input_senha.value;
-
-    if (email == "vznd.empresa@sptech.school" ) {
-      
-      divvalidarEmail.innerHTML = `✅`
-      
-      if(senha == "VazaNada#2024") {
-        divvalidarSenha.innerHTML = '✅'
-
-        window.location.href = "../html/dashboard.html"; //redirecionamento para a tela de dash
-      
-      } else {
-          divvalidarSenha.innerHTML = `⛔ Senha ou usuário incorreto(s)`
-      }
-
-    } else{
-        divvalidarEmail.innerHTML = `⛔ Email não encontrado `
-        divvalidarSenha.innerHTML = `⛔ Senha ou usuário incorreto(s)`
-      
-      }
-
-      if(senha =='') {
-        divvalidarEmail.innerHTML = ``
-        divvalidarSenha.innerHTML = `⛔ Insira algo`
-      }
-
-  }
-  
-  function home() {
-    window.location.href = "../index.html"; //redirecionar para a home
-  }
-
-  function mudarSenha() {
-    var inputSenha = input_senha
-    var buttonSenha = button_VisualizarSenha.value
-
-    if(inputSenha.type == "password") {
-      inputSenha.type = "text"
-      // buttonSenha - Ver como mudar a imagem do olho
-    } else {
-      inputSenha.type = "password"
-    }
-
-  }
-
-</script>

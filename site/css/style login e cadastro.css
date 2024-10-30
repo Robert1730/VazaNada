@@ -204,42 +204,39 @@ body {
 
     display: flex;
     text-align: center;
-    padding: 10px;
     border: 2px solid #50FFDF;
     border-radius: 5px;
-    width: 90%;
+    width: 95%;
+    height: 30px;
     background-color: transparent;
     color: #ffffff;
-    height: 15px;
-    outline: none;
-}
-   
+    
+}   
 
 #senha input {
     background: none;
     border: none;
     text-align: center;
-    width: 90%;
+    width: 85%;
     height: 100%;
+    /* width: 90%;
+    height: 100%; */
     color: #ffffff;
+    outline: none;
 }
 
 #senha .olho {
-
-    height: 35px;
-    width: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 15%;
     background-color: transparent;
-    position: relative;
-    bottom: 10px;
-    left: 10px;
- 
 }
 
 
 .olho img {
-
     height: 20px;
-    margin: 0px;
-
+    width: auto;
 }
 

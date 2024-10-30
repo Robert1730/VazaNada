@@ -25,12 +25,12 @@
                 <div>
                     <h1>Setores</h1>
                     <nav>
-                      <a href="#"><span style="color: blue;">Setor de Medição</span></a>
-                      <a href="#">Setor de Regulagem</a>
-                      <a href="#">Setor de Tratamento </a>
-                      <a href="#">Setor de Distribuição</a>
-                      <a href="#">Setor de Interconexão</a>
-                      <a href="#">Setor de Armazenamento</a>
+                      <a href="#"><span style="color: blue;">Medição</span></a>
+                      <a href="#">Regulagem</a>
+                      <a href="#">Tratamento </a>
+                      <a href="#">Distribuição</a>
+                      <a href="#">Interconexão</a>
+                      <a href="#">Armazenamento</a>
                     </nav>
                 </div>
             </aside>
@@ -46,18 +46,18 @@
                 <div class="sensor-info">
                   <h1>Setores <span style="color: rgb(0, 128, 19);">seguros</span></h1>
                   <div>
-                    <p>Setor de Interconexão</p>
-                    <p>Setor de Distribuição</p>
+                    <p>Interconexão</p>
+                    <p>Distribuição</p>
                  
                   </div>
                 </div>
                 <div class="sensor-info">
                   <h1>Setores em <span style="color: orange;">alerta</span></h1>
                   <div>
-                    <p>Setor de Medição</p>
-                    <p>Setor de Regulagem</p>
-                    <p>Setor de Tratamento</p>
-                    <p>Setor de Armazenamento</p>
+                    <p>Medição</p>
+                    <p>Regulagem</p>
+                    <p>Tratamento</p>
+                    <p>Armazenamento</p>
                   </div>
                 </div>
               </div>
@@ -102,142 +102,142 @@
         </div>
     </div>
 
- <script>
+</body>
+</html>
 
-        const labels = [ 
-            '7',
-            '8',
-            '10',
-            '11',
-            '12',
-            '13',
-            '14',
-            '15', 
-            '16',
-            '17',
-            '18',
-            '19',
-        ];
+<script>
 
-        const data = {
-            labels: labels,
-            datasets: [{
-                label:'Sensor 1',
-                backgroundColor: 'rgb(108, 229, 232)',
-                borderColor: 'rgb(108, 229, 232)',
-                data: [6, 12, 15 , 20, 23, 79, 12, 10, 2, 0, ],
-            },
-            {
-              label:'Crítico',
-                backgroundColor: 'rgb(255, 0, 0)',
-                borderColor: 'rgb(255, 0, 0)',
-                data: [75, 75, 75, 75, 75, 75, 75, 75,75, 75,75, 75, ],
-            }
+  const labels = [ 
+      '7',
+      '8',
+      '10',
+      '11',
+      '12',
+      '13',
+      '14',
+      '15', 
+      '16',
+      '17',
+      '18',
+      '19',
+  ];
 
-          ]
+  const data = {
+      labels: labels,
+      datasets: [{
+          label:'Sensor 1',
+          backgroundColor: 'rgb(108, 229, 232)',
+          borderColor: 'rgb(108, 229, 232)',
+          data: [6, 12, 15 , 20, 23, 79, 12, 10, 2, 0, ],
+      },
+      {
+        label:'Crítico',
+          backgroundColor: 'rgb(255, 0, 0)',
+          borderColor: 'rgb(255, 0, 0)',
+          data: [75, 75, 75, 75, 75, 75, 75, 75,75, 75,75, 75, ],
+      }
+
+    ]
 
 
-        };
+  };
 
-        const config = {
-            type: 'line',
-            data: data,
-            options: {
-              scales: {
-            y: {
-                ticks: {
-                    callback: function(value) {
-                        return value + '%'; 
-                    }
-                }
-            },
-           x: {
-                ticks: {
-                    callback: function(value) {
-                        return value + 'h'; 
-                    }
-                }
-            }
+  const config = {
+      type: 'line',
+      data: data,
+      options: {
+        scales: {
+      y: {
+          ticks: {
+              callback: function(value) {
+                  return value + '%'; 
+              }
+          }
+      },
+     x: {
+          ticks: {
+              callback: function(value) {
+                  return value + 'h'; 
+              }
+          }
+      }
 
-        }
-            }
-            
-        };
+  }
+      }
+      
+  };
 
-        const labels2 = [
-            'Janeiro',
-            'Fevereiro',
-            'Março',
-            'Abril',
-            'Maio',
-            'Junho',
-            'Julho',
-            'Agosto', 
-            'Setembro',
-            'Outubro',
-            'Novembro',
-            'Dezembro',
-        ];
+  const labels2 = [
+      'Janeiro',
+      'Fevereiro',
+      'Março',
+      'Abril',
+      'Maio',
+      'Junho',
+      'Julho',
+      'Agosto', 
+      'Setembro',
+      'Outubro',
+      'Novembro',
+      'Dezembro',
+  ];
 
-        const data2 = {
-            labels: labels2,
-            datasets: [{
-                label: 'QtdMês',
-                backgroundColor: 'rgb(108, 229, 232)',
-                borderColor: 'rgb(108, 229, 232)',
-                data: [5, 0, 7, 4, 0, 2, 3, 0, 5, 0, 10, 0, ],
-            }],
+  const data2 = {
+      labels: labels2,
+      datasets: [{
+          label: 'QtdMês',
+          backgroundColor: 'rgb(108, 229, 232)',
+          borderColor: 'rgb(108, 229, 232)',
+          data: [5, 0, 7, 4, 0, 2, 3, 0, 5, 0, 10, 0, ],
+      }],
 
-        }
-        
-        const config2 = {
-            type: 'bar',
-            data: data2,
-            options: {}
-        };
+  }
+  
+  const config2 = {
+      type: 'bar',
+      data: data2,
+      options: {}
+  };
 
-        const data3 = {
-  labels: [
-    'Setor de Medição ',
-    'Setor de Tratamento ',
-    'Setor de Regulagem',
-    'Setor de Armazenamento',
+  const data3 = {
+labels: [
+'Setor de Medição ',
+'Setor de Tratamento ',
+'Setor de Regulagem',
+'Setor de Armazenamento',
 
-  ],
-  datasets: [{
-    label: '',
-    data: [3, 3, 3, 1],
-    backgroundColor: [
-      'rgb(108, 229, 232)',
-      'rgb(8, 77, 110)',
-      'rgb(45, 139, 280)',
-      'rgb(130, 95, 250)',
-     
-    ],
-    hoverOffset: 4
-  }]
+],
+datasets: [{
+label: '',
+data: [3, 3, 3, 1],
+backgroundColor: [
+'rgb(108, 229, 232)',
+'rgb(8, 77, 110)',
+'rgb(45, 139, 280)',
+'rgb(130, 95, 250)',
+
+],
+hoverOffset: 4
+}]
 };
 
 
-        const config3 = {
-            type: 'pie',
-            data: data3,
-            options: {}
-        };
+  const config3 = {
+      type: 'pie',
+      data: data3,
+      options: {}
+  };
 
-        const myChart = new Chart(
-            document.getElementById('myChart'),
-            config
-        );
-        const myChart2 = new Chart(
-            document.getElementById('myChart2'),
-            config2
-        );
-        const myChart3 = new Chart(
-            document.getElementById('myChart3'),
-            config3
-        );
-    </script>
-
-</body>
-</html>
+  const myChart = new Chart(
+      document.getElementById('myChart'),
+      config
+  );
+  const myChart2 = new Chart(
+      document.getElementById('myChart2'),
+      config2
+  );
+  const myChart3 = new Chart(
+      document.getElementById('myChart3'),
+      config3
+  );
+</script>

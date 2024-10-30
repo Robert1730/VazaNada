@@ -1,218 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/styleFC.css">
-    <title>Fale Conosco</title>
-</head>
-<body>
-  <header>
-    <nav class="navbar">
-        <div class="logo">
-            <img src="../assets/img/vznd.png"> 
-        </div>
-
-        <div class="list-navbar">
-            <ul>
-                <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="../index.html#servico">Serviço</a></li>
-                <li class="nav-item"><a class="nav-link" href="../index.html#sobre-nos">Sobre nós</a></li>
-                <li class="nav-item"><a class="nav-link" href="./simulador.html">Simulador</a></li>
-                <li class="nav-item"><a class="nav-link" href="./faleconosco.html">Fale conosco</a></li>
-            </ul>
-        </div>
-
-        <div class="buttons">
-            <button class="cadastro-button"><a href="./cadastro.html">Cadastre-se</a></button>
-        
-            <button class="login-button"><a href="./login.html">Login</a></button>
-        </div>
-
-    </nav>
-</header>
-
-    <main>
-        <section id="faleConosco">
-            <h2>Precisa de ajuda?</h2>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="../js/faleConosco.js"></script>
+        <link rel="stylesheet" href="../css/styleFC.css">
+        <title>Fale Conosco</title>
+    </head>
     
-            <div class="div_informacoes">
+    <body>
+        <header>
+            <nav class="navbar">
+                <div class="logo">
+                    <img src="../assets/img/vznd.png"> 
+                </div>
+                <div class="list-navbar">
+                    <ul>
+                        <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../index.html#servico">Serviço</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../index.html#sobre-nos">Sobre nós</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./simulador.html">Simulador</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./faleconosco.html">Fale conosco</a></li>
+                    </ul>
+                </div>
+                <div class="buttons">
+                    <button class="cadastro-button"><a href="./cadastro.html">Cadastre-se</a></button> 
+                    <button class="login-button"><a href="./login.html">Login</a></button>
+                </div>
+            </nav>
+        </header>
 
-                <div class="div_inputs">
-                    <p class="informacoesFaleConosco">Seu nome completo:</p>
-                    <input type="text" id="ipt_nome" class="inputs">
-                    <div class="div_validacoes" id="div_validarNome"></div>
+        <main>
+            <section id="faleConosco">
+                <h2>Precisa de ajuda?</h2>
+                <div class="div_informacoes">
+                    <div class="div_inputs">
+                        <p class="informacoesFaleConosco">Seu nome completo:</p>
+                        <input type="text" id="ipt_nome" class="inputs">
+                        <div class="div_validacoes" id="div_validarNome"></div>
+                    </div>
+                    <div class="div_inputs">
+                        <p class="informacoesFaleConosco">O nome de sua empresa:</p>
+                        <input type="text" id="ipt_empresa" class="inputs">
+                        <div class="div_validacoes" id="div_validarEmpresa"></div>
+                    </div>   
                 </div>
-                
-                <div class="div_inputs">
-                    <p class="informacoesFaleConosco">O nome de sua empresa:</p>
-                    <input type="text" id="ipt_empresa" class="inputs">
-                    <div class="div_validacoes" id="div_validarEmpresa"></div>
+                <div class="div_informacoes">
+                    <div class="div_inputs">
+                        <p class="informacoesFaleConosco">Email para contato:</p>
+                        <input type="text" id="ipt_email" class="inputs">
+                        <div class="div_validacoes" id="div_validarEmail"></div>
+                    </div> 
+                    <div class="div_inputs">
+                        <p class="informacoesFaleConosco">Telefone para contato:</p>
+                        <input type="number" id="ipt_contato" class="inputs">
+                        <div class="div_validacoes" id="div_validarContato"></div>
+                    </div>
                 </div>
-                
-            </div>
-    
-            <div class="div_informacoes">
-    
-                <div class="div_inputs">
-                    <p class="informacoesFaleConosco">Email para contato:</p>
-                    <input type="text" id="ipt_email" class="inputs">
-                    <div class="div_validacoes" id="div_validarEmail"></div>
-                </div>
-                
-                <div class="div_inputs">
-                    <p class="informacoesFaleConosco">Telefone para contato:</p>
-                    <input type="number" id="ipt_contato" class="inputs">
-                    <div class="div_validacoes" id="div_validarContato"></div>
-                </div>
-                
-            </div>
-    
-            <div class="div_informacoes">
+                <div class="div_informacoes">
+                    <div id="div_mensagem">
+                        <p class="informacoesFaleConosco">O que você deseja?</p>
+                        <textarea id="textArea_mensagem" placeholder="Digite sua mensagem"></textarea>
+                        <div class="div_validacoes" id="div_validarMensagem"></div>
+                    </div>
+                </div> 
+                <div>
+                    <div id="div_escolhaContato">
+                        <p>Preferência de contato:</p>
+                        <input type="checkbox" id="chkipt_email" class="inputs" checked>
+                        <label for="chkipt_email">E-mail</label>
 
-                <div id="div_mensagem">
-                    <p class="informacoesFaleConosco">O que você deseja?</p>
-                    <textarea id="textArea_mensagem" placeholder="Digite sua mensagem"></textarea>
-                    <div class="div_validacoes" id="div_validarMensagem"></div>
+                        <input type="checkbox" id="chkipt_telefone" class="inputs">
+                        <label for="chkipt_telefone">Telefone</label>
+                    </div>
+                    <div class="div_validacoes" id="div_validarEscolha"></div>
                 </div>
-            
-            </div>
-    
-            <div>
-                <div id="div_escolhaContato">
-                    <p>Preferência de contato:</p>
-                    <input type="checkbox" id="chkipt_email" class="inputs" checked>
-                    <label for="chkipt_email">E-mail</label>
-        
-                    <input type="checkbox" id="chkipt_telefone" class="inputs">
-                    <label for="chkipt_telefone">Telefone</label>
-                </div>
-                <div class="div_validacoes" id="div_validarEscolha"></div>
-            </div>
-                
             <button id="buttonEnviar" onclick="enviar()">Enviar</button>
-    
         </section>
     </main>
 
-    <div class="footer">
-                
+    <div class="footer">  
         <div class="container"> 
             <h4>&copy; 2024 VZND. Todos os direitos reservados. v1.0.0</h4>
         </div>
-        
     </div> 
     
-</body>
+    </body>
 </html>
-
-<script>
-
-    var novaMensagem = false
-
-function enviar() {
-
-        // Variaveis com os valores
-
-        var nome = ipt_nome.value
-        var empresa = ipt_empresa.value
-        var email = ipt_email.value
-        var telefone = ipt_contato.value
-        var mensagemCliente = textArea_mensagem.value
-        var emailCheck = chkipt_email.checked
-        var telefoneCheck = chkipt_telefone.checked
-
-        // Variaveis das validações
-
-        var nomeValidado = false
-        var empresaValidada = false
-        var emailValidado = false
-        var telefoneValidado = false
-        var mensagemClienteValidado = false
-        var telefoneEmailValidado = true
-
-        div_validarNome.innerHTML = ``
-        div_validarEmpresa.innerHTML = ``
-        div_validarEmail.innerHTML = ``
-        div_validarContato.innerHTML = ``
-        div_validarMensagem.innerHTML = ``
-
-        if(novaMensagem == true) {
-            location.reload();
-        }
-
-        if(nome == '' || nome == " ") {
-            div_validarNome.innerHTML = `⛔ Insira um nome válido `;
- 
-        } else {
-            nomeValidado = true
-        }
-
-        if(empresa == '' || empresa == " ") {    
-            div_validarEmpresa.innerHTML = `⛔ Insira uma empresa válida`;
-        
-        } else {
-            empresaValidada = true
-        
-        }
-
-        if(emailCheck || telefoneCheck) {
-            div_validarEscolha.innerHTML = ``
-           
-            if(emailCheck && telefoneCheck) {
-                telefoneEmailValidado = false
-            }
-
-            if(emailCheck && (email == '' || email == " " || !email.includes("@"))) {
-                div_validarEmail.innerHTML = `⛔ Insira um email válido `;
-            
-            } else {
-                emailValidado = true
-            }
-
-            if(telefoneCheck && (telefone <=0 || telefone.length < 13)) {
-                div_validarContato.innerHTML = `⛔ Insira um contato válido, EX: +55 11 9 9999 9999`;
-            
-            } else {
-                telefoneValidado = true
-            } 
-
-            if(telefoneEmailValidado == false && emailValidado && telefoneValidado) {
-                telefoneEmailValidado = true
-            }
-
-        } else {
-            div_validarEscolha.innerHTML = `⛔ Escolha uma forma de contato`;
-        
-        }
-
-        if(mensagemCliente == '' || mensagemCliente == " ") {    
-            div_validarMensagem.innerHTML = `⛔ Insira uma mensagem válida`;
-        
-        } else {
-            mensagemClienteValidado = true
-    
-        }
-
-        if(nomeValidado && empresaValidada && (telefoneValidado || emailValidado) && mensagemClienteValidado && telefoneEmailValidado){
-            div_validarMensagem.innerHTML = `✅ Mensagem enviada com sucesso, entraremos em contato em breve`
-            div_validarMensagem.style.color = 'white';
-            buttonEnviar.innerHTML = `Enviar uma nova mensagem?`
-            buttonEnviar.style.width = `15vw`
-            novaMensagem = true
-
-            // Setando as inputs como apenas leitura
-            
-            ipt_nome.readOnly = true
-            ipt_contato.readOnly = true
-            ipt_email.readOnly = true
-            ipt_empresa.readOnly = true
-            textArea_mensagem.readOnly = true
-            chkipt_email.readOnly = true
-            chkipt_telefone.readOnly = true
-
-        }
-
-    }
-
-</script>
