@@ -149,7 +149,7 @@ body {
     transition: transform 0.8s, background-color 0.8s, border 0.8s;
 }
 
-#botao {
+.botao {
     margin-top: 5%;
     width: 100%;
     padding: 10px;
@@ -163,7 +163,7 @@ body {
     transition: transform 0.8s, background-color 0.8s, border 0.8s;
 }
 
-#botao:hover {
+.botao:hover {
     background-color: #000;
     transform: translateY(-5px);
     border: 2px solid #50FFDF;

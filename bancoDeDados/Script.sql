@@ -37,7 +37,7 @@ descrição VARCHAR(100) NOT NULL,
 fkUnidade INT NOT NULL,
 CONSTRAINT fkSetorUnidade 
 	FOREIGN KEY (fkUnidade) 
-		REFERENCES empresa (idEmpresa)
+		REFERENCES Unidade (idUnidade)
 );
 
 CREATE TABLE Sensor (
@@ -68,10 +68,10 @@ idUsuario INT PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR(45) NOT NULL,
 email VARCHAR(255) NOT NULL,
 senha VARCHAR(255) NOT NULL,
-fkEmpresa INT NOT NULL, 
-CONSTRAINT fkUsuarioEmpresa 
-	FOREIGN KEY (fkEmpresa) 
-		REFERENCES Empresa (idEmpresa)
+fkUnidade INT NOT NULL, 
+CONSTRAINT fkUsuarioUnidade
+	FOREIGN KEY (fkUnidade) 
+		REFERENCES Unidade (idUnidade)
 );
 
 CREATE TABLE Login (
@@ -322,7 +322,7 @@ INSERT INTO Login (dtHrAcesso, dtHrSaída, fkUsuario) VALUES
 
 SELECT * FROM empresa
 	JOIN unidade 
-		ON fkempresa = idEmpresa;
+		ON fkUnidade = idUnidade;
        
 SELECT empresa.nome AS Empresa, 
 	responsavel AS dono, 
@@ -363,3 +363,4 @@ SELECT Usuario.nome AS Nome,
 		dtHrSaída AS Saída 
 			FROM Usuario 
 				JOIN Login ON fkUsuario = idUsuario;
+			

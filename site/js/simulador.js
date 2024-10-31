@@ -22,6 +22,7 @@ function Economia() {
 
     var economia = perdeu_no_mes - novo_perdeu_no_mes
     var economia_porcentagem = (economia / perdeu_no_mes) * 100
+    var economia_porcentagem_ceil = Math.ceil(economia_porcentagem)
 
     div_validarVazamento.innerHTML = ``
     div_validarTempo.innerHTML = ``
@@ -33,10 +34,7 @@ function Economia() {
 
         div_validarVazamento.innerHTML = `⛔ Insira um valor válido (Maior que 0) `;
 
-    } else {
-        div_validarVazamento.innerHTML = `⛔ Insira um valor válido (Maior que 0) `;
-
-    }
+    } 
     
     if( duraçao_vazamento <= 0) {
 
@@ -76,7 +74,7 @@ function Economia() {
 
             <li>Vazamentos durando no máximo <span style="color:#50FFDF"><b>${nova_duraçao} min</b></span> (${nova_duracao_porcentagem_tofixed}% mais curtos) 🕗</li> 
             <li>Detectar um vazamento em <span style="color:#50FFDF"><b>${novo_tempo} min</b></span> (${tempo_detecçao * 0.9} min mais eficiente) ⚡</li>
-            <li>Economizar <span style="color:#50FFDF"><b>${economia} m3</b></span> de gás no mês (${economia_porcentagem}% a mais) 📈</li> 
+            <li>Economizar <span style="color:#50FFDF"><b>${economia} m3</b></span> de gás no mês (${economia_porcentagem_ceil}% a mais) 📈</li> 
             <li>Maior prevenção de acidentes nos gasodutos ✅</li> 
         </ul>
     </div>
