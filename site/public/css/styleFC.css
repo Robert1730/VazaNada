@@ -1,0 +1,232 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+  
+    background-position: left;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: 'Lexend Deca', sans-serif;
+    background-image: url(../assets/background/simulador2v3.jpg); 
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  header {
+    background-color: #333;
+    box-shadow: 0px 3px 10px;
+    height: 15vh;
+  }
+  
+  /* NAVBAR */
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.2rem 1.3rem;
+  }
+  
+  .logo img {
+    display: flex;
+    align-items: center;
+    height: 130px;
+  }
+  
+  .list-navbar {
+    display: flex;
+    align-items: center;
+  }
+  
+  .list-navbar ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;           /* Retira os bullets points */
+  }
+  
+  .nav-item {
+    margin: 0 15px;
+  }
+  
+  .nav-link {
+    text-decoration: none;      /* Retira a linha sublinhada */
+    font-weight: 500;
+    color: white;
+  }
+  
+  .navbar .list-navbar a:hover {
+    color: #50FFDF;
+  }
+  
+  
+  .buttons {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+  }
+  
+  
+  .cadastro-button {
+    background-color: transparent;
+   border: solid 1px;
+    border-radius: 10px;
+    border-color: #ffff;
+    padding: 5px 15px;
+    margin-right: 20px;
+  
+  }
+  
+  .cadastro-button a {
+    text-decoration: none;      /* Retira a linha sublinhada */
+    font-size: 20px;
+    font-weight: 300;
+    color: white;
+  }
+  
+  .login-button {
+    background-color: #50FFDF;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 25px;
+    font-weight: 900;
+  }
+  .login-button a {
+    text-decoration: none;      /* Retira a linha sublinhada */
+    font-size: 20px;
+    font-weight: 900;
+    color: white;
+  }
+  
+  
+  /* Fale conosco */
+  
+  main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 75%;
+  }
+  
+  #faleConosco {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    background-color: #01242cc2;
+    text-align: center;
+    border-radius: 50px;
+    border: solid 4px rgba(255, 255, 255, 0.63);
+    padding: 50px;
+    gap: 20px;
+  }
+  
+  #faleConosco h2 {
+    color: #fff;
+    font-size: 45px;
+  } 
+  
+  #faleConosco p {
+    color: #fff;
+    font-size: 30px;
+    font-weight: bold;
+  } 
+  
+  #faleConosco button {
+    align-self: center;
+    background-color: #50FFDF;
+    color: #f8f8ff;
+    border-radius: 10px;
+    border: #50FFDF 2px solid;
+    font-size: 30px;
+    width: 10vw;
+    padding: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    /* transition: transform 0.8s, background-color 0.8s, border 0.8s; */
+  }
+  
+  .div_informacoes {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+  }
+  
+  .div_inputs {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    text-align: start;
+  }
+  
+  .div_inputs input{
+    width: 100%;
+    height: 30px;
+    background-color: transparent;
+    border-radius: 10px;
+    border: #50FFDF 2px solid;
+    font-size: 20px;
+    color: #f8f8ff;
+    padding: 5px;
+    font-weight: bold;
+    outline: transparent;
+  }
+  
+  #div_mensagem {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    text-align: start;
+  }
+  
+  #div_mensagem textarea{
+    background-color: transparent;
+    border-radius: 10px;
+    border: #50FFDF 2px solid;
+    font-size: 20px;
+    color: #f8f8ff;
+    padding: 5px;
+    outline: transparent;
+    resize: none;
+  }
+  
+  .informacoesFaleConosco {
+    color: #50FFDF
+  }
+  
+  .div_validacoes {
+    color: rgb(255,182,193);
+  }
+  
+  #div_escolhaContato {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  #div_escolhaContato label{
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+  }
+  
+  .footer {
+      
+    background-color:#50FFDF;
+    height: 10vh;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-size: 15px;
+  }
+  
+  
+  .footer h4 {
+  
+    margin: 0px;
+  }
