@@ -18,6 +18,20 @@ function verificarEmail() {
     return database.executar(instrucaoSql);
   }
 
+  function criticoKPI() {
+    console.log('estou função kpi1')
+    var instrucaoSql = `
+        SELECT DISTINCT s.nome AS nome_setor
+        FROM setor s
+        JOIN sensor sn ON s.idSetor = sn.fkSetor
+        JOIN medicao m ON sn.idSensor = m.fkSensor
+        WHERE m.qtdGasVazado <= 4.0;
+    `;
+    return database.executar(instrucaoSql);
+  }
+
+
+
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucaoSql
 function cadastrar(nome, email, senha, fkUnidade) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha, fkUnidade);
@@ -34,5 +48,6 @@ function cadastrar(nome, email, senha, fkUnidade) {
 module.exports = {
     autenticar,
     verificarEmail,
+    criticoKPI,
     cadastrar
 };

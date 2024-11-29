@@ -17,5 +17,10 @@ router.get("/verificarEmail", function (req, res) {
     usuarioController.verificarEmail(req, res);
 });
 
+router.get("/criticoKPI", function (req, res) {
+    usuarioController.criticoKPI(req, res);
+});
+
+
 
 module.exports = router;

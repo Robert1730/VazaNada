@@ -54,6 +54,12 @@ function verificarEmail(req, res) {
     });
   }
   
+  function criticoKPI (req, res) {
+    usuarioModel.criticoKPI().then((resultado) => {
+      res.status(200).json(resultado);
+    });
+  }
+
 function cadastrar(req, res) {
     console.log('Entrando na função cadastrar no controller');
     console.log('Dados recebidos:', req.body); 
@@ -110,5 +116,6 @@ function cadastrar(req, res) {
 module.exports = {
     autenticar,
     verificarEmail,
+    criticoKPI,
     cadastrar
 }

@@ -10,7 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
 
-<body>
+<body onload="inicializarPagina()">
     <div class="main-container">      
       <header class="header">
           <h1>Dashboard</h1>
@@ -38,8 +38,8 @@
                 <div class="sensor-info">
                   <h1>Setor em estado <span style="color: red;">crítico</span></h1>
                   <div>
-                    <p>Setor de Medição</p>
-                    
+                   <p><span id="criticoKPI" class="resultadoKPI"></p>
+                     
                   </div>
                 </div>
                 <div class="sensor-info">
@@ -105,6 +105,41 @@
 </html>
 
 <script>
+
+
+function inicializarPagina() {
+    atualizarKPI();
+}
+
+function atualizarKPI(){
+
+  
+  fetch("/usuarios/criticoKPI").then(function (resposta) {
+            if (resposta.ok) {
+              if (resposta.status == 204) {
+                    throw "Nenhum resultado encontrado!!";
+                }
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos USUARIOS: ", JSON.stringify(resposta));
+                   
+                    criticoKPI.innerHTML = "";
+
+                    for (let i = 0; i < resposta.length; i++) {
+                // Cria um elemento HTML para exibir cada setor
+               
+                criticoKPI.innerHTML += `${resposta[i].nome_setor}<br>`; // Adiciona o nome do setor ao parágrafo
+                
+            }
+
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+            }).catch(function (resposta) {
+              console.error(resposta);
+            });
+            
+}
 
   const labels = [ 
       '7',
