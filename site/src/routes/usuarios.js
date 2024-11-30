@@ -21,6 +21,15 @@ router.get("/criticoKPI", function (req, res) {
     usuarioController.criticoKPI(req, res);
 });
 
+router.get("/seguroKPI", function (req, res) {
+    usuarioController.seguroKPI(req, res);
+});
+
+router.get("/alertaKPI", function (req, res) {
+    usuarioController.alertaKPI(req, res);
+});
+
+
 
 
 module.exports = router;
