@@ -8,7 +8,7 @@ function buscarPorId(id) {
 
 function listar() {
   console.log('estou função listar')
-  var instrucaoSql = `SELECT idUnidade, codigo_ativacao FROM Unidade`;
+  var instrucaoSql = `SELECT idUnidade, codigo_ativacao FROM unidade`;
 
   return database.executar(instrucaoSql);
 
