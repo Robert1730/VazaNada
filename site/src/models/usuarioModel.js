@@ -54,6 +54,37 @@ function verificarEmail() {
     return database.executar(instrucaoSql);
   }
 
+  function dashDATA() {
+    console.log('estou função dashDATA')
+    var instrucaoSql = `
+     SELECT 
+        CASE 
+            WHEN MONTH(dtComecoVazamento) = 1 THEN 'Janeiro'
+            WHEN MONTH(dtComecoVazamento) = 2 THEN 'Fevereiro'
+            WHEN MONTH(dtComecoVazamento) = 3 THEN 'Março'
+            WHEN MONTH(dtComecoVazamento) = 4 THEN 'Abril'
+            WHEN MONTH(dtComecoVazamento) = 5 THEN 'Maio'
+            WHEN MONTH(dtComecoVazamento) = 6 THEN 'Junho'
+            WHEN MONTH(dtComecoVazamento) = 7 THEN 'Julho'
+            WHEN MONTH(dtComecoVazamento) = 8 THEN 'Agosto'
+            WHEN MONTH(dtComecoVazamento) = 9 THEN 'Setembro'
+            WHEN MONTH(dtComecoVazamento) = 10 THEN 'Outubro'
+            WHEN MONTH(dtComecoVazamento) = 11 THEN 'Novembro'
+            WHEN MONTH(dtComecoVazamento) = 12 THEN 'Dezembro'
+        END AS nome_mes,                                        -- Nome do mês em português
+        YEAR(dtComecoVazamento) AS ano,                         -- Ano da medição
+        COUNT(*) AS quantidade_vazamentos                       -- Contagem de vazamentos por mês
+    FROM 
+        medicao
+    GROUP BY 
+        ano, nome_mes
+    ORDER BY 
+    ano, FIELD(nome_mes, 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro');
+
+
+    `;
+    return database.executar(instrucaoSql);
+  } 
 
 
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucaoSql
@@ -75,5 +106,6 @@ module.exports = {
     criticoKPI,
     seguroKPI,
     alertaKPI,
+    dashDATA,
     cadastrar
 };

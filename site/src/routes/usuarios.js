@@ -29,6 +29,9 @@ router.get("/alertaKPI", function (req, res) {
     usuarioController.alertaKPI(req, res);
 });
 
+router.get("/dashDATA", function (req, res) {
+    usuarioController.dashDATA(req, res);
+});
 
 
 
