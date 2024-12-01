@@ -34,7 +34,7 @@ header {
 .list-navbar ul {
     display: flex;
     justify-content: center;
-    list-style: none;           /* Retira os bullets points */
+    list-style: none;           
 }
 
 .nav-item {
@@ -42,7 +42,7 @@ header {
 }
 
 .nav-link {
-    text-decoration: none;      /* Retira a linha sublinhada */
+    text-decoration: none;     
     font-weight: 500;
     color: white;
 }
@@ -70,7 +70,7 @@ header {
 }
 
 .cadastro-button a {
-    text-decoration: none;      /* Retira a linha sublinhada */
+    text-decoration: none;      
     font-size: 20px;
     font-weight: 300;
     color: white;
@@ -84,7 +84,7 @@ header {
     font-weight: 900;
 }
 .login-button a {
-    text-decoration: none;      /* Retira a linha sublinhada */
+    text-decoration: none;     
     font-size: 20px;
     font-weight: 900;
     color: white;
@@ -96,8 +96,37 @@ header {
     text-align: center;
 }
 
-h1 {
-    color: #1F2A44;
+span {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    flex-direction: column;
+    position: relative;  
+    font-size: 7vh;
+    font-weight: bolder;
+    color: #1F2A44; 
+    display: inline-block;  
+    border: 2px solid #ED145B;  
+    border-radius: 10px;  
+}
+
+span::before {
+    content: ''; /*para dar o "corte" na animação*/ 
+    position: absolute;  
+    width: 100%;  
+    height: 100%;  
+    background: linear-gradient(to left, transparent 50%, #ED145B 50%);
+    background-size: 200% 100%;  
+    background-position: -100% 0;
+    z-index: -1;  /* deixa o texto aparecer */
+    animation: rastro 2s linear infinite;
+}
+
+@keyframes rastro {
+    0% {
+        background-position: -100% 0;
+    }
+    100% {
+        background-position: 100% 0;
+    }
 }
 
 textarea[type="text"] {
@@ -125,12 +154,27 @@ button:hover {
     background-color: #EFB661;
 }
 
+#pergunta {
+    text-align: center;
+    background-color: transparent;
+    border-color: #ED145B;
+    border-radius: 20px;
+    box-shadow: 8px 3px 3px #ED145B;
+    align-items: center;
+    text-align: center;
+
+}
+#pergunta::placeholder {
+    color: #ffffff; 
+
+}
+
 #resposta {
     margin-top: 20px;
     padding: 10px;
     border-radius: 5px;
     background-color: #D0D3D4;
-    border: 1px solid #63666A;
+    border: 1px solid #ED145B;
     text-align: left;
     display: none;
 }
