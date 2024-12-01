@@ -1,4 +1,4 @@
-create database vazaNada;
+ create database vazaNada;
 use vazaNada;
 
 create table usuario (

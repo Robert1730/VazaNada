@@ -45,18 +45,13 @@
                 <div class="sensor-info">
                   <h1>Setores <span style="color: rgb(0, 128, 19);">seguros</span></h1>
                   <div>
-                    <p>Interconexão</p>
-                    <p>Distribuição</p>
-                 
+                    <p><span id="seguroKPI" class="resultadoKPI"></p>
                   </div>
                 </div>
                 <div class="sensor-info">
                   <h1>Setores em <span style="color: orange;">alerta</span></h1>
                   <div>
-                    <p>Medição</p>
-                    <p>Regulagem</p>
-                    <p>Tratamento</p>
-                    <p>Armazenamento</p>
+                    <p><span id="alertaKPI" class="resultadoKPI"></p>
                   </div>
                 </div>
               </div>
@@ -127,7 +122,57 @@ function atualizarKPI(){
                     for (let i = 0; i < resposta.length; i++) {
                 // Cria um elemento HTML para exibir cada setor
                
-                criticoKPI.innerHTML += `${resposta[i].nome_setor}<br>`; // Adiciona o nome do setor ao parágrafo
+                criticoKPI.innerHTML += `${resposta[i].nome_setor}<br> `; // Adiciona o nome do setor ao parágrafo
+                
+            }
+
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+            }).catch(function (resposta) {
+              console.error(resposta);
+            });
+
+            fetch("/usuarios/seguroKPI").then(function (resposta) {
+            if (resposta.ok) {
+              if (resposta.status == 204) {
+                    throw "Nenhum resultado encontrado!!";
+                }
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos USUARIOS: ", JSON.stringify(resposta));
+                   
+                    seguroKPI.innerHTML = "";
+
+                    for (let i = 0; i < resposta.length; i++) {
+                // Cria um elemento HTML para exibir cada setor
+               
+                seguroKPI.innerHTML += `${resposta[i].nome_setor}<br> `; // Adiciona o nome do setor ao parágrafo
+                
+            }
+
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+            }).catch(function (resposta) {
+              console.error(resposta);
+            });
+
+            fetch("/usuarios/alertaKPI").then(function (resposta) {
+            if (resposta.ok) {
+              if (resposta.status == 204) {
+                    throw "Nenhum resultado encontrado!!";
+                }
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos USUARIOS: ", JSON.stringify(resposta));
+                   
+                    alertaKPI.innerHTML = "";
+
+                    for (let i = 0; i < resposta.length; i++) {
+                // Cria um elemento HTML para exibir cada setor
+               
+                alertaKPI.innerHTML += `${resposta[i].nome_setor}<br> `; // Adiciona o nome do setor ao parágrafo
                 
             }
 

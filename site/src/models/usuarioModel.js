@@ -19,13 +19,37 @@ function verificarEmail() {
   }
 
   function criticoKPI() {
-    console.log('estou função kpi1')
+    console.log('estou função criticoKPI')
     var instrucaoSql = `
         SELECT DISTINCT s.nome AS nome_setor
         FROM setor s
         JOIN sensor sn ON s.idSetor = sn.fkSetor
         JOIN medicao m ON sn.idSensor = m.fkSensor
-        WHERE m.qtdGasVazado <= 4.0;
+        WHERE m.qtdGasVazado >= 60.0;
+    `;
+    return database.executar(instrucaoSql);
+  }
+
+  function seguroKPI() {
+    console.log('estou função seguroKPI ')
+    var instrucaoSql = `
+        SELECT DISTINCT s.nome AS nome_setor
+        FROM setor s
+        JOIN sensor sn ON s.idSetor = sn.fkSetor
+        JOIN medicao m ON sn.idSensor = m.fkSensor
+        WHERE m.qtdGasVazado <= 0.0;
+    `;
+    return database.executar(instrucaoSql);
+  }
+
+  function alertaKPI() {
+    console.log('estou função alertaKPI')
+    var instrucaoSql = `
+        SELECT DISTINCT s.nome AS nome_setor
+        FROM setor s
+        JOIN sensor sn ON s.idSetor = sn.fkSetor
+        JOIN medicao m ON sn.idSensor = m.fkSensor
+        WHERE m.qtdGasVazado > 0.0 AND m.qtdGasVazado < 60.0;
     `;
     return database.executar(instrucaoSql);
   }
@@ -49,5 +73,7 @@ module.exports = {
     autenticar,
     verificarEmail,
     criticoKPI,
+    seguroKPI,
+    alertaKPI,
     cadastrar
 };
