@@ -71,8 +71,8 @@
               <div class="sensores-grafico-2">
                 <h1>Distribuição de Alertas por Setores</h1>
                 <p style="font-size: 40px;">
-                  <select name="" id="slt_mesSelecionado" class="select_mes">
-                    <option value="#">Selecione o Mês</option>
+                  <select id="slt_mesSelecionado" class="select_mes" onchange="obterDados()">
+                    <option value="#" selected disabled>Selecione o Mês</option>
                     <option value="01">Janeiro</option>
                     <option value="02">Fevereiro</option>
                     <option value="03">Março</option>
@@ -262,12 +262,23 @@ function obterDados(){
             });
           
   // Gráfico pizza 
-        
+            
+    var mesAtual = new Date().getMonth() + 1
+    var mesVar = mesAtual.toString().padStart(2, '0')
+    var mesSelecionado = slt_mesSelecionado.value
+
+    if (Number(mesVar) != Number(mesSelecionado) && mesSelecionado != '#') {
+      mesVar = mesSelecionado
+    }
+
         fetch("/usuarios/mostrarPizza", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
-            }
+            },
+            body: JSON.stringify({
+              mesServer: mesVar,  
+            }),
     
         }).then(function (resposta) {
             console.log("ESTOU NO THEN DO entrar()!")
@@ -276,18 +287,18 @@ function obterDados(){
                 var listaValores = json.listaFinal;
     
                 // Listas para salvar o tipo e a quantidade
-                var listaTipo = [];
+                var listaSetor = [];
                 var listaQuantidade = [];
     
-                for(var cont = 0; cont < listaJogador.length; cont++) {
+                for(var cont = 0; cont < listaValores.length; cont++) {
                     var quantidadeAtual = listaValores[cont].Quantidade;
-                    var tipoAtual = listaValores[cont].Tipo;
+                    var setorAtual = listaValores[cont].Setor;
     
-                    listaTipo.push(`'${tipoAtual}'`);
+                    listaSetor.push(`'${setorAtual}'`);
                     listaQuantidade.push(quantidadeAtual);
                     
                 }  // Chamando a função para plotar o gráfico de barra com os dados
-                plotarGraficoPizza(listaTipo, listaQuantidade)
+                plotarGraficoPizza(listaSetor, listaQuantidade)
             })
     })
 }

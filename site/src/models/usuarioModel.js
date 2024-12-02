@@ -99,7 +99,7 @@ function dashLINHA() {
 function buscarDadosPizza(mes) {
 
     var instrucaoSql = `
-        SELECT  FROM medicao WHERE data = '_____${mes}%';
+        SELECT COUNT(dtcomecoVazamento) AS 'Quantidade', setor.nome AS 'Setor' FROM medicao JOIN sensor ON fkSensor = idSensor JOIN setor ON fkSetor = idSetor WHERE dtcomecoVazamento like '___${mes}%' GROUP BY setor.nome;
         `;
     
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
