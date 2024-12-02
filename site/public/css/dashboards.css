@@ -198,19 +198,24 @@ body {
 
   .buttonSetor{
     cursor: pointer;
-    background-color: rgb(199, 165, 231);
+    background-color: #3d96a5;
     border: solid 1px;
      border-radius: 10px;
-     border-color: #ffff;
+     border-color: transparent;
      padding: 5px 15px;
      margin-right: 20px;
      transition: transform 0.8s, background-color 0.8s, border 0.8s;
+     
 }
 
 .buttonSetor:hover {
-    background-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.678);
     transform: translateY(-5px);
     border: 2px solid #50FFDF;
+}
+
+.navAlinhar{
+  margin-left: 20px;
 }
 
   
