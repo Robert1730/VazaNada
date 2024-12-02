@@ -52,37 +52,56 @@ function verificarEmail(req, res) {
     usuarioModel.verificarEmail().then((resultado) => {
       res.status(200).json(resultado);
     });
-  }
+}
   
-  function criticoKPI (req, res) {
+function criticoKPI (req, res) {
     usuarioModel.criticoKPI().then((resultado) => {
       res.status(200).json(resultado);
     });
-  }
+}
 
-  function seguroKPI (req, res) {
+function seguroKPI (req, res) {
     usuarioModel.seguroKPI().then((resultado) => {
       res.status(200).json(resultado);
     });
-  }
+}
 
-  function alertaKPI (req, res) {
+function alertaKPI (req, res) {
     usuarioModel.alertaKPI().then((resultado) => {
       res.status(200).json(resultado);
     });
-  }
+}
 
-  function dashDATA(req, res) {
+function dashDATA(req, res) {
     usuarioModel.dashDATA().then((resultado) => {
       res.status(200).json(resultado);
     });
-  }
+}
 
-  function dashLINHA(req, res) {
+function dashLINHA(req, res) {
     usuarioModel.dashLINHA().then((resultado) => {
       res.status(200).json(resultado);
     });
-  }
+}
+
+function mostrarGraficoPizza(req, res) {
+	var mes = req.body.mesServer;
+
+    graficoModel.buscarDadosPizza(mes)
+        .then(
+            function (lista) {
+                res.json({
+                    listaFinal: lista
+                })
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
 
 function cadastrar(req, res) {
     console.log('Entrando na função cadastrar no controller');
@@ -145,5 +164,6 @@ module.exports = {
     alertaKPI,
     dashDATA,
     dashLINHA,
+    mostrarGraficoPizza,
     cadastrar
 }

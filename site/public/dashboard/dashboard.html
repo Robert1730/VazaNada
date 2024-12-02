@@ -71,26 +71,23 @@
               <div class="sensores-grafico-2">
                 <h1>Distribuição de Alertas por Setores</h1>
                 <p style="font-size: 40px;">
-                  <select name="" id="" class="select_mes">
+                  <select name="" id="slt_mesSelecionado" class="select_mes">
                     <option value="#">Selecione o Mês</option>
-                    <option value="janeiro">Janeiro</option>
-                    <option value="fevereiro">Fevereiro</option>
-                    <option value="março">Março</option>
-                    <option value="abril">Abril</option>
-                    <option value="maio">Maio</option>
-                    <option value="junho">Junho</option>
-                    <option value="julho">Julho</option>
-                    <option value="agosto">Agosto</option>
-                    <option value="setembro">Setembro</option>
-                    <option value="outubro">Outubro</option>
-                    <option value="novembro">Novembro</option>
-                    <option value="dezembro">Dezembro</option>
-
-
+                    <option value="01">Janeiro</option>
+                    <option value="02">Fevereiro</option>
+                    <option value="03">Março</option>
+                    <option value="04">Abril</option>
+                    <option value="05">Maio</option>
+                    <option value="06">Junho</option>
+                    <option value="07">Julho</option>
+                    <option value="08">Agosto</option>
+                    <option value="09">Setembro</option>
+                    <option value="10">Outubro</option>
+                    <option value="11">Novembro</option>
+                    <option value="12">Dezembro</option>
                   </select>
                 <div class="chart-container3">
-                   
-                    <canvas id="myChart3"></canvas>
+                    <canvas id="graficoMês"></canvas>
                 </div>
               </div>
             </div>
@@ -99,9 +96,7 @@
 
 </body>
 </html>
-
 <script>
-
 
 function inicializarPagina() {
     atualizarKPI();
@@ -190,22 +185,7 @@ function atualizarKPI(){
 
 
 function obterDados(){
-  // Aqui seria a função que obteria os dados do banco de dados
-  // No caso, aqui você colocaria o fetch que teria o endereço da sua rota que você criou na pasta /routes e chamaria a função plotarGraficoLinha nessa função. Exemplo:
- 
-  // fetch('/obterDados')
-  // .then(function(response){
-  //   return response.json();
-  // })
-  // .then(function(data){
-  //   plotarGraficoLinha(data);
-  //   plotarGraficoBarra(data);
-  // })
-  // .catch(function(err){
-  //   console.log(err);
-  // })
-
-  // Como eu não configurei as rotas, eu criei um array com os dados para simular a obtenção dos dados
+  // Gráfico Barra
 
   var dadosDATA = []
   var dadosQUANTIDADE = []
@@ -243,7 +223,7 @@ function obterDados(){
               console.error(resposta);
             });
 
- // Grafico linha
+ // Grafico Linha
 
  var dadosHORARIO = []
  var dadosQUANTIDADElinha = []  
@@ -281,9 +261,35 @@ function obterDados(){
               console.error(resposta);
             });
           
-
-  
- 
+  // Gráfico pizza 
+        
+        fetch("/usuarios/mostrarPizza", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            }
+    
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+            resposta.json().then(json => {
+                // Pegando a resposta do Banco de dados
+                var listaValores = json.listaFinal;
+    
+                // Listas para salvar o tipo e a quantidade
+                var listaTipo = [];
+                var listaQuantidade = [];
+    
+                for(var cont = 0; cont < listaJogador.length; cont++) {
+                    var quantidadeAtual = listaValores[cont].Quantidade;
+                    var tipoAtual = listaValores[cont].Tipo;
+    
+                    listaTipo.push(`'${tipoAtual}'`);
+                    listaQuantidade.push(quantidadeAtual);
+                    
+                }  // Chamando a função para plotar o gráfico de barra com os dados
+                plotarGraficoPizza(listaTipo, listaQuantidade)
+            })
+    })
 }
 
 // Função para plotar o gráfico de barra
@@ -292,32 +298,18 @@ function plotarGraficoBarra(parametro1, parametro2){
 console.log('parametro 1', parametro1)
 console.log('parametro 2', parametro2)
 
-// Preenchendo os arrays com os dados
-
-
-// Capturando o elemento canvas pelo id 
 var ctx = document.getElementById('barra').getContext('2d');
-// Criando o gráfico de barra usando o Chart.js
+
 var myChart = new Chart(ctx, {
-    type: 'bar', // Tipo de gráfico: barra
-    data: { // Dados para o gráfico
-        labels: parametro1, // Rótulos no eixo X - Mostro as datas
+    type: 'bar',                        // Tipo de gráfico: barra
+    data: {                           
+        labels: parametro1,             // Rótulos no eixo X 
         datasets: [{
-<<<<<<< HEAD
-            label: 'Quantidade de Vazamentos', // Nome do conjunto de dados
-=======
-            label: 'QtdMês', // Nome do conjunto de dados
->>>>>>> d606dc368baa427e2f7ad843ef28b09fc959bc4b
-            data: parametro2, // Dados dos votos
-            // backgroundColor: [
-            //     'rgba(255, 99, 132, 0.2)', // Cor de fundo das barras
-            // ],
-            // borderColor: [
-            //     'rgba(255, 99, 132, 1)', // Cor da borda das barras
-            // ],
+            label: 'Quantidade Mês',    // Nome do conjunto de dados
+            data: parametro2,           // Dados dos votos
             backgroundColor: 'rgb(108, 229, 232)',
             borderColor: 'rgb(108, 229, 232)',
-            borderWidth: 1 // Largura da borda das barras
+            borderWidth: 1              // Largura da borda das barras
         }]
     },
 });
@@ -328,22 +320,22 @@ function plotarGraficoLinha(parametro1, parametro2){
 
   var ctx = document.getElementById('myChart').getContext('2d');
 
-// Criando o gráfico com as alterações solicitadas
+                                                          // Criando o gráfico com as alterações solicitadas
 var myChart = new Chart(ctx, {
-    type: 'line', // Tipo de gráfico: linha
+    type: 'line',                                         // Tipo de gráfico: linha
     data: {
         labels: parametro1, 
         datasets: [{
             label: 'Sensor 1', 
            data: parametro2, 
-            backgroundColor: 'rgb(108, 229, 232)', // Cor da linha
-            borderColor: 'rgb(108, 229, 232)', // Cor da borda
-            borderWidth: 1 // Largura da borda da linha
+            backgroundColor: 'rgb(108, 229, 232)',         // Cor da linha
+            borderColor: 'rgb(108, 229, 232)',             // Cor da borda
+            borderWidth: 1                                 // Largura da borda da linha
         },{
         label:'Crítico',
           backgroundColor: 'rgb(255, 0, 0)',
           borderColor: 'rgb(255, 0, 0)',
-          data: [60, 60, 60, 60, 60, 60, 60, 60,60, 60,60, 60, ],
+          data: [60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60],
       }
       ]
     },
@@ -380,65 +372,145 @@ var myChart = new Chart(ctx, {
 
 }
 
-  const labels = [ 
-      '7',
-      '8',
-      '10',
-      '11',
-      '12',
-      '13',
-      '14',
-      '15', 
-      '16',
-      '17',
-      '18',
-      '19',
-  ];
+function plotarGraficoPizza(parametro1, parametro2){
 
-  const data = {
-      labels: labels,
-      datasets: [{
-          label:'Sensor 1',
-          backgroundColor: 'rgb(108, 229, 232)',
-          borderColor: 'rgb(108, 229, 232)',
-          data: [6, 12, 15 , 20, 23, 55, 12, 10, 2, 0, ],
-      },
-      {
-        label:'Crítico',
-          backgroundColor: 'rgb(255, 0, 0)',
-          borderColor: 'rgb(255, 0, 0)',
-          data: [60, 60, 60, 60, 60, 60, 60, 60,60, 60,60, 60],
-      }
+  var ctx = document.getElementById('graficoMês');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: parametro1,
+                    borderColor: ['#ff0000' , '#F12323', '#123423'],
+                    datasets: [{
+                        data: parametro2,
+                        borderWidth: 1
+                    }],
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                }})
 
-    ]
+}
 
 
-  };
+// function plotarGraficoLinha(parametro1, parametro2){
 
-  const config = {
-      type: 'line',
-      data: data,
-      options: {
-        scales: {
-      y: {
-          ticks: {
-              callback: function(value) {
-                  return value + '%'; 
-              }
-          }
-      },
-     x: {
-          ticks: {
-              callback: function(value) {
-                  return value + 'h'; 
-              }
-          }
-      }
+//   var ctx = document.getElementById('myChart').getContext('2d');
 
-  }
-      }
+// // Criando o gráfico com as alterações solicitadas
+// var myChart = new Chart(ctx, {
+//     type: 'line', // Tipo de gráfico: linha
+//     data: {
+//         labels: parametro1, 
+//         datasets: [{
+//             label: 'Sensor 1', 
+//            data: parametro2, 
+//             backgroundColor: 'rgb(108, 229, 232)', // Cor da linha
+//             borderColor: 'rgb(108, 229, 232)', // Cor da borda
+//             borderWidth: 1 // Largura da borda da linha
+//         },{
+//         label:'Crítico',
+//           backgroundColor: 'rgb(255, 0, 0)',
+//           borderColor: 'rgb(255, 0, 0)',
+//           data: [60, 60, 60, 60, 60, 60, 60, 60,60, 60,60, 60, ],
+//       }
+//       ]
+//     },
+//     options: {
+//         responsive: true,
+//         scales: {
+//             y: {
+//                 beginAtZero: false,         // Impede que o eixo Y comece do zero, se necessário
+//                 min: 0,                     // Define um valor mínimo fixo para o eixo Y, ajuste conforme necessário
+//                 max: 100,                   // Define um valor máximo fixo para o eixo Y, ajuste conforme necessário
+//                 ticks: {
+//                     stepSize: 10            // Define o intervalo dos valores no eixo Y (exemplo: 0, 10, 20, etc.)
+//                 },
+                
+//                 ticks: {
+//                 callback: function(value) {
+//                   return value + '%'; 
+//               }
+          
+//       },
+//             },
+//             x: {
+                   
+//                 labels: parametro1,     
+//                 title: {
+//                     display: true,
+//                     text: 'Horários'    
+//                 }
+//             }
+//         }
+//     }, 
+    
+// });
+
+// }
+
+  // const labels = [ 
+  //     '7',
+  //     '8',
+  //     '10',
+  //     '11',
+  //     '12',
+  //     '13',
+  //     '14',
+  //     '15', 
+  //     '16',
+  //     '17',
+  //     '18',
+  //     '19',
+  // ];
+
+  // const data = {
+  //     labels: labels,
+  //     datasets: [{
+  //         label:'Sensor 1',
+  //         backgroundColor: 'rgb(108, 229, 232)',
+  //         borderColor: 'rgb(108, 229, 232)',
+  //         data: [6, 12, 15 , 20, 23, 55, 12, 10, 2, 0, ],
+  //     },
+  //     {
+  //       label:'Crítico',
+  //         backgroundColor: 'rgb(255, 0, 0)',
+  //         borderColor: 'rgb(255, 0, 0)',
+  //         data: [60, 60, 60, 60, 60, 60, 60, 60,60, 60,60, 60],
+  //     }
+
+  //   ]
+
+
+  // };
+
+  // const config = {
+  //     type: 'line',
+  //     data: data,
+  //     options: {
+  //       scales: {
+  //     y: {
+  //         ticks: {
+  //             callback: function(value) {
+  //                 return value + '%'; 
+  //             }
+  //         }
+  //     },
+  //    x: {
+  //         ticks: {
+  //             callback: function(value) {
+  //                 return value + 'h'; 
+  //             }
+  //         }
+  //     }
+
+  // }
+  //     }
       
-  };
+  // };
 
 
 
@@ -474,47 +546,42 @@ var myChart = new Chart(ctx, {
   //     options: {}
   // };
 
-  const data3 = {
-labels: [
-'Setor de Medição ',
-'Setor de Tratamento ',
-'Setor de Regulagem',
-'Setor de Armazenamento',
+  // Gráfico de pizza
 
-],
-datasets: [{
-label: '',
-data: [3, 3, 3, 1],
-backgroundColor: [
-'rgb(108, 229, 232)',
-'rgb(8, 77, 110)',
-'rgb(45, 139, 280)',
-'rgb(130, 95, 250)',
+//   const data3 = {
+// labels: [
+// 'Setor de Medição ',
+// 'Setor de Tratamento ',
+// 'Setor de Regulagem',
+// 'Setor de Armazenamento',
 
-],
-hoverOffset: 4
-}]
-};
+// ],
+// datasets: [{
+// label: '',
+// data: [3, 3, 3, 1],
+// backgroundColor: [
+// 'rgb(108, 229, 232)',
+// 'rgb(8, 77, 110)',
+// 'rgb(45, 139, 280)',
+// 'rgb(130, 95, 250)',
+
+// ],
+// hoverOffset: 4
+// }]
+// };
 
 
-  const config3 = {
-      type: 'pie',
-      data: data3,
-      options: {}
-  };
+//   const config3 = {
+//       type: 'pie',
+//       data: data3,
+//       options: {}
+//   };
 
-  // const myChart = new Chart(
-  //     document.getElementById('myChart'),
-  //     config
-  // );
-  // const myChart2 = new Chart(
-  //     document.getElementById('barra'),
-  //     config2
-  // );
-  const myChart3 = new Chart(
-      document.getElementById('myChart3'),
-      config3
-  );
+ 
+//   const myChart3 = new Chart(
+//       document.getElementById('myChart3'),
+//       config3
+//   );
 
   const grafico_geral = document.getElementById('myChartTrocarRegulagem');
   const grafico_geral2 = document.getElementById('myChartTrocarTramento');
@@ -526,61 +593,6 @@ hoverOffset: 4
     document.getElementById('myChartTrocarRegulagem').style.display="flex";
     document.getElementById('myChart').style.display="none";
     document.getElementById('myChartTrocarTratamento').style.display="none";
-
-    // new Chart(grafico_geral, {
-    //     type: 'line',
-    //     data: {
-    //       labels: [
-    //         '0h',
-    //         '1h',
-    //         '2h',
-    //         '3h',
-    //         '4h',
-    //         '5h',
-    //         '6h',
-    //         '7h', 
-    //         '8h',
-    //         '9h',
-    //         '10h',
-    //         '11h',
-    //       ],
-    //       datasets:[{
-    //         label: 'Fluxo',
-    //         backgroundColor: [
-    //           'rgb(000, 202, 220)',
-    //           'rgb(73, 195, 251)',
-    //           'rgb(101, 166, 250)',
-    //           'rgb(126, 128, 231)',
-    //           'rgb(155, 87, 204)',],
-    //         data: [6, 12, 15 , 20, 23, 79, 12, 10, 2, 0],        
-          
-    //         label: 'Fluxo',
-    //         backgroundColor: [
-    //         'rgb(255, 0, 0)',
-    //         'rgb(255, 0, 0)',
-    //         'rgb(255, 0, 0)',
-    //         'rgb(255, 0, 0)',
-    //         'rgb(255, 0, 0)',],
-    //         data: [75, 75, 75, 75, 75, 75, 75, 75, 75, 75],
-    //       }]
-    //     },
-
-    //     options: {
-    //     scales: {
-    //     y: {
-    //         ticks: {
-    //             stepSize: 10,
-    //             callback: function(value) {
-    //                 return value + '%'; 
-    //             }
-    //         }
-    //       },
-
-    //     }
-    //     }
-
-    //   });
-
     
   const labels = [ 
       '7',
