@@ -1,94 +1,119 @@
-create database vazaNada;
-use vazaNada;
+CREATE DATABASE vazaNada;
+USE vazaNada;
+DROP DATABASE vazaNada;
 
-create table usuario (
-idUsuario int primary key auto_increment,
-nome varchar(45),
-email varchar(255),
-senha varchar(255),
-fkUnidade int,
-foreign key fkUnidadeUsuario (fkUnidade)
-references unidade(idUnidade)
-);
+CREATE TABLE empresa (
+idEmpresa INT PRIMARY KEY AUTO_INCREMENT,
+razao_social VARCHAR(255),
+nome VARCHAR(255),
+responsavel VARCHAR(80),
+telefone VARCHAR(11)
+)AUTO_INCREMENT 1000;
 
-create table login (
-idLogin int primary key auto_increment,
-dtHrAcesso datetime,
-dtHrSaida datetime,
-fkUsuario int,
-constraint fkLoginUsuario foreign key (fkUsuario)
-references usuario(idUsuario)
-);
+CREATE TABLE unidade (
+idUnidade INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(255),
+logradouro VARCHAR(100),
+numero VARCHAR(10),
+bairro VARCHAR(100),
+cidade VARCHAR(45),
+estado CHAR(2),
+cep CHAR(9),
+codigo_ativacao VARCHAR(45),
+fkEmpresa INT,
+CONSTRAINT fkEmpresaUnidade 
+    FOREIGN KEY (fkEmpresa) 
+        REFERENCES empresa(idEmpresa)
+) AUTO_INCREMENT 1000;
 
-create table empresa (
-idEmpresa int primary key auto_increment,
-razao_social varchar(255),
-nome varchar(255),
-responsavel varchar(80),
-telefone varchar(11)
-);
+CREATE TABLE setor (
+idSetor INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(60),
+descricao VARCHAR(100),
+fkUnidade INT,
+CONSTRAINT fkSetorUnidade 
+    FOREIGN KEY (fkUnidade)
+        REFERENCES unidade(idUnidade)
+) AUTO_INCREMENT 1000;
 
-create table unidade (
-idUnidade int primary key auto_increment,
-nome varchar(255),
-logradouro varchar(100),
-numero varchar(10),
-bairro varchar(100),
-cidade varchar(45),
-estado char(2),
-cep char(9),
-fkEmpresa int,
-constraint fkEmpresaUnidade foreign key (fkEmpresa) 
-references empresa(idEmpresa),
-codigo_ativacao varchar(45)
-);
+CREATE TABLE sensor (
+idSensor INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(45),
+dtInstalacao DATETIME,
+dtUltimaManutencao DATETIME,
+fkSetor INT,
+CONSTRAINT fkSensorSetor 
+    FOREIGN KEY (fkSetor)
+        REFERENCES setor(idSetor)
+) AUTO_INCREMENT 1000;
 
-create table setor (
-idSetor int primary key auto_increment,
-nome varchar(60),
-descricao varchar(100),
-fkUnidade int,
-constraint fkSetorUnidade foreign key (fkUnidade)
-references unidade(idUnidade)
-);
+CREATE TABLE medicao (
+idMedicao INT PRIMARY KEY AUTO_INCREMENT,
+qtdGasVazado FLOAT,
+dtComecoVazamento DATETIME DEFAULT CURRENT_TIMESTAMP,
+fkSensor INT,
+CONSTRAINT fkMedicaoSensor 
+    FOREIGN KEY (fkSensor)
+        REFERENCES sensor(idSensor)
+) AUTO_INCREMENT 1000;
 
-create table sensor (
-idSensor int primary key auto_increment,
-nome varchar(45),
-dtInstalacao datetime,
-dtUltimaManutencao datetime,
-fkSetor int,
-constraint fkSensorSetor foreign key (fkSetor)
-references setor(idSetor)
-);
+CREATE TABLE usuario (
+idUsuario INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(45),
+email VARCHAR(255),
+senha VARCHAR(255), 
+fkUnidade INT,
+CONSTRAINT fkUnidadeUsuario 
+    FOREIGN KEY (fkUnidade)
+        REFERENCES unidade(idUnidade)
+)AUTO_INCREMENT 1000;
 
-create table medicao (
-idMedicao int primary key auto_increment,
-qtdGasVazado float,
-dtComecoVazamento datetime,
-fkSensor int,
-constraint fkMedicaoSensor foreign key (fkSensor)
-references sensor(idSensor)
-);
+-- CREATE TABLE login (
+-- idLogin INT PRIMARY KEY AUTO_INCREMENT,
+-- dtHrAcesso DATETIME,
+-- dtHrSaida DATETIME,
+-- fkUsuario INT,
+-- CONSTRAINT fkLoginUsuario 
+--     FOREIGN KEY (fkUsuario)
+--         REFERENCES usuario(idUsuario)
+-- );
 
-show tables;
+SHOW TABLES;
 
+-- Descrição das tabelas:
+DESC empresa;
+DESC unidade;
+DESC setor;
+DESC sensor;
+DESC medicao;
+DESC usuario;
+
+-- Inserção da empresa administradora
+INSERT INTO empresa (idEmpresa, razao_social, nome, responsavel, telefone) VALUES 
+(1, 'VazaNada', 'Petrobras', 'Robert Ferreira de Souza', '1194456789');
+
+-- Inserção da empresa exemplo
 INSERT INTO empresa (razao_social, nome, responsavel, telefone) VALUES 
 ('Petrobras S.A.', 'Petrobras', 'Roberto da Silva', '2134456789');
 
-INSERT INTO unidade (nome, logradouro, numero, bairro, cidade, estado, cep, fkEmpresa) VALUES 
-('Unidade Rio de Janeiro', 'Avenida República do Chile', '65', 'Centro', 'Rio de Janeiro', 'RJ', '20031-912', 1);
+INSERT INTO unidade (idUnidade, nome, logradouro, numero, bairro, cidade, estado, cep, fkEmpresa) VALUES 
+(1,'Matrix', 'Rua Augusta', '1730', 'Jardins', 'São Paulo', 'SP', '20031-080', 1),
+(DEFAULT, 'Unidade Rio de Janeiro', 'Avenida República do Chile', '65', 'Centro', 'Rio de Janeiro', 'RJ', '20031-912', 1000);
 
+-- Inserção do usuário administrador
+INSERT INTO usuario (idUsuario, nome, email, senha, fkUnidade) VALUES 
+(1, 'Robert Ferreira de Souza', 'robert.souza@vazanada.com', '1404Rt05@', 1);
+
+-- Inserção dos outros usuários
 INSERT INTO usuario (nome, email, senha, fkUnidade) VALUES 
-('Carlos Almeida', 'carlos.almeida@petrobras.com', 'senhaPetro@123', 1),
-('Juliana Ribeiro', 'juliana.ribeiro@petrobras.com', 'senhaPetro@456', 1);
+('Juliana Ribeiro', 'juliana.ribeiro@petrobras.com', 'senhaPetro@456', 1000);
 
-INSERT INTO login (dtHrAcesso, dtHrSaida, fkUsuario) VALUES 
-('2024-11-27 08:00:00', '2024-11-27 12:00:00', 1),
-('2024-11-27 13:00:00', '2024-11-27 17:00:00', 2);
+-- INSERT INTO login (dtHrAcesso, dtHrSaida, fkUsuario) VALUES 
+-- ('2024-11-27 08:00:00', '2024-11-27 12:00:00', 1),
+-- ('2024-11-27 13:00:00', '2024-11-27 17:00:00', 2);
 
 INSERT INTO setor (nome, descricao, fkUnidade) VALUES 
-('Setor de Monitoramento RJ', 'Monitoramento de gasodutos na unidade RJ', 1),
+('Setor de Medição RJ', 'Monitoramento de gasodutos na unidade RJ', 1),
 ('Setor de Inspeção RJ', 'Inspeção de segurança na unidade RJ', 1);
 
 INSERT INTO sensor (nome, dtInstalacao, dtUltimaManutencao, fkSetor) VALUES 
@@ -99,17 +124,13 @@ INSERT INTO medicao (qtdGasVazado, dtComecoVazamento, fkSensor) VALUES
 (4.1, '2024-11-25 09:45:00', 1),
 (75, '2024-11-26 14:20:00', 2);	
 
-select * from empresa;
-select * from unidade;
-select * from setor;
-select * from sensor;
-select * from medicao;
-select * from usuario;
-select * from login;
-
-desc setor;
-desc sensor;
-desc medicao;
+SELECT * FROM empresa;
+SELECT * FROM unidade;
+SELECT * FROM setor;
+SELECT * FROM sensor;
+SELECT * FROM medicao;
+SELECT * FROM usuario;
+SELECT * FROM login;
 
 -- Criando view para visualizar o setor que está em estado crítico (KPI):
 create view vw_Setor_Critico as 
@@ -120,22 +141,6 @@ join setor
 on idSetor = fkSetor
 where medicao.qtdGasVazado >= 75;
 
-select * from vw_Setor_Critico;
+SELECT * FROM vw_Setor_Critico;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+-- Terminar de arrumar o Script urgente
