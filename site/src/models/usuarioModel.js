@@ -35,9 +35,9 @@ function verificarEmail() {
     var instrucaoSql = `
         SELECT DISTINCT s.nome AS nome_setor
         FROM setor s
-        JOIN sensor sn ON s.idSetor = sn.fkSetor
-        JOIN medicao m ON sn.idSensor = m.fkSensor
-        WHERE m.qtdGasVazado <= 0.0;
+		left JOIN sensor sn ON s.idSetor = sn.fkSetor
+		left JOIN medicao m ON sn.idSensor = m.fkSensor
+        WHERE m.idMedicao IS NULL ;
     `;
     return database.executar(instrucaoSql);
   }
@@ -86,6 +86,16 @@ function verificarEmail() {
     return database.executar(instrucaoSql);
   } 
 
+  function dashLINHA() {
+    console.log('estou função alertaKPI')
+    var instrucaoSql = `
+        
+    SELECT DATE_FORMAT(dtComecoVazamento, '%H:%i') AS horario, qtdGasVazado
+    FROM medicao ORDER BY dtComecoVazamento;
+    `;
+    return database.executar(instrucaoSql);
+  }
+
 
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucaoSql
 function cadastrar(nome, email, senha, fkUnidade) {
@@ -107,5 +117,6 @@ module.exports = {
     seguroKPI,
     alertaKPI,
     dashDATA,
+    dashLINHA,
     cadastrar
 };

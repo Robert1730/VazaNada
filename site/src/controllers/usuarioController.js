@@ -78,6 +78,12 @@ function verificarEmail(req, res) {
     });
   }
 
+  function dashLINHA(req, res) {
+    usuarioModel.dashLINHA().then((resultado) => {
+      res.status(200).json(resultado);
+    });
+  }
+
 function cadastrar(req, res) {
     console.log('Entrando na função cadastrar no controller');
     console.log('Dados recebidos:', req.body); 
@@ -138,5 +144,6 @@ module.exports = {
     seguroKPI,
     alertaKPI,
     dashDATA,
+    dashLINHA,
     cadastrar
 }

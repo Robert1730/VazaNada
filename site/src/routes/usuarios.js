@@ -33,6 +33,10 @@ router.get("/dashDATA", function (req, res) {
     usuarioController.dashDATA(req, res);
 });
 
+router.get("/dashLINHA", function (req, res) {
+    usuarioController.dashLINHA(req, res);
+});
+
 
 
 module.exports = router;

@@ -223,8 +223,8 @@ function obterDados(){
                     for (var i = 0; i < resposta.length; i++) {
                       var diaSelecionado = resposta[i]
                       console.log(diaSelecionado)
-                      var data = diaSelecionado.data 
-                      var quantidade = diaSelecionado.quantidade_veiculos
+                      var data = diaSelecionado.nome_mes 
+                      var quantidade = diaSelecionado.quantidade_vazamentos
                       
                       dadosDATA.push(data)
                       dadosQUANTIDADE.push(quantidade)
@@ -233,6 +233,44 @@ function obterDados(){
                     plotarGraficoBarra(dadosDATA, dadosQUANTIDADE)
                   console.log('aa',dadosDATA)
                   console.log('bb', dadosQUANTIDADE)
+                });
+
+
+            } else {
+                throw ('Houve um erro na API!');
+            }
+            }).catch(function (resposta) {
+              console.error(resposta);
+            });
+
+ // Grafico linha
+
+ var dadosHORARIO = []
+ var dadosQUANTIDADElinha = []  
+
+
+  fetch("/usuarios/dashLINHA").then(function (resposta) {
+            if (resposta.ok) {
+              if (resposta.status == 204) {
+                    throw "Nenhum resultado encontrado!!";
+                }
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+                    // resultadoKPI1.innerHTML = ${resposta[0].quantidade_total_usuarios}
+                  
+                    for (var i = 0; i < resposta.length; i++) {
+                      var diaSelecionado = resposta[i]
+                      console.log(diaSelecionado)
+                      var hora = diaSelecionado.horario 
+                      var quantidade = diaSelecionado.qtdGasVazado
+                      
+                      dadosHORARIO.push(hora)
+                      dadosQUANTIDADElinha.push(quantidade)
+                    }
+                    // Chamando a função para plotar o gráfico de barra com os dados
+                    plotarGraficoLinha(dadosHORARIO, dadosQUANTIDADElinha)
+                  console.log('aa',dadosHORARIO)
+                  console.log('bb', dadosQUANTIDADElinha)
                 });
 
 
@@ -265,18 +303,77 @@ var myChart = new Chart(ctx, {
     data: { // Dados para o gráfico
         labels: parametro1, // Rótulos no eixo X - Mostro as datas
         datasets: [{
-            label: 'Publicações', // Nome do conjunto de dados
+            label: 'Quantidade de Vazamentos', // Nome do conjunto de dados
             data: parametro2, // Dados dos votos
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)', // Cor de fundo das barras
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)', // Cor da borda das barras
-            ],
+            // backgroundColor: [
+            //     'rgba(255, 99, 132, 0.2)', // Cor de fundo das barras
+            // ],
+            // borderColor: [
+            //     'rgba(255, 99, 132, 1)', // Cor da borda das barras
+            // ],
+            backgroundColor: 'rgb(108, 229, 232)',
+            borderColor: 'rgb(108, 229, 232)',
             borderWidth: 1 // Largura da borda das barras
         }]
     },
 });
+
+}
+
+function plotarGraficoLinha(parametro1, parametro2){
+
+  var ctx = document.getElementById('myChart').getContext('2d');
+
+// Criando o gráfico com as alterações solicitadas
+var myChart = new Chart(ctx, {
+    type: 'line', // Tipo de gráfico: linha
+    data: {
+        labels: parametro1, 
+        datasets: [{
+            label: 'Sensor 1', 
+           data: parametro2, 
+            backgroundColor: 'rgb(108, 229, 232)', // Cor da linha
+            borderColor: 'rgb(108, 229, 232)', // Cor da borda
+            borderWidth: 1 // Largura da borda da linha
+        },{
+        label:'Crítico',
+          backgroundColor: 'rgb(255, 0, 0)',
+          borderColor: 'rgb(255, 0, 0)',
+          data: [60, 60, 60, 60, 60, 60, 60, 60,60, 60,60, 60, ],
+      }
+      ]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: false,         // Impede que o eixo Y comece do zero, se necessário
+                min: 0,                     // Define um valor mínimo fixo para o eixo Y, ajuste conforme necessário
+                max: 100,                   // Define um valor máximo fixo para o eixo Y, ajuste conforme necessário
+                ticks: {
+                    stepSize: 10            // Define o intervalo dos valores no eixo Y (exemplo: 0, 10, 20, etc.)
+                },
+                
+                ticks: {
+                callback: function(value) {
+                  return value + '%'; 
+              }
+          
+      },
+            },
+            x: {
+                   
+                labels: parametro1,     
+                title: {
+                    display: true,
+                    text: 'Horários'    
+                }
+            }
+        }
+    }, 
+    
+});
+
 }
 
   const labels = [ 
@@ -306,7 +403,7 @@ var myChart = new Chart(ctx, {
         label:'Crítico',
           backgroundColor: 'rgb(255, 0, 0)',
           borderColor: 'rgb(255, 0, 0)',
-          data: [75, 75, 75, 75, 75, 75, 75, 75,75, 75,75, 75, ],
+          data: [60, 60, 60, 60, 60, 60, 60, 60,60, 60,60, 60],
       }
 
     ]
@@ -338,6 +435,8 @@ var myChart = new Chart(ctx, {
       }
       
   };
+
+
 
   // const labels2 = [
   //     'Janeiro',
@@ -400,10 +499,10 @@ hoverOffset: 4
       options: {}
   };
 
-  const myChart = new Chart(
-      document.getElementById('myChart'),
-      config
-  );
+  // const myChart = new Chart(
+  //     document.getElementById('myChart'),
+  //     config
+  // );
   // const myChart2 = new Chart(
   //     document.getElementById('barra'),
   //     config2
@@ -500,13 +599,13 @@ hoverOffset: 4
           label:'Sensor 1',
           backgroundColor: 'rgb(108, 229, 232)',
           borderColor: 'rgb(108, 229, 232)',
-          data: [2, 20, 10 , 35, 23, 40, 12, 10, 2, 0, ],
+          data: [2, 20, 10 , 35, 23, 64, 12, 10, 2, 0, ],
       },
       {
         label:'Crítico',
           backgroundColor: 'rgb(255, 0, 0)',
           borderColor: 'rgb(255, 0, 0)',
-          data: [75, 75, 75, 75, 75, 75, 75, 75,75, 75,75, 75, ],
+          data: [60, 60, 60, 60, 60, 60, 60, 60,60, 60,60, 60, ],
       }
 
     ]
@@ -577,13 +676,13 @@ hoverOffset: 4
           label:'Sensor 1',
           backgroundColor: 'rgb(108, 229, 232)',
           borderColor: 'rgb(108, 229, 232)',
-          data: [2,40, 50 , 78, 23, 79, 12, 10, 2, 5,2,0 ],
+          data: [2,40, 50 , 67, 23, 65, 12, 10, 2, 5,2,0 ],
       },
       {
         label:'Crítico',
           backgroundColor: 'rgb(255, 0, 0)',
           borderColor: 'rgb(255, 0, 0)',
-          data: [75, 75, 75, 75, 75, 75, 75, 75,75, 75,75, 75, ],
+          data: [60, 60, 60, 60, 60, 60, 60, 60,60, 60,60, 60, ],
       }
 
     ]
