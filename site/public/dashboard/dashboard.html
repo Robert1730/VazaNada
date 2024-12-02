@@ -223,8 +223,8 @@ function obterDados(){
                     for (var i = 0; i < resposta.length; i++) {
                       var diaSelecionado = resposta[i]
                       console.log(diaSelecionado)
-                      var data = diaSelecionado.data 
-                      var quantidade = diaSelecionado.quantidade_veiculos
+                      var data = diaSelecionado.nome_mes 
+                      var quantidade = diaSelecionado.quantidade_vazamentos
                       
                       dadosDATA.push(data)
                       dadosQUANTIDADE.push(quantidade)
@@ -265,7 +265,7 @@ var myChart = new Chart(ctx, {
     data: { // Dados para o gráfico
         labels: parametro1, // Rótulos no eixo X - Mostro as datas
         datasets: [{
-            label: 'Publicações', // Nome do conjunto de dados
+            label: 'QtdMês', // Nome do conjunto de dados
             data: parametro2, // Dados dos votos
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)', // Cor de fundo das barras
