@@ -24,12 +24,12 @@
                 <div>
                     <h1>Setores</h1>
                     <nav>
-                      <a href="#"><span style="color: blue;">Medição</span></a>
-                      <a href="#">Regulagem</a>
-                      <a href="#">Tratamento </a>
-                      <a href="#">Distribuição</a>
-                      <a href="#">Interconexão</a>
-                      <a href="#">Armazenamento</a>
+                      <a href="dashboard.html"><button onclick="" >Medição</button></a>
+                      <a href="#"><button onclick="trocarRegulagem()">Regulagem</button></a>
+                      <a href="#"><button onclick="">Tratamento </button></a>
+                      <a href="#"><button onclick="" >Distribuição</button></a>
+                      <a href="#"> <button onclick="" >Interconexão </button></a>
+                      <a href="#"><button onclick="" >Armazenamento </button></a>
                     </nav>
                 </div>
             </aside>
@@ -59,7 +59,8 @@
               <div class="sensores-grafico-1">
                 <div class="chart-container1">
                     <h1>Quantidade captada por sensor (%)</h1>
-                    <canvas id="myChart"></canvas>
+                    <canvas id="myChart"></canvas>                 
+                    <canvas style="display: none;" id="myChartTrocarRegulagem"></canvas>
                 </div>
                 <div class="chart-container2">
                     <h1>Quantidade de vazamento detectados por mês</h1>
@@ -218,7 +219,7 @@ function obterDados(){
                 }
                 resposta.json().then(function (resposta) {
                     console.log("Dados recebidos: ", JSON.stringify(resposta));
-                    // resultadoKPI1.innerHTML = `${resposta[0].quantidade_total_usuarios}`
+                    // resultadoKPI1.innerHTML = ${resposta[0].quantidade_total_usuarios}
                   
                     for (var i = 0; i < resposta.length; i++) {
                       var diaSelecionado = resposta[i]
@@ -412,4 +413,68 @@ hoverOffset: 4
       document.getElementById('myChart3'),
       config3
   );
+
+  const grafico_geral = document.getElementById('myChartTrocarRegulagem');
+</script>
+
+<script>
+  function trocarRegulagem(){
+
+    document.getElementById('myChartTrocarRegulagem').style.display="flex";
+    document.getElementById('myChart').style.display="none";
+
+    new Chart(grafico_geral, {
+        type: 'line',
+        data: {
+          labels: [
+            '0h',
+            '1h',
+            '2h',
+            '3h',
+            '4h',
+            '5h',
+            '6h',
+            '7h', 
+            '8h',
+            '9h',
+            '10h',
+            '11h',
+          ],
+          datasets:[{
+            label: 'Fluxo',
+            backgroundColor: [
+              'rgb(000, 202, 220)',
+              'rgb(73, 195, 251)',
+              'rgb(101, 166, 250)',
+              'rgb(126, 128, 231)',
+              'rgb(155, 87, 204)',],
+            data: [6, 12, 15 , 20, 23, 79, 12, 10, 2, 0],        
+          
+            label: 'Fluxo',
+            backgroundColor: [
+            'rgb(255, 0, 0)',
+            'rgb(255, 0, 0)',
+            'rgb(255, 0, 0)',
+            'rgb(255, 0, 0)',
+            'rgb(255, 0, 0)',],
+            data: [75, 75, 75, 75, 75, 75, 75, 75, 75, 75],
+          }]
+        },
+
+        options: {
+        scales: {
+        y: {
+            ticks: {
+                stepSize: 10,
+                callback: function(value) {
+                    return value + '%'; 
+                }
+            }
+          },
+
+        }
+        }
+
+      });
+    }
 </script>
