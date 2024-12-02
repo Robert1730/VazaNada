@@ -37,6 +37,8 @@ router.get("/dashLINHA", function (req, res) {
     usuarioController.dashLINHA(req, res);
 });
 
-
+router.post("/mostrarPizza", function (req, res) {
+    usuarioController.mostrarGraficoPizza(req, res);
+})
 
 module.exports = router;

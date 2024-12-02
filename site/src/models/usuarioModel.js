@@ -18,7 +18,7 @@ function verificarEmail() {
     return database.executar(instrucaoSql);
   }
 
-  function criticoKPI() {
+function criticoKPI() {
     console.log('estou função criticoKPI')
     var instrucaoSql = `
         SELECT DISTINCT s.nome AS nome_setor
@@ -28,9 +28,9 @@ function verificarEmail() {
         WHERE m.qtdGasVazado >= 60.0;
     `;
     return database.executar(instrucaoSql);
-  }
+}
 
-  function seguroKPI() {
+function seguroKPI() {
     console.log('estou função seguroKPI ')
     var instrucaoSql = `
         SELECT DISTINCT s.nome AS nome_setor
@@ -40,9 +40,9 @@ function verificarEmail() {
         WHERE m.idMedicao IS NULL ;
     `;
     return database.executar(instrucaoSql);
-  }
+}
 
-  function alertaKPI() {
+function alertaKPI() {
     console.log('estou função alertaKPI')
     var instrucaoSql = `
         SELECT DISTINCT s.nome AS nome_setor
@@ -52,9 +52,9 @@ function verificarEmail() {
         WHERE m.qtdGasVazado > 0.0 AND m.qtdGasVazado < 60.0;
     `;
     return database.executar(instrucaoSql);
-  }
+}
 
-  function dashDATA() {
+function dashDATA() {
     console.log('estou função dashDATA')
     var instrucaoSql = `
      SELECT 
@@ -84,9 +84,9 @@ function verificarEmail() {
 
     `;
     return database.executar(instrucaoSql);
-  } 
+} 
 
-  function dashLINHA() {
+function dashLINHA() {
     console.log('estou função alertaKPI')
     var instrucaoSql = `
         
@@ -94,8 +94,18 @@ function verificarEmail() {
     FROM medicao ORDER BY dtComecoVazamento;
     `;
     return database.executar(instrucaoSql);
-  }
+}
 
+function buscarDadosPizza(mes) {
+
+    var instrucaoSql = `
+        SELECT COUNT(dtcomecoVazamento) AS 'Quantidade', setor.nome AS 'Setor' FROM medicao JOIN sensor ON fkSensor = idSensor JOIN setor ON fkSetor = idSetor WHERE dtcomecoVazamento like '___${mes}%' GROUP BY setor.nome;
+        `;
+    
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+
+}
 
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucaoSql
 function cadastrar(nome, email, senha, fkUnidade) {
@@ -118,5 +128,6 @@ module.exports = {
     alertaKPI,
     dashDATA,
     dashLINHA,
+    buscarDadosPizza,
     cadastrar
 };
