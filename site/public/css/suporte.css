@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap');
 
+
 * {
     font-family: 'Lexend Deca', sans-serif;
     margin: 0;
@@ -7,7 +8,7 @@
 }
 
 body {
-    background: linear-gradient(#998dc9, #ED145B);
+    background: linear-gradient(#998dc9, #63B1BC);
 }
 
 .main-container {
@@ -21,15 +22,18 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: 100vw;
 }
 
 .header h1 {
-    margin-left: 270px;
+
+    position: relative;
+    left: 120px;
+
 }
 
 .aside {
-    background: #d6839f;
+    background: #63B1BC;
     width: fit-content;
     height: 90vh;
     padding: 20px 40px;
@@ -65,7 +69,7 @@ body {
 
 .buttonSetor {
     cursor: pointer;
-    background-color: #3d96a5;
+    background-color: #ED145B;
     border: solid 1px transparent;
     border-radius: 10px;
     padding: 5px 15px;
@@ -158,12 +162,6 @@ canvas, .sensor-info div {
     padding: 8px;
 }
 
-h3 {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
-
 .select_mes {
     padding: 15px;
     background-color: #52cade;
@@ -181,7 +179,6 @@ h3 {
 .container {
     display: flex;
 }
-
 
 
 span {
@@ -232,11 +229,6 @@ button {
     cursor: pointer;
 }
 
-button {
-    background-color: #ED145B;
-    color: #FFFFFF;
-    border: none;
-}
 
 button:hover {
     background-color: #EFB661;
@@ -278,4 +270,10 @@ button:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+button {
+    background-color: #ED145B;
+    color: #FFFFFF;
+    border: none;
 }
