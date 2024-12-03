@@ -218,4 +218,47 @@ body {
   margin-left: 20px;
 }
 
+.aside .logout{
+  color: #000;
+  font-weight: 900;
+}
+
+.aside .guia2{
+  color: #000;
+  font-weight: 900;
+}
+
+.aside .guia2{
+  color: #000;
+  font-weight: 900;
+  margin-left: 10px;
+  display: flex;
+}
+
+.buttonGuia{
+  margin-left:25px;
+  display: flex;               
+  align-items: center;          
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: transparent;
+  border: solid 1px;
+   border-radius: 10px;
+   border-color: transparent;
+   padding: 30px;
+   margin-right: 20px;
+   transition: transform 0.8s, background-color 0.8s, border 0.8s;
+
+
+}
+
+.buttonGuia:hover {
+  background-color: rgba(255, 255, 255, 0.678);
+  transform: translateY(-5px);
+  border: 2px solid #50FFDF;
+}
+
+  
+
   
