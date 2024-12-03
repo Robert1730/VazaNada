@@ -110,7 +110,6 @@ INSERT INTO setor (nome, descricao, fkUnidade) VALUES
 ('Setor de Regulagem RJ', 'Regulagem dos gasosdutos na unidade RJ', 1000),
 ('Setor de Tratamento RJ', 'Tratamento dos gasosdutos na unidade RJ', 1000);
 
-
 INSERT INTO sensor (nome, dtInstalacao, dtUltimaManutencao, fkSetor) VALUES 
 ('Sensor Átila', '2023-02-10 10:00:00', '2024-03-14 10:00:00', 1),
 ('Sensor Átila', '2023-02-10 10:00:00', '2024-03-14 10:00:00', 2),
@@ -128,16 +127,156 @@ SELECT * FROM sensor;
 SELECT * FROM medicao;
 SELECT * FROM usuario;
 
+-- Selects iniciais:
 
--- Criando view para visualizar o setor que está em estado crítico (KPI):
-create view vw_Setor_Critico as 
-select setor.nome as 'Setor' from medicao
-join sensor
-on idSensor = fkSensor
-join setor
-on idSetor = fkSetor
-where medicao.qtdGasVazado >= 75;
+-- Logar usuario e pegar a permissao dele
+SELECT idUsuario, nome, email, fkUnidade as UnidadeID, permissao FROM usuario WHERE email = '${email}' AND senha = '${senha}';
 
-SELECT * FROM vw_Setor_Critico;
+-- Ver se o usuário está cadastrado
+SELECT email FROM usuario;
 
--- Terminar de arrumar o Script urgente
+-- Ver o que está crítico para a KPI
+SELECT DISTINCT s.nome AS nome_setor
+        FROM setor s
+        JOIN sensor sn ON s.idSetor = sn.fkSetor
+        JOIN medicao m ON sn.idSensor = m.fkSensor
+        WHERE m.qtdGasVazado >= 60.0;
+
+-- Ver os que estão seguros para a KPI
+SELECT DISTINCT s.nome AS nome_setor
+        FROM setor s
+		JOIN sensor sn ON s.idSetor = sn.fkSetor
+		LEFT JOIN medicao m ON sn.idSensor = m.fkSensor
+        WHERE m.idMedicao IS NULL;
+
+-- Ver os que estão em alerta para a KPI
+SELECT DISTINCT s.nome AS nome_setor
+        FROM setor s
+        JOIN sensor sn ON s.idSetor = sn.fkSetor
+        JOIN medicao m ON sn.idSensor = m.fkSensor
+        WHERE m.qtdGasVazado > 0.0 AND m.qtdGasVazado < 60.0;
+
+-- Puxar dados para a dashboard (Gráfico de barras)
+SELECT 
+        CASE 
+            WHEN MONTH(dtComecoVazamento) = 1 THEN 'Janeiro'
+            WHEN MONTH(dtComecoVazamento) = 2 THEN 'Fevereiro'
+            WHEN MONTH(dtComecoVazamento) = 3 THEN 'Março'
+            WHEN MONTH(dtComecoVazamento) = 4 THEN 'Abril'
+            WHEN MONTH(dtComecoVazamento) = 5 THEN 'Maio'
+            WHEN MONTH(dtComecoVazamento) = 6 THEN 'Junho'
+            WHEN MONTH(dtComecoVazamento) = 7 THEN 'Julho'
+            WHEN MONTH(dtComecoVazamento) = 8 THEN 'Agosto'
+            WHEN MONTH(dtComecoVazamento) = 9 THEN 'Setembro'
+            WHEN MONTH(dtComecoVazamento) = 10 THEN 'Outubro'
+            WHEN MONTH(dtComecoVazamento) = 11 THEN 'Novembro'
+            WHEN MONTH(dtComecoVazamento) = 12 THEN 'Dezembro'
+        END AS nome_mes,                                        -- Nome do mês em português
+        YEAR(dtComecoVazamento) AS ano,                         -- Ano da medição
+        COUNT(*) AS quantidade_vazamentos                       -- Contagem de vazamentos por mês
+    FROM 
+        medicao
+    GROUP BY 
+        ano, nome_mes
+    ORDER BY 
+    ano, FIELD(nome_mes, 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro');
+
+-- Puxar dados para a dashboard (Gráfico de linha)
+SELECT DATE_FORMAT(dtComecoVazamento, '%H:%i') AS horario, qtdGasVazado
+    FROM medicao ORDER BY dtComecoVazamento;
+
+-- Puxar dados para a dashboard (Gráfico de Pizza)
+SELECT COUNT(dtcomecoVazamento) AS 'Quantidade', setor.nome AS 'Setor' FROM medicao JOIN sensor ON fkSensor = idSensor JOIN setor ON fkSetor = idSetor WHERE dtComecoVazamento like '_____${mes}%' GROUP BY setor.nome;
+
+-- Model da empresa
+
+-- Select para verificar a unidade 
+SELECT idUnidade, codigo_ativacao FROM unidade;
+
+-- Criação dos views:
+CREATE VIEW logarUsuario AS 
+SELECT idUsuario, nome, email, fkUnidade as UnidadeID, permissao FROM usuario;
+
+CREATE VIEW validacaoLogado AS 
+SELECT email FROM usuario;
+
+CREATE VIEW criticoKPI AS 
+SELECT DISTINCT s.nome AS nome_setor
+        FROM setor s
+        JOIN sensor sn ON s.idSetor = sn.fkSetor
+        JOIN medicao m ON sn.idSensor = m.fkSensor
+        WHERE m.qtdGasVazado >= 60.0;
+
+CREATE VIEW seguroKPI AS 
+SELECT DISTINCT s.nome AS nome_setor
+        FROM setor s
+		JOIN sensor sn ON s.idSetor = sn.fkSetor
+		LEFT JOIN medicao m ON sn.idSensor = m.fkSensor
+        WHERE m.idMedicao IS NULL;
+
+CREATE VIEW alertaKPI AS 
+SELECT DISTINCT s.nome AS nome_setor
+        FROM setor s
+        JOIN sensor sn ON s.idSetor = sn.fkSetor
+        JOIN medicao m ON sn.idSensor = m.fkSensor
+        WHERE m.qtdGasVazado > 0.0 AND m.qtdGasVazado < 60.0;
+
+CREATE VIEW dadosBarra AS 
+SELECT 
+        CASE 
+            WHEN MONTH(dtComecoVazamento) = 1 THEN 'Janeiro'
+            WHEN MONTH(dtComecoVazamento) = 2 THEN 'Fevereiro'
+            WHEN MONTH(dtComecoVazamento) = 3 THEN 'Março'
+            WHEN MONTH(dtComecoVazamento) = 4 THEN 'Abril'
+            WHEN MONTH(dtComecoVazamento) = 5 THEN 'Maio'
+            WHEN MONTH(dtComecoVazamento) = 6 THEN 'Junho'
+            WHEN MONTH(dtComecoVazamento) = 7 THEN 'Julho'
+            WHEN MONTH(dtComecoVazamento) = 8 THEN 'Agosto'
+            WHEN MONTH(dtComecoVazamento) = 9 THEN 'Setembro'
+            WHEN MONTH(dtComecoVazamento) = 10 THEN 'Outubro'
+            WHEN MONTH(dtComecoVazamento) = 11 THEN 'Novembro'
+            WHEN MONTH(dtComecoVazamento) = 12 THEN 'Dezembro'
+        END AS nome_mes,                                        -- Nome do mês em português
+        YEAR(dtComecoVazamento) AS ano,                         -- Ano da medição
+        COUNT(*) AS quantidade_vazamentos                       -- Contagem de vazamentos por mês
+    FROM 
+        medicao
+    GROUP BY 
+        ano, nome_mes
+    ORDER BY 
+    ano, FIELD(nome_mes, 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro');
+
+CREATE VIEW dadosLinha AS
+SELECT DATE_FORMAT(dtComecoVazamento, '%H:%i') AS horario, qtdGasVazado
+    FROM medicao ORDER BY dtComecoVazamento;
+
+ALTER VIEW dadosPizza AS
+SELECT COUNT(dtcomecoVazamento) AS 'Quantidade', setor.nome AS 'Setor', dtComecoVazamento
+    FROM medicao 
+    JOIN sensor ON fkSensor = idSensor 
+    JOIN setor ON fkSetor = idSetor 
+    GROUP BY setor.nome, dtComecoVazamento;
+
+-- Testes dos Views
+SELECT * FROM logarUsuario;
+
+SELECT * FROM validacaoLoga1do;
+
+SELECT * FROM criticoKPI;
+
+SELECT * FROM seguroKPI;
+
+SELECT * FROM alertaKPI;
+
+SELECT * FROM dadosBarra;
+
+SELECT * FROM dadosLinha;
+
+SELECT * FROM dadosPizza WHERE dtComecoVazamento like '_____11%' GROUP BY setor.nome;
+
+SELECT Quantidade, Setor
+FROM dadosPizza
+WHERE dtComecoVazamento LIKE '_____11%'
+GROUP BY Setor;
+
+-- Dados pizza não foi
