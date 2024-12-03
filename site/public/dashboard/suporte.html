@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="../css/suporte.css">
+
+    <link rel="shortcut icon" href="../assets/icon/IconeVZ.png" type="image/x-icon">
+
+</head>
+
+<body onload="inicializarPagina()">
+    <div class="main-container">
+        <header class="header">
+            <h1> Suporte </h1>
+        </header>
+        <div class="container">
+            <aside class="aside">
+                <a class="logout" href="../index.html"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+                        fill="black" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0z" />
+                        <path fill-rule="evenodd"
+                            d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708z" />
+                    </svg><br>Logout</a><br><br><br>
+
+                <h1> Links Acessíveis </h1><br><br>
+                <nav class="navAlinhar">
+                    <a href="https://github.com/Robert1730/VazaNada"><button onclick=""
+                            class="buttonSetor">Github</button></a>
+                    <a
+                        href="https://accounts.zoho.com/signin?servicename=ZohoSupport&signupurl=https://www.zoho.com/desk/signup.html&serviceurl=https%3A%2F%2Fdesk.zoho.com%3Fref_value%3Dgoogle%253Azoho%257Cgoogle%253Adesk%257Cdirect%253Adesk%252Chttps%253A%252F%252Fwww.zoho.com%252Fdesk%252F%252C-%252CDesktop%252Chttps%253A%252F%252Fwww.zoho.com%252Fdesk%252F"><button
+                            class="buttonSetor" onclick="">Zoho</button></a>
+                    <a href="https://trello.com/b/ygKszktv/sprint-03"><button class="buttonSetor"
+                            onclick="">Trello</button></a><br><br><br>
+
+
+                </nav>
+                <a class="guia2">Baixe o guia de instalação </a><br><br><a class="guia buttonGuia"
+                    href="https://bandteccom-my.sharepoint.com/:w:/r/personal/robert_souza_sptech_school/_layouts/15/Doc.aspx?sourcedoc=%7B6153EEE6-8DB9-4154-874C-BEBB919E5D07%7D&file=Documento%201.docx&action=editnew&mobileredirect=true&wdNewAndOpenCt=1732847632356&ct=1732847632884&wdOrigin=OFFICECOM-WEB.START.NEW&wdPreviousSessionSrc=HarmonyWeb&wdPreviousSession=8ef81ac5-68c1-4ae4-bbaa-6999e4538ba2&cid=87fc86ab-a3a8-4cb9-89ed-f9bf7737c170"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="37" height="37" fill="black"
+                        class="bi bi-file-earmark-arrow-down" viewBox="0 0 16 16">
+                        <path
+                            d="M8.5 6.5a.5.5 0 0 0-1 0v3.793L6.354 9.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8.5 10.293z" />
+                        <path
+                            d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z" />
+                    </svg><br></a>
+            </aside>
+
+            <div class="bobIA-content"><br><br>
+                <span>BobIA</span><br><br>
+                <textarea id="pergunta" type="text" placeholder="Digite a pergunta..."></textarea>
+                <br><br>
+                <button onclick="gerarResposta()">Gerar Resposta</button>
+                <h3>Resposta da IA:</h3>
+                <div id="resposta"></div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>
