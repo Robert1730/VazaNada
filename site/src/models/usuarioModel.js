@@ -97,12 +97,14 @@ function dashLINHA() {
 }
 
 function buscarDadosPizza(mes) {
-
+    console.log("MES AQUI", mes)
     var instrucaoSql = `
-        SELECT COUNT(dtcomecoVazamento) AS 'Quantidade', setor.nome AS 'Setor' FROM medicao JOIN sensor ON fkSensor = idSensor JOIN setor ON fkSetor = idSetor WHERE dtcomecoVazamento like '___${mes}%' GROUP BY setor.nome;
-        `;
+    SELECT COUNT(dtcomecoVazamento) AS 'Quantidade', setor.nome AS 'Setor' FROM medicao JOIN sensor ON fkSensor = idSensor JOIN setor ON fkSetor = idSetor WHERE dtComecoVazamento like '_____${mes}%' GROUP BY setor.nome;
+    `;
     
+    console.log('Estou na função grafico de pizza')
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
+
     return database.executar(instrucaoSql);
 
 }

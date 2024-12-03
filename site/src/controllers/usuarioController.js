@@ -84,25 +84,34 @@ function dashLINHA(req, res) {
     });
 }
 
-function mostrarGraficoPizza(req, res) {
-	var mes = req.body.mesServer;
+// function mostrarGraficoPizza(req, res) {
+// 	var mes = req.body.mesServer;
 
-    graficoModel.buscarDadosPizza(mes)
+//     usuarioModel.buscarDadosPizza(mes)
+//         .then((resultado) => {
+//             res.status(200).json(resultado);
+//           });
+//     }
+
+    function mostrarGraficoPizza(req, res) {
+
+        var mes = req.body.mesServer;
+        
+        usuarioModel.buscarDadosPizza(mes)
         .then(
-            function (lista) {
-                res.json({
-                    listaFinal: lista
-                })
-            }
-        ).catch(
-            function (erro) {
-                console.log(erro);
-                console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
-                res.status(500).json(erro.sqlMessage);
-            }
-        );
-}
+            function(lista) {
+          res.json({
+            listaFinal: lista
+          })
+        }
+    ).catch(
+        function (erro){
+            res.status(500).json(erro.sqlMessage)
+        }
+     );
 
+    }
+       
 function cadastrar(req, res) {
     console.log('Entrando na função cadastrar no controller');
     console.log('Dados recebidos:', req.body); 

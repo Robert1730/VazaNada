@@ -263,6 +263,9 @@ function obterDados(){
           
   // Gráfico pizza 
             
+    var listaSetor = []
+    var listaQuantidade = []
+
     var mesAtual = new Date().getMonth() + 1
     var mesVar = mesAtual.toString().padStart(2, '0')
     var mesSelecionado = slt_mesSelecionado.value
@@ -287,20 +290,21 @@ function obterDados(){
                 var listaValores = json.listaFinal;
     
                 // Listas para salvar o tipo e a quantidade
-                var listaSetor = [];
-                var listaQuantidade = [];
     
                 for(var cont = 0; cont < listaValores.length; cont++) {
                     var quantidadeAtual = listaValores[cont].Quantidade;
                     var setorAtual = listaValores[cont].Setor;
     
-                    listaSetor.push(`'${setorAtual}'`);
+                    listaSetor.push(setorAtual);
                     listaQuantidade.push(quantidadeAtual);
                     
                 }  // Chamando a função para plotar o gráfico de barra com os dados
                 plotarGraficoPizza(listaSetor, listaQuantidade)
             })
     })
+ 
+
+
 }
 
 // Função para plotar o gráfico de barra
@@ -383,216 +387,57 @@ var myChart = new Chart(ctx, {
 
 }
 
-function plotarGraficoPizza(parametro1, parametro2){
+// function plotarGraficoPizza(parametro1, parametro2){
 
-  var ctx = document.getElementById('graficoMês');
-            new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: parametro1,
-                    borderColor: ['#ff0000' , '#F12323', '#123423'],
-                    datasets: [{
-                        data: parametro2,
-                        borderWidth: 1
-                    }],
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
-                    }
-                }})
-
-}
-
-
-// function plotarGraficoLinha(parametro1, parametro2){
-
-//   var ctx = document.getElementById('myChart').getContext('2d');
-
-// // Criando o gráfico com as alterações solicitadas
-// var myChart = new Chart(ctx, {
-//     type: 'line', // Tipo de gráfico: linha
-//     data: {
-//         labels: parametro1, 
-//         datasets: [{
-//             label: 'Sensor 1', 
-//            data: parametro2, 
-//             backgroundColor: 'rgb(108, 229, 232)', // Cor da linha
-//             borderColor: 'rgb(108, 229, 232)', // Cor da borda
-//             borderWidth: 1 // Largura da borda da linha
-//         },{
-//         label:'Crítico',
-//           backgroundColor: 'rgb(255, 0, 0)',
-//           borderColor: 'rgb(255, 0, 0)',
-//           data: [60, 60, 60, 60, 60, 60, 60, 60,60, 60,60, 60, ],
-//       }
-//       ]
-//     },
-//     options: {
-//         responsive: true,
-//         scales: {
-//             y: {
-//                 beginAtZero: false,         // Impede que o eixo Y comece do zero, se necessário
-//                 min: 0,                     // Define um valor mínimo fixo para o eixo Y, ajuste conforme necessário
-//                 max: 100,                   // Define um valor máximo fixo para o eixo Y, ajuste conforme necessário
-//                 ticks: {
-//                     stepSize: 10            // Define o intervalo dos valores no eixo Y (exemplo: 0, 10, 20, etc.)
-//                 },
-                
-//                 ticks: {
-//                 callback: function(value) {
-//                   return value + '%'; 
-//               }
-          
-//       },
-//             },
-//             x: {
-                   
-//                 labels: parametro1,     
-//                 title: {
-//                     display: true,
-//                     text: 'Horários'    
-//                 }
-//             }
-//         }
-//     }, 
-    
-// });
+//   var ctx = document.getElementById('graficoMês');
+//             new Chart(ctx, {
+//                 type: 'pie',
+//                 data: {
+//                     labels: parametro1,
+//                     borderColor: ['#ff0000' , '#F12323', '#123423'],
+//                     datasets: [{
+//                         data: parametro2,
+//                         borderWidth: 1
+//                     }],
+//                     options: {
+//                         scales: {
+//                             y: {
+//                                 beginAtZero: true
+//                             }
+//                         }
+//                     }
+//                 }})
 
 // }
 
-  // const labels = [ 
-  //     '7',
-  //     '8',
-  //     '10',
-  //     '11',
-  //     '12',
-  //     '13',
-  //     '14',
-  //     '15', 
-  //     '16',
-  //     '17',
-  //     '18',
-  //     '19',
-  // ];
 
-  // const data = {
-  //     labels: labels,
-  //     datasets: [{
-  //         label:'Sensor 1',
-  //         backgroundColor: 'rgb(108, 229, 232)',
-  //         borderColor: 'rgb(108, 229, 232)',
-  //         data: [6, 12, 15 , 20, 23, 55, 12, 10, 2, 0, ],
-  //     },
-  //     {
-  //       label:'Crítico',
-  //         backgroundColor: 'rgb(255, 0, 0)',
-  //         borderColor: 'rgb(255, 0, 0)',
-  //         data: [60, 60, 60, 60, 60, 60, 60, 60,60, 60,60, 60],
-  //     }
+function plotarGraficoPizza(setores, quantidades) {
+    var ctx = document.getElementById('graficoMês').getContext('2d');
+    
+    // Verifica se já existe um gráfico e destrói o anterior
+    if (window.GraficoPizza) {
+        window.GraficoPizza.destroy();
+    }
 
-  //   ]
-
-
-  // };
-
-  // const config = {
-  //     type: 'line',
-  //     data: data,
-  //     options: {
-  //       scales: {
-  //     y: {
-  //         ticks: {
-  //             callback: function(value) {
-  //                 return value + '%'; 
-  //             }
-  //         }
-  //     },
-  //    x: {
-  //         ticks: {
-  //             callback: function(value) {
-  //                 return value + 'h'; 
-  //             }
-  //         }
-  //     }
-
-  // }
-  //     }
+    // Cria o novo gráfico
+    window.GraficoPizza = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: setores,
+            datasets: [{
+                label: 'Distribuição de Alertas por Setores',
+                data: quantidades,
+                backgroundColor: ['#FF0000', '#00FF00', '#FF8C00', '#0000FF'],
+                borderColor: ['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'],
+                borderWidth: 1
+            }]
+        }
+        
       
-  // };
+    });
+}
 
 
-
-  // const labels2 = [
-  //     'Janeiro',
-  //     'Fevereiro',
-  //     'Março',
-  //     'Abril',
-  //     'Maio',
-  //     'Junho',
-  //     'Julho',
-  //     'Agosto', 
-  //     'Setembro',
-  //     'Outubro',
-  //     'Novembro',
-  //     'Dezembro',
-  // ];
-
-  // const data2 = {
-  //     labels: labels2,
-  //     datasets: [{
-  //         label: 'QtdMês',
-  //         backgroundColor: 'rgb(108, 229, 232)',
-  //         borderColor: 'rgb(108, 229, 232)',
-  //         data: [5, 0, 7, 4, 0, 2, 3, 0, 5, 0, 10, 0, ],
-  //     }],
-
-  // }
-  
-  // const config2 = {
-  //     type: 'bar',
-  //     data: data2,
-  //     options: {}
-  // };
-
-  // Gráfico de pizza
-
-//   const data3 = {
-// labels: [
-// 'Setor de Medição ',
-// 'Setor de Tratamento ',
-// 'Setor de Regulagem',
-// 'Setor de Armazenamento',
-
-// ],
-// datasets: [{
-// label: '',
-// data: [3, 3, 3, 1],
-// backgroundColor: [
-// 'rgb(108, 229, 232)',
-// 'rgb(8, 77, 110)',
-// 'rgb(45, 139, 280)',
-// 'rgb(130, 95, 250)',
-
-// ],
-// hoverOffset: 4
-// }]
-// };
-
-
-//   const config3 = {
-//       type: 'pie',
-//       data: data3,
-//       options: {}
-//   };
-
- 
-//   const myChart3 = new Chart(
-//       document.getElementById('myChart3'),
-//       config3
-//   );
 
   const grafico_geral = document.getElementById('myChartTrocarRegulagem');
   const grafico_geral2 = document.getElementById('myChartTrocarTramento');
