@@ -27,6 +27,7 @@ function autenticar(req, res) {
                                         senha: resultadoAutenticar[0].senha,
                                         bairro: resultadoAutenticar[0].bairro,
                                         estado: resultadoAutenticar[0].estado,
+                                        permissao: resultadoAutenticar[0].permissao,
                                         cep: resultadoAutenticar[0].cep
                                        
                                     });
