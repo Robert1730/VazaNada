@@ -356,7 +356,12 @@ var myChart = new Chart(ctx, {
         label:'Crítico',
           backgroundColor: 'rgb(255, 0, 0)',
           borderColor: 'rgb(255, 0, 0)',
-          data: [60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60],
+          data: new Array(labels.length).fill(60),
+          borderWidth: 2,
+          fill: false,
+          tension:0,
+          pointRadius: 0,
+          borderDash: [5, 5]
       }
       ]
     },
@@ -483,7 +488,12 @@ function plotarGraficoPizza(setores, quantidades) {
         label:'Crítico',
           backgroundColor: 'rgb(255, 0, 0)',
           borderColor: 'rgb(255, 0, 0)',
-          data: [60, 60, 60, 60, 60, 60, 60, 60,60, 60,60, 60, ],
+          data: new Array(labels.length).fill(60),
+        borderWidth: 2,
+        fill: false,
+        tension:0,
+        pointRadius: 0,
+        borderDash: [5, 5]
       }
 
     ]
@@ -560,7 +570,13 @@ function plotarGraficoPizza(setores, quantidades) {
         label:'Crítico',
           backgroundColor: 'rgb(255, 0, 0)',
           borderColor: 'rgb(255, 0, 0)',
-          data: [60, 60, 60, 60, 60, 60, 60, 60,60, 60,60, 60, ],
+        data: new Array(labels.length).fill(60),
+        borderWidth: 2,
+        fill: false,
+        tension:0,
+        pointRadius: 0,
+        borderDash: [5, 5]
+        
       }
 
     ]
@@ -592,6 +608,10 @@ function plotarGraficoPizza(setores, quantidades) {
       }
       
   };
+
+
+
+
 
   const myChart = new Chart(
       document.getElementById('myChartTrocarTratamento'),
