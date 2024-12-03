@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="../js/faleConosco.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
         <link rel="stylesheet" href="../css/styleFC.css">
         <link rel="shortcut icon" href="../assets/icon/IconeVZ.png" type="image/x-icon">
         <title>Fale Conosco</title>
@@ -105,6 +106,7 @@ function enviar() {
         var mensagemCliente = document.getElementById("textArea_mensagem").value;
         var emailCheck = document.getElementById("chkipt_email").checked;
         var telefoneCheck = document.getElementById("chkipt_telefone").checked;
+        var preferenciaContato = ''
 
         // Variaveis das validações
 
@@ -149,16 +151,16 @@ function enviar() {
 
             if(emailCheck && (email == '' || email == " " || !email.includes("@"))) {
                 div_validarEmail.innerHTML = `⛔ Insira um email válido `;
-            
             } else {
                 emailValidado = true
+                preferenciaContato += `Email de contato: ${email}    `
             }
 
             if(telefoneCheck && (telefone <=0 || telefone.length < 13)) {
-                div_validarContato.innerHTML = `⛔ Insira um contato válido, EX: +55 11 9 9999 9999`;
-            
+                div_validarContato.innerHTML = `⛔ Insira um contato válido, EX: +55 11 9 9999 9999`;            
             } else {
                 telefoneValidado = true
+                preferenciaContato += `Telefone de contato: ${telefone}`
             } 
 
             if(telefoneEmailValidado == false && emailValidado && telefoneValidado) {
@@ -184,6 +186,19 @@ function enviar() {
             buttonEnviar.innerHTML = `Enviar uma nova mensagem?`
             buttonEnviar.style.width = `15vw`
             novaMensagem = true
+
+            emailjs.init('EgALv5Ye9K9kcHsd5')
+            var servicoID = 'service_uon868g'
+            var templateID = 'template_8nkl193'
+
+            var templateParametros = {
+                from_nome: nome,
+                from_empresa: empresa,
+                from_preferenciaContato: preferenciaContato,
+                mensagem: mensagemCliente
+            };
+
+            emailjs.send(servicoID, templateID, templateParametros)
 
             // Setando as inputs como apenas leitura
             
