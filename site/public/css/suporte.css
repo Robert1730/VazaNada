@@ -22,13 +22,16 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
     width: 100vw;
 }
 
 .header h1 {
-
+    text-align: center;
     position: relative;
     left: 120px;
+    align-items: center;
+    justify-content: center;
 
 }
 
