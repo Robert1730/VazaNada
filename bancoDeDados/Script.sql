@@ -280,3 +280,74 @@ WHERE dtComecoVazamento LIKE '_____11%'
 GROUP BY Setor;
 
 -- Dados pizza não foi
+
+SELECT 
+    fkSensor, 
+    COUNT(*) AS total_vazamentos
+FROM (
+    SELECT 
+        m1.idMedicao, 
+        m1.fkSensor,
+        m1.dtComecoVazamento,
+        -- Verifica a diferença em minutos entre a medição atual e a anterior
+        IF(
+            TIMESTAMPDIFF(MINUTE, m2.dtComecoVazamento, m1.dtComecoVazamento) > 1, 
+            1, 0
+        ) AS novo_vazamento
+    FROM 
+        medicao m1
+    LEFT JOIN 
+        medicao m2 ON m1.fkSensor = m2.fkSensor 
+                  AND m1.dtComecoVazamento > m2.dtComecoVazamento
+    WHERE 
+        NOT EXISTS (
+            SELECT 1
+            FROM medicao m3
+            WHERE m3.fkSensor = m1.fkSensor
+            AND TIMESTAMPDIFF(MINUTE, m3.dtComecoVazamento, m1.dtComecoVazamento) <= 1
+            AND m3.idMedicao <> m1.idMedicao
+        )
+) AS vazamentos
+GROUP BY fkSensor;
+
+DELIMITER $$
+
+CREATE PROCEDURE ABCD()
+BEGIN
+    DECLARE a INT DEFAULT 1;
+    DECLARE dtComecoVazamento1 DATETIME;
+    DECLARE fkSensor1 INT;
+    DECLARE dtComecoVazamento2 DATETIME;
+    DECLARE fkSensor2 INT;
+    DECLARE maxId INT;
+    DECLARE quantidadeMes INT;
+
+    SELECT MAX(idMedicao) INTO maxId FROM medicao;
+    
+    loopSimples: LOOP
+        SELECT dtComecoVazamento, fkSensor 
+        INTO dtComecoVazamento1, fkSensor1
+        FROM medicao 
+        WHERE idMedicao = a;
+
+        SELECT dtComecoVazamento, fkSensor 
+        INTO dtComecoVazamento2, fkSensor2
+        FROM medicao 
+        WHERE idMedicao = a+1;
+        
+        SET quantidadeMes = IF(
+            TIMESTAMPDIFF(dtComecoVazamento1, dtComecoVazamento2) > 1, 
+            1, 0
+        );
+        
+        SET a = a + 1;
+
+        IF a > maxId THEN
+            LEAVE loopSimples;
+        END IF;
+
+    END LOOP loopSimples;
+END $$
+
+call ABCD;
+
