@@ -130,15 +130,15 @@ if(inputSenha.type == "password") {
                     sessionStorage.PERMISSAO = json.permissao;
 
 
-                    if(sessionStorage.PERMISSAO == 'N0'){
+                    if(sessionStorage.PERMISSAO == 'N3'){
                       
                       setTimeout(function () {
-                          window.location = "./dashboard/dashboard.html";
+                          window.location = "./dashboard/suporte.html";
                       }, 1000); // apenas para exibir o loading
 
                     } else {
                       setTimeout(function () {
-                          window.location = "./dashboard/suporte.html";
+                          window.location = "./dashboard/dashboard.html";
                       }, 1000); 
                     }
 
